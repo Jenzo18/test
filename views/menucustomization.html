@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is where superadmin can add, edit, and delete, menu items">
+    <title>Bahay Pares Tapsihan Customization Page</title>
+    <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/menucustomization.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a href="/Updateorder"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+            </div>
+            <div class="menu-icon" id="menuIcon">
+                <i class="fas fa-bars fa-2x"></i>
+                <input type="hidden" id="userId" name="userId">
+            </div>
+            <div class="nav-items">
+                <a id="updateOrderLink" href="/Updateorder">Update Delivery Status</a>
+                <a id="menuCustomizationLink" href="/menucustomization">Menu Update</a>
+                <a id="orderHistoryLink" href="/OrderHistory">Order History</a>
+                <a id="manageAccountsLink" href="/superadmin">Accounts and Configurations</a>
+            </div>
+            <div class="profile-label" id="profile-label">
+                <span id="welcomeUsername" class="welcomeusername"></span>
+                <div class="logout-link">
+                    <a href="/AdminProfile"><i class="fas fa-user"></i>Profile</a>
+                    <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button id="profileIcon" class="dropbtn" style="display: none;">
+                    <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon"
+                        loading="lazy">
+                </button>
+            </div>
+        </nav>
+        <div class="header-content">
+        </div>
+
+        <!-- Responsive Drawer -->
+        <div class="drawer">
+            <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+                <div class="circle-background">
+                    <i class="fas fa-times"></i>
+                </div>
+            </button>
+            <div class="nav-items">
+                <div class="quick-search-container">
+                    <input type="text" id="quickSearchInput" placeholder="Quick Search">
+                </div>
+                <a href="/AdminProfile" class="menu-item" id="profileMenu">Profile</a>
+                <a id="updateOrderLink" class="menu-item" href="/Updateorder">Update Delivery Status</a>
+                <a id="menuCustomizationLink" class="menu-item" href="/menucustomization">Menu Update</a>
+                <a id="orderHistoryLink" class="menu-item" href="/OrderHistory">Order History</a>
+                <a id="manageAccountsLink" class="menu-item" href="/superadmin">Accounts and Configurations</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="loading-overlay">
+        <div id="loading-spinner">
+            <img src="/images/bahaypareslogo.png" alt="Loading..." loading="lazy" class="loader-image">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <div>
+        <!-- Start of Customize Menu -->
+        <h1 style="padding-left: 20px;">Customize Menu Items</h1>
+        <form id="item-info2" class="menu-form">
+            <div class="form-row">
+                <!-- Category Section -->
+                <div class="form-item" id="categoryDropdownContainer">
+                    <label for="category2">Category:</label>
+                    <select id="category2" name="category" required>
+                        <!-- Auto category :D -->
+                    </select>
+                    <input type="text" id="customCategory" name="customCategory" placeholder="Enter custom category"
+                        style="display: none;">
+                    <label id="newCategory" name="newCategory" style="display: none;"></label>
+
+
+                    <!-- Name and Description Section -->
+                    <div class="form-item">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="description">Description:</label>
+                        <textarea type="text" id="description" name="description" rows="4" cols="50"
+                            required> </textarea>
+                    </div>
+                </div>
+                <!-- Image and Availability Section -->
+                <div class="form-item">
+                    <label>Current Image:</label>
+                    <div id="existing-image-container"> Select an Item to Edit</div>
+                    <label style="white-space: nowrap;">New Image:</label>
+                    <div id="image-preview-container"> Upload an Image to Preview</div>
+                    <label class="file-input-container" title="Upload Image from Device">
+                        <input type="file" id="image" name="image" accept=".jpg, .jpeg" required
+                            title="Upload JPG Image from Device">
+                    </label>
+                    <label for="availability">Availability:</label>
+                    <input type="checkbox" id="availability" name="availability" class="bigger-checkbox">
+                </div>
+
+                <!-- Status Section -->
+                <div class="form-item">
+                    <label for="status"
+                        title="This is where you can set the customers' view of the item status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="default">Default</option>
+                        <option value="sale">For Sale</option>
+                        <option value="new">New</option>
+                        <option value="featured">Featured</option>
+                    </select>
+                    <div class="form-item" id="saleOldPriceContainer" style="display: none;">
+                        <label for="saleOldPrice">Old Price:</label>
+                        <input type="number" id="saleOldPrice" name="saleOldPrice">
+                    </div>
+
+
+                    <!-- Price Section -->
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" required>
+
+                    <label for="quantity">Item Quantity:</label>
+                    <input type="text" id="quantity" name="quantity" required>
+
+
+                </div>
+            </div>
+    </div>
+    <!-- Button Section -->
+    <div class="button-container">
+        <button type="button" onclick="insertRecord()" class="add-to-cart-btn2">Insert Menu</button>
+    </div>
+    </form>
+
+    <br>
+    <hr>
+
+    <!-- End of Customize Menu -->
+
+    <!-- Item Details Section -->
+    <div class="item-details">
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <th>Status</th>
+                    <th>Item Quantity</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <div class="quick-search-container">
+                <input style="
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px 0 0 5px;
+                    outline: none;
+                    margin-left: 20px;
+                    margin-bottom:20px; 
+                    " type="text" id="menuSearch" placeholder="Search menu items...">
+
+            </div>
+            <tbody id="menuTableBody2">
+                <!-- Table rows will be dynamically populated here -->
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    </div>
+    </div>
+
+    <br><br><br><br>
+
+
+
+
+
+
+
+
+    <script>
+
+        // Add this at the beginning of your JavaScript code
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        document.getElementById('status').addEventListener('change', function () {
+            const selectedStatus = this.value;
+            const salePriceContainer = document.getElementById('saleOldPriceContainer');
+            const priceLabel = document.querySelector('label[for="price"]');
+
+            if (selectedStatus === 'sale') {
+                salePriceContainer.style.display = 'block';
+                priceLabel.textContent = 'New Price:';
+            } else {
+                salePriceContainer.style.display = 'none';
+                priceLabel.textContent = 'Price:';
+            }
+        });
+
+        // Function to show the loading overlay
+        function showLoading() {
+            loadingOverlay.style.display = 'block';
+            loadingSpinner.style.display = 'block';
+        }
+
+        // Function to hide the loading overlay
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+            loadingSpinner.style.display = 'none';
+        }
+
+        document.getElementById('image').addEventListener('change', function () {
+            const fileInput = this;
+            const allowedExtensions = ['.jpg', '.jpeg'];
+            const maxSizeInBytes = 5 * 1024 * 1024;
+
+            const fileName = fileInput.value.toLowerCase();
+            const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
+            const fileSize = fileInput.files[0].size;
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                alert('Invalid file format. Please select a JPG or JPEG file.');
+                fileInput.value = ''; // Clear the file input
+            }
+            if (fileSize > maxSizeInBytes) {
+                alert('File size exceeds the limit. Please select a smaller file.');
+                fileInput.value = ''; // Clear the file input
+                return; // Stop further processing
+            }
+
+            // If the file is valid, display the image preview
+            const selectedFile = fileInput.files[0];
+            displayImagePreview(selectedFile);
+
+        });
+
+        // Get the username from sessionStorage
+        const username = sessionStorage.getItem('username');
+        if (username) {
+            const welcomeUsername = document.getElementById('welcomeUsername');
+            welcomeUsername.textContent = username;
+
+            // Fetch the userId based on the displayed username
+            sessionStorage.setItem('username', username);
+        }
+
+
+        document.getElementById('category2').addEventListener('change', function () {
+            const selectedCategory = this.value;
+            const customCategoryInput = document.getElementById('customCategory');
+
+            // If "CUSTOM" is selected, show the custom category input field; otherwise, hide it
+            customCategoryInput.style.display = selectedCategory === 'CUSTOM' ? 'block' : 'none';
+        });
+
+
+        async function insertRecord() {
+            const categoryDropdown = document.getElementById('category2');
+            const customCategoryInput = document.getElementById('customCategory');
+            const selectedCategory = categoryDropdown.value === 'CUSTOM' ? customCategoryInput.value :
+                categoryDropdown.value;
+
+            if (categoryDropdown.value === 'CUSTOM' && customCategoryInput.value.trim() === '') {
+                // Display an error message if custom category is blank
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Input Error',
+                    text: 'Custom category cannot be blank.',
+                });
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const imageInput = document.getElementById('image');
+            const price = parseFloat(document.getElementById('price').value);
+            const quantity = document.getElementById('quantity').value;
+            const availability = document.getElementById('availability').checked;
+            const status = document.getElementById('status').value;
+
+            let saleOldPrice;
+
+            if (status === 'sale') {
+                saleOldPrice = parseFloat(document.getElementById('saleOldPrice').value);
+                if (saleOldPrice <= price) {
+                    alert('Sale Price must be less than the regular Price.');
+                    return; // Prevent form submission
+                }
+            }
+
+            if (status === 'sale') {
+                saleOldPrice = parseFloat(document.getElementById('saleOldPrice').value);
+
+                if (isNaN(saleOldPrice) || saleOldPrice <= 0) {
+                    // Display an error message if saleOldPrice is not a valid number or less than or equal to 0
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Input Error',
+                        text: 'Sale Old Price must be a valid number greater than 0.',
+                    });
+                    return; // Prevent form submission
+                }
+
+                if (saleOldPrice <= price) {
+                    // Display an error message if saleOldPrice is less than or equal to the regular price
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Input Error',
+                        text: 'Sale Old Price must be greater than the regular Price.',
+                    });
+                    return; // Prevent form submission
+                }
+            }
+
+
+            // Client-side validation for the image field
+            if (imageInput.files.length === 0) {
+                alert('Please select an image for the menu item.');
+                return; // Prevent form submission
+            }
+
+            if (!name || !description || isNaN(price) || price < 0 ||quantity < 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'input Error',
+                    text: 'Please fill in all fields.',
+                });
+                return;
+            }
+
+
+            const formData = new FormData();
+            formData.append('category', selectedCategory);
+            formData.append('name', name);
+            formData.append('description', description);
+            formData.append('image', imageInput.files[0]);
+            formData.append('price', price);
+            formData.append('quantity', quantity);
+            formData.append('availability', availability);
+            formData.append('status', status);
+
+            // Add salePrice to formData if it's defined
+            if (saleOldPrice !== undefined) {
+                formData.append('saleOldPrice', saleOldPrice);
+            }
+
+            try {
+                const response = await fetch('/insertmenu', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+                document.getElementById('item-info2').reset();
+
+                fetchMenuData();
+                fetchCategories();
+
+                document.getElementById('customCategory').style.display = 'none';
+                document.getElementById('customCategory').value = '';
+                document.getElementById('saleOldPriceContainer').style.display = 'none';
+                document.getElementById('saleOldPrice').value = '';
+                document.getElementById('quantity').value = '';
+                document.getElementById('image-preview-container').innerHTML = 'Upload an Image to Preview';
+                document.getElementById('existing-image-container').innerHTML = 'Select an Item to Edit';
+
+            } catch (error) {
+                console.error('Error inserting record:', error);
+                alert('An error occurred while inserting the record.');
+            }
+        }
+
+
+
+        // TRY
+        async function checkMenuItemExists(name, category) {
+            try {
+                const response = await fetch('/checkMenuItemExists', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        category
+                    }),
+                });
+
+                const result = await response.json();
+                return result.exists;
+            } catch (error) {
+                console.error('Error checking menu item existence:', error);
+                return false;
+            }
+        }
+
+        async function deleteMenuItem(name) {
+            try {
+                const response = await fetch(`/deleteOrder/${name}`, {
+                    method: 'DELETE',
+                });
+
+                const result = await response.json();
+                alert(result.message);
+
+                // Reload the table data after deletion
+                fetchMenuData();
+            } catch (error) {
+                console.error('Error deleting menu item:', error);
+                alert('An error occurred while deleting the menu item.');
+            }
+        }
+
+        async function toggleAvailability(name, currentAvailability, button) {
+            const availabilityCell = document.querySelector(
+                `#menuTableBody2 tr[data-name="${name}"] .availability-cell`);
+            const newAvailability = !currentAvailability;
+            availabilityCell.textContent = newAvailability ? 'Loading....' : 'Loading....';
+
+            try {
+                const response = await fetch('/updatemenu', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        availability: newAvailability
+                    }),
+                });
+
+                const result = await response.json();
+                button.textContent = newAvailability ? 'Set Unavailable' : 'Set Available';
+
+                fetchMenuData();
+            } catch (error) {
+                console.error('Error updating availability:', error);
+                alert('An error occurred while updating availability.');
+            }
+        }
+
+
+        async function fetchMenuData() {
+            showLoading();
+            try {
+                const response = await fetch('/menufetch');
+                const data = await response.json();
+
+                const dataBody = document.getElementById('menuTableBody2');
+                dataBody.innerHTML = '';
+
+                data.forEach((menu) => {
+                    const row = document.createElement('tr');
+                    row.setAttribute('data-name', menu.name);
+
+                    const categoryCell = document.createElement('td');
+                    const nameCell = document.createElement('td');
+                    const descriptionCell = document.createElement(
+                        'td'); // Create a new cell for description
+                    const imageCell = document.createElement('td');
+                    const priceCell = document.createElement('td');
+
+                    // Create the availability cell
+                    const availabilityCell = document.createElement('td');
+                    availabilityCell.classList.add('availability-cell'); // Add a class for easier selection
+
+                    categoryCell.textContent = menu.category;
+                    nameCell.textContent = menu.name;
+                    descriptionCell.textContent = menu.description; // Populate description cell
+                    // ...
+
+                    const img = document.createElement('img');
+                    const imageExtension = menu.imageType === 'jpg' ? 'jpg' : 'jpeg';
+                    img.src = `data:image/${imageExtension};base64,${menu.image}`;
+                    img.alt = menu.name;
+                    img.style.maxWidth = '100px';
+                    imageCell.appendChild(img);
+
+                    priceCell.textContent = menu.price;
+
+                    // Create a button to toggle availability
+                    const availabilityButton = document.createElement('button');
+                    availabilityButton.textContent = menu.availability ? 'Set Unavailable' :
+                        'Set Available';
+                    availabilityButton.classList.add('toggle-button'); // Add the toggle-button class
+                    availabilityButton.addEventListener('click', () => {
+                        toggleAvailability(menu.name, menu.availability, availabilityButton);
+                    });
+
+                    availabilityCell.appendChild(availabilityButton);
+
+                    const statusCell = document.createElement('td'); // Create a cell for the status
+                    statusCell.textContent = menu.status; // Set the content of the status cell
+
+                    const quantityCell = document.createElement('td'); // Create a cell for the status
+                    quantityCell.textContent = menu.quantity; // Set the content of the status cell
+
+                    // Create a button to delete the menu item
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.classList.add('delete-button'); // Add a class for styling
+                    deleteButton.addEventListener('click', () => {
+                        deleteMenuItem(menu.name);
+                    });
+
+                    // Add the Delete button cell to the row
+                    const deleteCell = document.createElement('td');
+                    deleteCell.appendChild(deleteButton);
+
+                    // Create an Edit button for each row
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'Edit';
+                    editButton.classList.add('edit-button');
+                    editButton.addEventListener('click', () => {
+                        editMenuItem(menu.name, menu.category);
+                    });
+
+                    // Add the Edit button cell to the row
+                    const editCell = document.createElement('td');
+                    editCell.appendChild(editButton);
+
+
+                    // Append all cells to the row
+                    row.appendChild(categoryCell);
+                    row.appendChild(nameCell);
+                    row.appendChild(descriptionCell); // Append description cell
+                    row.appendChild(imageCell);
+                    row.appendChild(priceCell);
+                    row.appendChild(availabilityCell);
+                    row.appendChild(statusCell);
+                    row.appendChild(quantityCell);
+                    row.appendChild(editCell);
+                    row.appendChild(deleteCell);
+
+                    dataBody.insertBefore(row, dataBody.firstChild);
+                    hideLoading();
+                });
+            } catch (error) {
+                console.error('Error fetching menu data:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+
+        let editingCategory = '';
+
+        function editMenuItem(name, category) {
+            showLoading();
+            editingCategory = category;
+            document.getElementById('category2').style.display = 'none';
+            document.getElementById('newCategory').style.display = 'block';
+            document.getElementById('customCategory').style.display = 'none';
+            document.getElementById('saleOldPriceContainer').style.display = 'none';
+
+            // Fetch the menu item data for editing
+            fetch(`/getMenuItem/${category}/${name}`, {
+                    method: 'GET',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error fetching menu item for editing. Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Populate the form fields with the data for editing
+                    document.getElementById('category2').value = data.category;
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('description').value = data.description;
+                    document.getElementById('price').value = data.price;
+                    document.getElementById('availability').checked = data.availability;
+                    document.getElementById('status').value = data.status;
+                    document.getElementById('quantity').value = data.quantity;
+                    document.getElementById('newCategory').value = data.category;
+
+                    const salePriceContainer = document.getElementById('saleOldPriceContainer');
+                    const priceLabel = document.querySelector('label[for="price"]');
+                    if (data.status === 'sale') {
+                        salePriceContainer.style.display = 'block';
+                        priceLabel.textContent = 'New Price:';
+
+                        document.getElementById('saleOldPrice').value = data.saleOldPrice;
+                    }
+                    // Display the existing image
+                    const existingImage = document.createElement('img');
+                    existingImage.src = `data:image/jpeg;base64,${data.image}`;
+                    existingImage.alt = data.name;
+                    existingImage.style.maxWidth = '100px';
+                    document.getElementById('existing-image-container').innerHTML = '';
+                    existingImage.id = 'existing-image';
+                    document.getElementById('existing-image-container').appendChild(existingImage);
+                    document.getElementById('newCategory').textContent = `${editingCategory}`;
+
+
+                    // Check if the "Update" button already exists
+                    const updateButton = document.getElementById('update-menu-button');
+                    if (!updateButton) {
+                        // If it doesn't exist, create and add the "Update Menu" button
+                        const updateMenuButton = document.createElement('button');
+                        updateMenuButton.textContent = 'Update Menu';
+                        updateMenuButton.id = 'update-menu-button'; // Add an id for easier targeting
+                        updateMenuButton.classList.add('update-menu-btn'); // Add a class for styling
+                        updateMenuButton.addEventListener('click', () => {
+                            updateMenuItem(name, data.image); // Call the function to update the menu item
+                        });
+                        document.querySelector('.button-container').appendChild(updateMenuButton);
+
+                        // Create and add the "Cancel Editing" button
+                        const cancelEditingButton = document.createElement('button');
+                        cancelEditingButton.textContent = 'Cancel Editing';
+                        cancelEditingButton.id = 'cancel-editing-button';
+                        cancelEditingButton.classList.add('delete-button');
+                        cancelEditingButton.style.marginLeft = '20px';
+                        cancelEditingButton.addEventListener('click', () => {
+                            // Call a function to handle canceling editing (you can implement this function)
+                            cancelEditing();
+                        });
+                        document.querySelector('.button-container').appendChild(cancelEditingButton);
+
+                        // Hide the "Insert Menu" button
+                        const insertMenuButton = document.querySelector('.add-to-cart-btn2');
+                        insertMenuButton.style.display = 'none';
+                    }
+
+                    hideLoading();
+                })
+                .catch(error => {
+                    console.error('Error fetching menu item for editing:', error.message);
+                });
+
+            // Scroll to the top of the page
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function cancelEditing() {
+            location.reload();
+        }
+
+
+
+
+        async function updateMenuItem(name) {
+
+            try {
+                const category = document.getElementById('category2').value;
+                const newName = document.getElementById('name').value;
+                const description = document.getElementById('description').value;
+                const price = parseFloat(document.getElementById('price').value);
+                const availability = document.getElementById('availability').checked;
+                const status = document.getElementById('status').value;
+                const quantity = parseInt(document.getElementById('quantity').value);
+
+                let saleOldPrice;
+
+                if (status === 'sale') {
+                    saleOldPrice = parseFloat(document.getElementById('saleOldPrice').value);
+
+                    if (isNaN(saleOldPrice) || saleOldPrice <= 0 || saleOldPrice <= price) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Input Error',
+                            text: 'Sale Old Price must be a valid number greater than 0 and greater than the regular Price.',
+                        });
+                        return;
+                    }
+                }
+
+                // Validate if the name is not empty
+                if (!newName.trim()) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Input Error',
+                        text: 'Name cannot be blank.',
+                    });
+                    return;
+                }
+
+                // Validate if the description is not empty
+                if (!description.trim()) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Input Error',
+                        text: 'Description cannot be blank.',
+                    });
+                    return;
+                }
+
+                // Validate if the price is not empty, a valid number, and not negative
+                if (!document.getElementById('price').value.trim() || isNaN(price) || price < 0 || quantity < 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Input Error',
+                        text: 'Price and quantity must be a non-empty, non-negative value.',
+                    });
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('category', category);
+                formData.append('name', name);
+                formData.append('newName', newName);
+                formData.append('description', description);
+                formData.append('price', price);
+                formData.append('availability', availability);
+                formData.append('status', status);
+                formData.append('quantity', quantity);
+                if (saleOldPrice !== undefined) {
+                    formData.append('saleOldPrice', saleOldPrice);
+                }
+
+                const imageInput = document.getElementById('image');
+
+                if (imageInput.files.length > 0) {
+                    formData.append('image', imageInput.files[0]);
+                }
+
+                const response = await fetch('/updatemenuItem', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+
+                document.getElementById('item-info2').reset();
+                document.querySelector('.button-container').style.display = 'flex';
+                document.querySelector('.button-container').style.justifyContent = 'center';
+                document.querySelector('.button-container').style.alignItems = 'center';
+                document.querySelector('.add-to-cart-btn2').style.display = 'block';
+                document.getElementById('category2').style.display = 'block';
+                document.getElementById('newCategory').style.display = 'none';
+                document.getElementById('existing-image-container').innerHTML = 'Select an Item to Edit';
+                document.getElementById('image-preview-container').innerHTML = 'Upload an Image to Preview';
+
+                const updateButton = document.querySelector('.update-menu-btn');
+                const cancelEditingButton = document.getElementById('cancel-editing-button');
+
+                if (updateButton) {
+                    updateButton.remove();
+                    fetchMenuData();
+                }
+                if (cancelEditingButton) {
+                    cancelEditingButton.remove();
+                }
+
+            } catch (error) {
+                console.error('Error updating menu item:', error.message);
+            }
+        }
+        //=================================================
+        fetchMenuData();
+
+        // Function to handle menu item search
+        function searchMenuItems() {
+            const searchInput = document.getElementById('menuSearch');
+            const searchTerm = searchInput.value.toLowerCase();
+            const tableRows = document.querySelectorAll('#menuTableBody2 tr');
+
+            tableRows.forEach(row => {
+                let rowContent = row.textContent.toLowerCase();
+                if (rowContent.includes(searchTerm)) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Add an event listener to the search input to call the searchMenuItems function
+        document.getElementById('menuSearch').addEventListener('input', searchMenuItems);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+            const drawer = document.querySelector('.drawer');
+
+            menuIcon.addEventListener('click', function () {
+                if (drawer.style.left === '0px' || !drawer.style.left) {
+                    drawer.style.left = '-250px'; // Hide the drawer
+                } else {
+                    drawer.style.left = '0'; // Show the drawer
+                }
+            });
+            const closeDrawerButton = document.getElementById('closeDrawer');
+            closeDrawerButton.addEventListener('click', function () {
+                drawer.style.left = '-250px'; // Hide the drawer
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const quickSearchInput = document.getElementById('quickSearchInput');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            quickSearchInput.addEventListener('input', function () {
+                const searchTerm = quickSearchInput.value.toLowerCase();
+
+                menuItems.forEach(function (menuItem) {
+                    const menuItemText = menuItem.innerText.toLowerCase();
+
+                    // Check if the search term is present in the menu item text
+                    if (menuItemText.includes(searchTerm)) {
+                        menuItem.style.display = 'block';
+                    } else {
+                        menuItem.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        //LOGOUT FUNCTION
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutButton = document.getElementById('logoutButton');
+
+            // Check if the user is authenticated by making a GET request to a route that
+            // returns the user information when authenticated
+            fetch('/check-auth', {
+                    method: 'GET',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.isAuthenticated) {
+                        // If the user is authenticated, show the logout button
+                        logoutButton.style.display = 'block';
+
+                        // Add a click event listener to the logout button
+                        logoutButton.addEventListener('click', function () {
+                            // Display a confirmation dialog
+                            const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+                            // Check if the user confirmed the logout
+                            if (isConfirmed) {
+                                // Send a logout request to the server when confirmed
+                                fetch('/logout', {
+                                        method: 'GET',
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.message === 'Logout successful') {
+                                            // Redirect to the login page or another page after logout
+                                            window.location.href = '/';
+                                        } else {
+                                            console.error('Logout failed:', data.error);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error during logout:', error);
+                                    });
+                            }
+                        });
+                    } else {
+                        // If the user is not authenticated, keep the logout button hidden
+                        logoutButton.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking authentication:', error);
+                });
+        });
+
+
+        async function fetchCategories() {
+            try {
+                const response = await fetch('/categories');
+                const categories = await response.json();
+                const categoryDropdown = document.getElementById('category2');
+                categoryDropdown.innerHTML = '';
+
+
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    categoryDropdown.appendChild(option);
+                });
+
+                const othersOption = document.createElement('option');
+                othersOption.value = 'CUSTOM';
+                othersOption.textContent = 'CUSTOM';
+                categoryDropdown.appendChild(othersOption);
+
+
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchCategories();
+        });
+
+        function displayImagePreview(file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Create an img element to display the preview
+                const previewImg = document.createElement('img');
+                previewImg.src = e.target.result;
+                previewImg.alt = 'Image Preview';
+                previewImg.style.maxWidth = '100px';
+                document.getElementById('image-preview-container').innerHTML = ''; // Clear previous preview
+                document.getElementById('image-preview-container').appendChild(previewImg);
+            };
+
+            // Read the selected image file
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+</body>
+
+</html>

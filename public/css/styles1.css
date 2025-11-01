@@ -1,0 +1,685 @@
+h3 {
+margin: 2px;
+text-align: left;
+}
+
+h5 {
+text-align: left;
+margin: 2px;
+color: rgb(116, 172, 33);
+}
+
+input {
+padding: 5px;
+width: 200px;
+border: 1px solid #ccc;
+border-radius: 4px;
+margin: 2px;
+}
+
+.items {
+  max-width: 150px;
+  margin-right: 10px;
+  background-color: #022c58;
+  border-right: 5px solid #00356e;
+  border-bottom: 5px solid #00356e;
+}
+
+
+nav .table {
+  width: auto;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+nav .table th,
+nav .table td { padding: 8px; text-align: left;
+}
+nav.button{
+  text-align: center;
+  padding: 20px 0px;
+  background-color: #0056b3;
+}
+empty-space{
+  margin-right: auto;
+}
+
+
+.container {
+max-width: 80%;
+margin: 20px auto;
+display: grid;
+grid-template-columns: 1fr 2fr 1fr; /* Divide the container into three columns */
+grid-gap: 20px;
+}
+
+.categories {
+background-color: #f2f2f2;
+padding: 10px;
+border-radius: 8px;
+text-align: center;
+}
+.category-item {
+cursor: pointer;
+padding: 5px;
+}
+.category-item:hover {
+background-color: #ddd;
+}
+.menu-container {
+background-color: #fff;
+padding: 20px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+height: 1000px;
+overflow-x: auto;
+overflow-y: auto;
+}
+
+.menu-customization-container{
+background-color: #fff;
+padding: 20px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+height: 1000px;
+width: 800px;
+overflow-x: hidden;
+overflow-y: auto;
+
+}
+
+.menu-item-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 10px;
+padding: 10px;
+border-bottom: 1px solid #ddd;
+}
+
+.item-info {
+flex: 1;
+padding-right: 10px;
+}
+.item-name {
+font-size: 20px;
+font-weight: bold;
+}
+.item-description {
+color: #777;
+}
+.item-price {
+color: #007bff;
+}
+.quantity-container {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.quantity-input {
+width: 50px;
+text-align: center;
+}
+.input-location{
+width: 300px;
+height: 50px;
+}
+.add-to-cart-btn {
+background-color: #007bff;
+color: #fff;
+border: none;
+padding: 8px 12px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+.add-to-cart-btn:hover {
+background-color: #0056b3;
+}
+
+.available-btn {
+background-color: #007bff;
+color: #fff;
+border: none;
+padding: 8px 12px;
+margin-right: 5px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+.available-btn:hover {
+background-color: #0056b3;
+}
+
+.unavailable-btn {
+background-color: #dd0505;
+color: #fff;
+border: none;
+padding: 8px 12px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+.unavailable-btn:hover {
+background-color: #a80505;
+}
+.cart {
+background-color: #fff;
+padding: 20px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+text-align: center;
+border-radius: 8px;
+}
+.cart-container {
+text-align: right;
+max-height: 300px;
+overflow-y: auto;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+overflow-y: auto;
+}
+
+.options-table {
+  text-align: left; /* Align table content to the left */
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  border: none;
+}
+
+.options-table td {
+  text-align: left;
+  padding: auto;
+  cursor: default;
+  border: none;
+}
+.no-hover {
+  text-align: left; /* Align table content to the left */
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: auto;
+  border: none;
+}
+
+.no-hover td {
+  padding: 5px;
+  text-align: left;
+  cursor: default; 
+  border: none;
+}
+
+.no-hover tr:hover {
+  background-color: initial; /* Remove the background color change on hover */
+}
+
+/* Style the select element */
+select {
+padding: 10px; /* Add padding for better spacing */
+font-size: 16px; /* Set font size */
+border: 1px solid #ccc; /* Add a border */
+border-radius: 5px; /* Add rounded corners */
+width: 200px; /* Set the width as desired */
+background-color: #fff; /* Background color */
+}
+
+
+/* Style the select options */
+select option {
+padding: 5px; /* Add padding for better spacing */
+font-size: 14px; /* Set font size for options */
+}
+
+/* Style the select when it's focused */
+select:focus {
+outline: none; /* Remove the default focus outline */
+border-color: black; /* Change border color when focused */
+}
+
+
+/* Styles for other elements outside the options table */
+.confirm-order-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Styles for other elements outside the options table */
+.button-like-link {
+  text-decoration: none;
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-like-link:hover {
+  background-color: #f1f1f1; /* No hover effect, so set it to the default background color */
+}
+
+.cart-table {
+width: 100%;
+border-collapse: collapse;
+}
+.cart-table th, .cart-table td {
+padding: 8px;
+border-bottom: 1px solid #ddd;
+}
+.cart-total {
+font-size: 18px;
+font-weight: bold;
+margin-top: 10px;
+}
+.confirm-order-btn {
+background-color: #00cc66;
+color: #fff;
+border: none;
+padding: 12px 20px;
+font-size: 18px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+display: block;
+margin: 0 auto;
+}
+
+.reset-discount-btn {
+  background-color: #00cc66;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto;
+  }
+
+.categories {
+text-align: center;
+position: relative;
+}
+
+.category-heading {
+color: white;
+margin-bottom: 20px;
+}
+
+.category-button {
+background-size: cover;
+color: #fff;
+font-weight: 900;
+text-shadow: -2px -2px 0 #004288, 2px -2px 0 #004288, -2px 2px 0 #004288, 2px 2px 0 #004288;
+padding: 10px 20px;
+margin-bottom: 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 14px;
+width: 100%;
+height: 70px;
+font-size: 20px;
+}
+.ItemImage {
+background-color:#333;
+background-size: cover;
+color: #fff;
+font-weight: 900;
+text-shadow: -2px -2px 0 #004288, 2px -2px 0 #004288, -2px 2px 0 #004288, 2px 2px 0 #004288;
+padding: 10px 20px;
+margin-bottom: 20px;
+border: none;
+border-radius: 4px;
+cursor: default;
+font-size: 10px;
+width: 100%;
+height: 70px;
+font-size: 15px;
+}
+.category-button:hover {
+transform: scale(1.1);
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Adjust the styles for your menu-container2 */
+.menu-container2 {
+width: 900px;
+margin: 0 auto;
+padding: 20px;
+background-color: #f8f8f8;
+border: 1px solid #ddd;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+overflow-x: hidden;
+overflow-y: auto;
+}
+
+.menu-form {
+text-align: left;
+}
+
+.menu-form .form-row {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+
+.menu-form .form-item {
+flex: 0 0 calc(30% - 10px); /* Adjust the width as needed */
+margin-bottom: 10px; /* Add spacing between items */
+}
+
+.menu-form label {
+font-size: 18px;
+color: #333;
+display: block;
+}
+
+
+.menu-form select,
+.menu-form input[type="text"],
+.menu-form input[type="number"] {
+width: 100%;
+padding: 10px;
+font-size: 16px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+.menu-form input[type="checkbox"] {
+margin: 0;
+}
+
+.add-to-cart-btn2 {
+background-color: #007bff;
+color: #fff;
+border: none;
+padding: 10px 20px;
+font-size: 18px;
+cursor: pointer;
+border-radius: 5px;
+}
+
+.add-to-cart-btn2:hover {
+background-color: #0056b3;
+}
+
+.update-menu-btn {
+  background-color: #007bff;
+color: #fff;
+border: none;
+padding: 10px 20px;
+font-size: 18px;
+cursor: pointer;
+border-radius: 5px;
+}
+
+.update-menu-btn:hover {
+  background-color: #0056b3;
+  }
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 30px;
+  border: 1px solid #ddd; /* Add border to the entire table */
+  border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+table th,
+table td {
+  border: none; /* Remove borders on table cells */
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  border: 1px solid #ddd; 
+}
+
+table tbody tr:hover {
+  background-color: #ddd;
+}
+.bigger-checkbox {
+width: 30px; /* Adjust the width as needed */
+height: 30px; /* Adjust the height as needed */
+}
+
+/* Style for the toggle button */
+.toggle-button {
+background-color: #00cc66; /* Button background color */
+color: #fff; /* Text color */
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+background-color: #02aa56; /* Hover color */
+}
+
+.edit-button {
+  background-color: #007bff; /* Red color */
+  color: #fff; /* Text color */
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #0469d4; /* Hover color */
+}
+
+/* Style for the "Available" text */
+.available {
+color: #27ae60; /* Green color */
+}
+
+/* Style for the "Unavailable" text */
+.unavailable {
+color: #e74c3c; /* Red color */
+}
+
+/* Style for the Delete button */
+.delete-button {
+background-color: #e74c3c; /* Red color */
+color: #fff; /* Text color */
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+background-color: #c0392b; /* Hover color */
+}
+
+/* Style for the file input container */
+.file-input-container {
+color: #000000;
+padding: 10px;
+cursor: pointer;
+}
+
+/* Style for the actual file input */
+.file-input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+
+/* Style for the file input label text */
+.file-input-label {
+font-size: 16px;
+text-align: center;
+}
+
+.button-container {
+text-align: center;
+margin-top: 20px; /* Adjust the margin as needed */
+}
+
+/* Loading overlay styles */
+#loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.loader-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px; /* Set the width of the image as desired */
+  height: 200px; /* Set the height of the image as desired */
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Add this to your CSS stylesheet or in a <style> tag in your HTML document */
+.menu-item-container {
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.footer {
+background-color: #0056b3;
+color: #fff;
+padding: 10px;
+text-align: center;
+}
+
+.social-icons {
+display: inline-block;
+}
+
+.social-icons a {
+text-decoration: none;
+color: #fff;
+margin: 0 10px;
+font-size: 20px;
+}
+
+.copyright {
+display: inline-block;
+margin-top: 10px;
+font-size: 14px;
+}
+
+.remove-button {
+color: #022c58; 
+border: none;
+padding: 0;
+text-decoration: none;
+font-size: 30px;
+cursor: pointer;
+background-color: transparent;
+}
+
+.remove-button:hover {
+background-color: transparent;
+}
+
+.left-align {
+  text-align: left;
+}
+    
+.right-align {
+  text-align: right;
+}
+    
+.add-button {
+color: #022c58;
+border: none;
+padding: 0;
+text-decoration: none;
+font-size: 25px;
+cursor: pointer;
+background-color: transparent;
+}
+
+.add-button:hover {
+background-color: transparent;
+}
+
+/* Style for the allergen logo container */
+.allergen-logo {
+display: flex;
+align-items: center; /* Vertically center the icons */
+margin-right: 10px; /* Adjust the margin as needed */
+}
+
+/* Style for allergen icons (using Font Awesome) */
+.allergen-logo i {
+font-size: 24px; /* Adjust the icon size as needed */
+margin-right: 10px; /* Adjust the spacing between icons */
+margin-left: 5px;
+}
+
+.search-container {
+display: flex;
+align-items: center; /* Vertically align items */
+}
+
+/* Optional: Add margin between the icon container and the input/button */
+.allergen-logo {
+margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.allergen-logo a i {
+color: rgb(7, 7, 122)
+}
+

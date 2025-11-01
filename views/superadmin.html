@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+  content="This is where superadmin can: manage and register admin accounts, edit their own account, update general settings such as delivery fee, and toggle website on and off">
+  <title>Bahay Pares Tapsihan Admin Account Page</title>
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="/css/superadmin.css" />
+  <link rel="stylesheet" type="text/css" href="/css/styles1.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/Updateorder"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+        <input type="hidden" id="userId" name="userId">
+      </div>
+      <div class="nav-items">
+        <a id="updateOrderLink" href="/Updateorder">Update Delivery Status</a>
+        <a id="menuCustomizationLink" href="/menucustomization">Menu Update</a>
+        <a id="orderHistoryLink" href="/OrderHistory">Order History</a>
+        <a id="manageAccountsLink" href="/superadmin">Accounts and Configurations</a>
+      </div>
+      <div class="profile-label" id="profile-label">
+        <span id="welcomeUsername" class="welcomeusername"></span>
+        <div class="logout-link">
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="profileIcon" class="dropbtn" style="display: none;">
+          <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon" loading="lazy">
+        </button>
+      </div>
+    </nav>
+    <div class="header-content">
+    </div>
+
+
+        <!-- Responsive Drawer -->
+        <div class="drawer">
+          <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+            <div class="circle-background">
+                <i class="fas fa-times"></i>
+            </div>
+          </button>      
+            <div class="nav-items">
+              <div class="quick-search-container">
+                <input type="text" id="quickSearchInput" placeholder="Quick Search">
+            </div>
+                <a id="updateOrderLink" class="menu-item" href="/Updateorder">Update Delivery Status</a>
+                <a id="menuCustomizationLink" class="menu-item" href="/menucustomization">Menu Update</a>
+                <a id="orderHistoryLink" class="menu-item" href="/OrderHistory">Order History</a>
+                <a id="manageAccountsLink" class="menu-item" href="/superadmin">Accounts and Configurations</a>
+            </div>
+          </div>
+  </header>
+
+  <div class="adminContainer">
+    <div class="tabcontainer">
+      <div class="tab" onclick="showSection('manageAdminaccounts')" data-section-id="manageAdminaccounts">Manage Admin
+        Account</div>
+      <div class="tab" onclick="showSection('registerAdmin')" data-section-id="registerAdmin">Register Admin Account
+      </div>
+      <div class="tab" onclick="showSection('updateSuperAdmin')" data-section-id="updateSuperAdmin">Update Super Admin
+        Account</div>
+      <div class="tab" onclick="showSection('updateDeliveryFee')" data-section-id="updateDeliveryFee">Update Delivery
+        Fee</div>
+      <div class="tab" onclick="showSection('toggleRestaurantState')" data-section-id="toggleRestaurantState">Toggle
+        Website Open/Close</div>
+    </div>
+
+    <div class="admin-section2" id="manageAdminaccounts">
+      <h1>Admin Accounts</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Type of User</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="data-body">
+          <!-- Data from MongoDB will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="admin-section" id="registerAdmin">
+      <h1>Register Admin Account</h1>
+      <div class="inputbox">
+        <input type="text" id="username" name="username" required>
+        <label>Username</label>
+      </div>
+      <div class="inputbox">
+        <input type="text" id="email" name="email" required>
+        <label>Email</label>
+      </div>
+      <div class="inputbox">
+        <input type="password" id="password" name="password" required>
+        <label>Password</label>
+      </div>
+      <div class="inputbox">
+        <select id="userOption" name="userOption">
+          <option value="Cashier">Cashier</option>
+          <option value="KitchenPersonnel">Kitchen Personnel</option>
+          <option value="DeliveryPerson">Delivery Person</option>
+        </select>
+        <label>Type of Account</label>
+      </div>
+      <div align="center">
+        <button type="button" onclick="insertRecordAdmin()" class="registeradminbutton">Register</button>
+      </div>
+    </div>
+
+    <div class="admin-section" id="updateSuperAdmin">
+      <h1>Update Super Admin Account</h1>
+      <br>
+      <form id="updateSuperAdminForm">
+        <div class="inputbox">
+          <select id="updateOption" name="updateOption" onchange="toggleFields()">
+            <option value="newEmail">New Email</option>
+            <option value="newPassword">New Password</option>
+          </select>
+          <label>Update Option:</label>
+        </div>
+        <div class="inputbox" id="oldEmailRow">
+          <input type="email" id="oldSuperEmail" name="oldSuperEmail" required>
+          <label>Enter the Old Email</label>
+        </div>
+
+        <div class="inputbox" id="oldPasswordRow">
+          <input type="password" id="oldSuperPassword" name="oldSuperPassword" required>
+          <label>Enter the Old Password</label>
+        </div>
+
+        <div class="inputbox" id="newEmailRow" style="display:none;">
+          <input type="email" id="newSuperEmail" name="newSuperEmail" required>
+          <label>Enter the New Email</label>
+        </div>
+
+        <div class="inputbox" id="newPasswordRow">
+          <input type="password" id="newSuperPassword" name="newSuperPassword" required>
+          <label for="newSuperPassword">Enter the New Password</label>
+          <div id="eyeIcon" onclick="togglePasswordVisibility()">
+            <i class="fa fa-eye" id="eye"></i>
+          </div>
+        </div>
+
+
+        <div>
+          <button type="button" onclick="updateSuperAdmin()">Update</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-section" id="updateDeliveryFee">
+      <h1>Update Delivery Fee</h1>
+      <br>
+      <form id="updateDeliveryFeeForm">
+        <div class="inputbox">
+          <select id="locationDropdown" onchange="updateDeliveryFee()">
+            <!-- Populate this dropdown dynamically with data from the database using JavaScript -->
+          </select>
+          <label>Select Location</label>
+        </div>
+        <div class="deliveryfeelabel">
+          <label for="deliveryFee">Delivery Fee:</label>
+          <span id="deliveryFee"></span> <!-- Display Delivery Fee as text -->
+        </div>
+        <div class="inputbox">
+          <input type="number" id="newDeliveryFee" name="newDeliveryFee" required>
+          <label>New Delivery Fee</label>
+        </div>
+        <div align="center">
+          <button type="button" onclick="updateDeliveryFeeData()">Update Delivery Fee</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-section" id="toggleRestaurantState">
+      <h1>Restaurant Status</h1>
+      <form id="toggleRestaurantStateForm">
+        <div>
+          <label class="switch">
+            <input type="checkbox" id="restaurantState" onchange="toggleRestaurantState()">
+            <span class="slider round">
+              <span id="switchText" class="switch-label">Closed</span>
+            </span>
+          </label>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+  <script>
+    window.onload = function () {
+      checkRestaurantState();
+      fetchData();
+      fetchDeliveryFeeData();
+      toggleFields();
+    }
+
+    // Get the username from sessionStorage
+    const username = sessionStorage.getItem('username');
+    if (username) {
+      // Update the welcomeUsername element with the username
+      const welcomeUsername = document.getElementById('welcomeUsername');
+      welcomeUsername.textContent = username;
+
+      // Fetch the userId based on the displayed username
+      sessionStorage.setItem('username', username);
+    }
+
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.admin-section');
+      sections.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      const sections2 = document.querySelectorAll('.admin-section2');
+      sections2.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Show the selected section
+      const selectedSection = document.getElementById(sectionId);
+      selectedSection.style.display = 'block';
+
+      // Remove 'active' class from all tabs
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      // Add 'active' class to the clicked tab
+      const activeTab = document.querySelector(`.tab[data-section-id="${sectionId}"]`);
+      activeTab.classList.add('active');
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      showSection('manageAdminaccounts'); // Change this to the ID of the default section
+    });
+
+
+    // Function to check restaurant state and adjust the switch text and state
+    function checkRestaurantState() {
+      fetch('/checkRestaurantState')
+        .then(response => response.json())
+        .then(data => {
+          const restaurantStateInput = document.getElementById('restaurantState');
+          const switchText = document.getElementById('switchText');
+
+          if (data.state === 'Closed') {
+            restaurantStateInput.checked = false;
+            switchText.textContent = 'Closed';
+            switchText.style.transform = 'translate(35px, -50%)';
+          } else {
+            restaurantStateInput.checked = true;
+            switchText.textContent = 'Open';
+            switchText.style.transform = 'translate(15px, -50%)';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('newSuperPassword');
+      const eyeIcon = document.getElementById('eye');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    }
+
+    function toggleFields() {
+      const updateOption = document.getElementById('updateOption').value;
+      const oldEmailRow = document.getElementById('oldEmailRow');
+      const oldPasswordRow = document.getElementById('oldPasswordRow');
+      const newEmailRow = document.getElementById('newEmailRow');
+      const newPasswordRow = document.getElementById('newPasswordRow');
+
+      oldEmailRow.style.display = 'table-row';
+      oldPasswordRow.style.display = 'table-row';
+
+      if (updateOption === 'newEmail') {
+        newEmailRow.style.display = 'table-row';
+        newPasswordRow.style.display = 'none';
+      } else if (updateOption === 'newPassword') {
+        newEmailRow.style.display = 'none';
+        newPasswordRow.style.display = 'table-row';
+      }
+    }
+
+    let deliveryFeeData; // Global variable to store the fetched data
+
+    // Function to fetch data from the server and populate the dropdown
+    async function fetchDeliveryFeeData() {
+      const response = await fetch('/fetchdeliveryfee');
+      if (response.ok) {
+        deliveryFeeData = await response.json();
+        const locationDropdown = document.getElementById('locationDropdown');
+
+        // Clear existing options
+        locationDropdown.innerHTML = '<option value="">Select a location</option>';
+
+        // Populate the dropdown with data from the database
+        deliveryFeeData.forEach((item) => {
+          const option = document.createElement('option');
+          option.value = item.Location;
+          option.textContent = item.Location;
+          locationDropdown.appendChild(option);
+        });
+      } else {
+        console.error('Error fetching delivery fee data');
+      }
+    }
+
+    // Function to update the Delivery Fee text based on the selected location
+    function updateDeliveryFee() {
+      const locationDropdown = document.getElementById('locationDropdown');
+      const deliveryFeeSpan = document.getElementById('deliveryFee');
+      const selectedLocation = locationDropdown.value;
+
+      // Find the selected location in the data array and update the content of the span
+      if (selectedLocation) {
+        const selectedData = deliveryFeeData.find((item) => item.Location === selectedLocation);
+        if (selectedData) {
+          deliveryFeeSpan.textContent = selectedData.DeliveryFee;
+        }
+      } else {
+        deliveryFeeSpan.textContent = '';
+      }
+    }
+
+
+    // Function to update the Delivery Fee in the database
+    async function updateDeliveryFeeData() {
+      const locationDropdown = document.getElementById('locationDropdown');
+      const newDeliveryFeeInput = document.getElementById('newDeliveryFee');
+      const selectedLocation = locationDropdown.value;
+      const newDeliveryFee = newDeliveryFeeInput.value;
+
+      if (!selectedLocation || newDeliveryFee === '') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Please select a location and enter a new Delivery Fee.',
+        });
+        return;
+      }
+
+      // Send the updated data to the server
+      const response = await fetch('/updatedeliveryfee', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          location: selectedLocation,
+          newDeliveryFee: parseFloat(newDeliveryFee)
+        }),
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Delivery Fee updated successfully.',
+        });
+
+        location.reload();
+
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error updating Delivery Fee.',
+        });
+      }
+    }
+
+    function toggleRestaurantState() {
+      const restaurantStateInput = document.getElementById('restaurantState');
+      const newState = restaurantStateInput.checked ? 'Open' : 'Closed';
+
+      // Send an AJAX request to update the restaurant state in the database
+      fetch('/updateRestaurantstate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            state: newState
+          }),
+        })
+        .then((response) => {
+          if (response.ok) {
+            checkRestaurantState();
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: `Restaurant is now ${newState}`,
+            });
+
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Failed to update restaurant state',
+            });
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+
+    async function updateSuperAdmin() {
+      const oldSuperEmail = document.getElementById('oldSuperEmail').value;
+      const oldSuperPassword = document.getElementById('oldSuperPassword').value;
+      const updateOption = document.getElementById('updateOption').value;
+      const newSuperEmail = document.getElementById('newSuperEmail').value;
+      const newSuperPassword = document.getElementById('newSuperPassword').value;
+
+      try {
+        if (!oldSuperEmail || !oldSuperPassword || !updateOption) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please fill in all fields.',
+          });
+          return;
+        }
+
+        if (updateOption === 'newEmail' && !newSuperEmail) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please provide the new email for the update.',
+          });
+          return;
+        }
+
+        if (updateOption === 'newPassword' && !newSuperPassword) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please provide the new password for the update.',
+          });
+          return;
+        }
+
+        if(updateOption === 'newEmail') {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(newSuperEmail)) {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Please enter a valid email address.',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+            return;
+          }
+        } else if (updateOption === 'newPassword'){
+          const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+          if (!passwordRegex.test(newSuperPassword)) {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+            return;
+          }
+        }
+
+        const data = {
+          oldSuperEmail: oldSuperEmail,
+          oldSuperPassword: oldSuperPassword,
+          updateOption: updateOption,
+          newSuperEmail: newSuperEmail,
+          newSuperPassword: newSuperPassword,
+        };
+
+        if (await checkExistingEmail(newSuperEmail)) {
+          return;
+      }
+
+        const response = await fetch('/updateSuperAdmin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        if (result.error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: result.error,
+          });
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: result.message,
+          });
+          window.location.href = '/superadmin';
+        }
+      } catch (error) {
+        console.error('Error updating super admin:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'An error occurred while updating the super admin account.',
+        });
+      }
+    }
+
+    // Function to delete data from MongoDB
+    async function deleteData(username) {
+      try {
+        // Show a confirmation dialog before proceeding with the deletion
+        const shouldDelete = confirm(`Are you sure you want to delete the user "${username}"?`);
+        if (!shouldDelete) {
+          return; // Do nothing if the user cancels the deletion
+        }
+
+        const response = await fetch('/delete', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username
+          }),
+        });
+
+        const result = await response.json();
+
+        const dataBody = document.getElementById('data-body');
+        dataBody.innerHTML = '';
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: result.message,
+        });
+
+        // Fetch data again to update the table
+        await fetchData(); // Use await to wait for fetchData to complete
+
+      } catch (error) {
+        console.error('Error deleting data:', error);
+      }
+    }
+
+    async function checkExistingEmail(email) {
+            try {
+                const response = await fetch('/checkEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email }),
+                });
+
+                const result = await response.json();
+
+                if (result.exists) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: `Invalid Email. Try Again!`,
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                    });
+                    return true; // Email exists
+                }
+
+                return false; // Email doesn't exist
+            } catch (error) {
+                console.error('Error checking existing email:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while checking the existing email.',
+                });
+                return true; // Assume email exists to prevent the record from being inserted
+            }
+        }
+
+    async function insertRecordAdmin() {
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const userOption = document.getElementById('userOption').value; // Get the selected account type
+
+      // Check if all fields are filled
+      if (!username || !email || !password || !userOption) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Please fill in all fields for Register Admin Accounts',
+        });
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Please enter a valid email address.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
+
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        return;
+      }
+
+      if (await checkExistingEmail(email)) {
+          return;
+      }
+
+      // Include password, email, and user type in the data
+      const data = {
+        username: username,
+        email: email,
+        password: password, // Store the plain password, it will be hashed on the server
+        userType: userOption, // Add the selected user type to the data
+      };
+
+      try {
+        const response = await fetch('/insertAdmin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: result.message,
+        });
+        window.location.href = '/superadmin';
+      } catch (error) {
+        console.error('Error inserting record:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'An error occurred while inserting the record.',
+        });
+      }
+    }
+
+
+    // Function to fetch data and populate the table
+    async function fetchData() {
+      try {
+        const response = await fetch('/admin');
+        const data = await response.json();
+
+        // Access the table body element
+        const dataBody = document.getElementById('data-body');
+        dataBody.classList.add('tabledata');
+
+        // Loop through the data and create table rows
+        data.forEach((user) => {
+          const row = document.createElement('tr');
+          const usernameCell = document.createElement('td');
+          const emailCell = document.createElement('td');
+          const typeCell = document.createElement('td');
+          const deleteButtonCell = document.createElement('td'); // New column for the delete button
+
+          usernameCell.textContent = user.username;
+          emailCell.textContent = user.email;
+          typeCell.textContent = user.userType;
+
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.addEventListener('click', () => deleteData(user
+            .username)); // Add event listener for the delete action
+
+          deleteButtonCell.appendChild(deleteButton);
+          row.appendChild(usernameCell);
+          row.appendChild(emailCell);
+          row.appendChild(typeCell);
+          row.appendChild(deleteButtonCell); // Add the delete button cell to the row
+
+          dataBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+      const drawer = document.querySelector('.drawer');
+
+      menuIcon.addEventListener('click', function () {
+        if (drawer.style.left === '0px' || !drawer.style.left) {
+          drawer.style.left = '-250px'; // Hide the drawer
+        } else {
+          drawer.style.left = '0'; // Show the drawer
+        }
+      });
+      const closeDrawerButton = document.getElementById('closeDrawer');
+      closeDrawerButton.addEventListener('click', function () {
+        drawer.style.left = '-250px'; // Hide the drawer
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        quickSearchInput.addEventListener('input', function () {
+            const searchTerm = quickSearchInput.value.toLowerCase();
+
+            menuItems.forEach(function (menuItem) {
+                const menuItemText = menuItem.innerText.toLowerCase();
+
+                // Check if the search term is present in the menu item text
+                if (menuItemText.includes(searchTerm)) {
+                    menuItem.style.display = 'block';
+                } else {
+                    menuItem.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    //LOGOUT FUNCTION
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutButton = document.getElementById('logoutButton');
+
+      // Check if the user is authenticated by making a GET request to a route that
+      // returns the user information when authenticated
+      fetch('/check-auth', {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.isAuthenticated) {
+            // If the user is authenticated, show the logout button
+            logoutButton.style.display = 'block';
+
+  
+            logoutButton.addEventListener('click', function () {
+              // Display a confirmation dialog
+              const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+              // Check if the user confirmed the logout
+              if (isConfirmed) {
+                // Send a logout request to the server when confirmed
+                fetch('/logout', {
+                    method: 'GET',
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.message === 'Logout successful') {
+                      // Redirect to the login page or another page after logout
+                      window.location.href = '/';
+                    } else {
+                      console.error('Logout failed:', data.error);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during logout:', error);
+                  });
+              }
+            });
+          } else {
+            // If the user is not authenticated, keep the logout button hidden
+            logoutButton.style.display = 'none';
+          }
+        })
+        .catch(error => {
+          console.error('Error checking authentication:', error);
+        });
+    });
+  </script>
+</body>
+
+</html>

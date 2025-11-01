@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bahay Pares Tapsihan Order Status Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="This is where the superadmin can update the order status to notify customers">
+  
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="/css/updateorder.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ 
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body class="container_main">
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/Updateorder"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+        <input type="hidden" id="userId" name="userId">
+      </div>
+      <div class="nav-items">
+        <a id="updateOrderLink" href="/Updateorder">Update Delivery Status</a>
+        <a id="menuCustomizationLink" href="/menucustomization">Menu Update</a>
+        <a id="orderHistoryLink" href="/OrderHistory">Order History</a>
+        <a id="manageAccountsLink" href="/superadmin">Accounts and Configurations</a>
+      </div>
+      <div class="profile-label" id="profile-label">
+        <span id="welcomeUsername" class="welcomeusername"></span>
+        <div class="logout-link">
+          <a href="/AdminProfile"><i class="fas fa-user"></i>Profile</a>
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="profileIcon" class="dropbtn" style="display: none;">
+          <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon" loading="lazy">
+        </button>
+      </div>
+    </nav>
+    <div class="header-content">
+    </div>
+
+            <!-- Responsive Drawer -->
+            <div class="drawer">
+              <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+                <div class="circle-background">
+                    <i class="fas fa-times"></i>
+                </div>
+              </button>      
+                <div class="nav-items">
+                  <div class="quick-search-container">
+                    <input type="text" id="quickSearchInput" placeholder="Quick Search">
+                </div>
+                    <a href="/AdminProfile" class="menu-item" id="profileMenu">Profile</a>
+                    <a id="updateOrderLink" class="menu-item" href="/Updateorder">Update Delivery Status</a>
+                    <a id="menuCustomizationLink" class="menu-item" href="/menucustomization">Menu Update</a>
+                    <a id="orderHistoryLink" class="menu-item" href="/OrderHistory">Order History</a>
+                    <a id="manageAccountsLink" class="menu-item" href="/superadmin">Accounts and Configurations</a>
+                </div>
+              </div>
+  </header>
+
+  <div id="loading-overlay">
+    <div id="loading-spinner">
+      <img src="/images/bahaypareslogo.png" alt="Loading..." loading="lazy" class="loader-image">
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="select-order-section" id="select-order-section">
+      <h3>Update Delivery Status</h3>
+      <form id="updateForm">
+        <div class="labelandinput">
+          <label>Order ID: </label>
+          <input type="text" id="updateorderid" name="orderid" placeholder="Order ID" style="color: #0d47a1;" readonly>
+          <label>Delivery Status: </label>
+          <input type="text" id="updatedstatus" name="deliverystatus" placeholder="Delivery Status" style="color: #0d47a1;"readonly>
+        </div>
+        <div class="labelandinput2">
+          <button type="button" onclick="markAsPreparing()" id="preparingButton">Set as "Preparing"</button>
+          <button type="button" onclick="markAsDelivering()" id="outfordeliveryButton">Set as "Out for Delivery"</button>
+          <button type="button" onclick="markAsAttemptDelivery()" id="failedattemptoneButton" style="display: none">Failed Delivery Attempt</button>
+          <button type="button" onclick="markAsDelivered()" style="display: none;" id="deliveredButton">Set as "Delivered"</button>
+          <button type="button" onclick="CancelOrder()" class="cancelbutton" id="cancelorderButton">Cancel Order</button>
+        </div>
+      </form>
+
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." oninput="performSearch()">
+        <span class="status-icon" data-status="Pending" title="Sort Pending"><i class="fas fa-hourglass-half"
+            onclick="setIconText(this)"></i></span>
+        <span class="status-icon" data-status="Preparing" title="Sort Preparing"><i class="far fa-clock"
+            onclick="setIconText(this)"></i></span>
+        <span class="status-icon" data-status="Out for Delivery" title="Sort Out for Delivery"><i class="fas fa-truck"
+            onclick="setIconText(this)"></i></span>
+        <span class="status-icon" data-status="ascending"  title="Sort Ascending"> <i class="fas fa-sort-amount-up sort-icon"
+            onclick="sortData('ascending')"></i></span>
+        <span class="status-icon" data-status="descending" title="Sort Descending"><i class="fas fa-sort-amount-down sort-icon"
+            onclick="sortData('descending')"></i></span>
+      </div>
+      
+      <button id="toggleSidebarBtn" title="Toggle Category Section">
+        <i id="toggleIcon" class="fas fa-chevron-up"></i>
+    </button>    
+    </div>
+
+      <div class="order-details">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Username</th>
+              <th>Delivery Address</th>
+              <th>Total Price</th>
+              <th>Payment & Status</th>
+              <th>Status</th>
+              <th>Details</th> <!-- Add a new column for expanding/collapsing -->
+            </tr>
+          </thead>
+          <tbody id="data-body">
+            <!-- Data from MongoDB will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+      <br>
+
+  </div>
+
+  <br><br><br><br><br><br>
+
+
+  <script>
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+
+       // Get the username from sessionStorage
+       const username = sessionStorage.getItem('username');
+        if (username) {
+            const welcomeUsername = document.getElementById('welcomeUsername');
+            welcomeUsername.textContent = username;
+
+            // Fetch the userId based on the displayed username
+            sessionStorage.setItem('username', username);
+        }
+        
+    // Update the message element with the message (if it exists)
+    if (message) {
+      // Display the message as an alert
+      alert(message);
+    }
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    // Function to show the loading overlay
+    function showLoading() {
+      loadingOverlay.style.display = 'block';
+      loadingSpinner.style.display = 'block';
+    }
+
+    // Function to hide the loading overlay
+    function hideLoading() {
+      loadingOverlay.style.display = 'none';
+      loadingSpinner.style.display = 'none';
+    }
+
+    function sortData(display_order) {
+      showLoading();
+      fetchData(display_order);
+    }
+
+    async function fetchData(display_order) {
+      showLoading();
+      try {
+        const response = await fetch('/adminfetch');
+        const data = await response.json();
+
+        if (display_order == 'ascending') {
+          data.sort((b, a) => new Date(b.orderDate) - new Date(a.orderDate));
+        } else {
+          data.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+        }
+
+        // Access the table body element
+        const dataBody = document.getElementById('data-body');
+
+        // Clear existing table rows before populating the data
+        dataBody.innerHTML = '';
+
+        // Track the currently open details row and summary row
+        let openDetailsRow = null;
+        let openSummaryRow = null;
+
+        // Loop through the data and create table rows
+        data.forEach((order, index) => {
+          
+          if (order.deliverystatus === "Delivered" || order.deliverystatus.includes("Cancelled")) {
+            return;
+          }
+
+          const {
+            orderId,
+            username,
+            items,
+            phone,
+            location,
+            discount,
+            totalprice,
+            paymentmethod,
+            deliverystatus,
+            specialinstruction,
+          } = order;
+
+          // Assuming order.orderDate is in a format that JavaScript's Date constructor can parse.
+          const orderDate = new Date(order.orderDate);
+
+          const formattedOrderDate = orderDate.toLocaleString('en-US', {
+            timeZone: 'Asia/Manila',
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+
+          // Create a new row for each order summary
+          const summaryRow = document.createElement('tr');
+          summaryRow.classList.add('summarytable-row');
+          summaryRow.innerHTML = `
+            <td>${orderId}</td>
+            <td>${username}</td>
+            <td>${location}</td>
+            <td>₱${totalprice.Total}</td>
+            <td>${paymentmethod}</td>
+            <td>${deliverystatus}</td>
+            <td><button class="details-button" id="details-button">Details</button></td>
+          `;
+
+          // Create a new row for order details (hidden by default)
+          const detailsRow = document.createElement('tr');
+          detailsRow.classList.add('details-row'); // Hide the details row initially
+          detailsRow.innerHTML = `
+        <td colspan="7">
+          <div class="compact-details">
+            <hr>
+            <p><strong>Order ID:</strong> ${orderId}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Order Date and Time:</strong> ${formattedOrderDate}</p>
+            <p><strong>Ordered Items:</strong></p>
+              <ul>
+                ${items.map(
+                  (item, itemIndex) => `
+                    <li>
+                      <strong>Item Name:</strong> ${item.name}<br>
+                      <strong>Quantity:</strong> ${item.quantity}<br>
+                      <button class="cancel-item-button" onclick="cancelItem('${orderId}', ${itemIndex})" id="cancelItemButton">Cancel Item</button>
+                    `
+                ).join('')}
+              </ul>
+            <p><strong>Discount:</strong> ${discount.SelectedDiscount} (${discount.CustomerDiscount})</p>
+            <p><strong>Order Summary:</strong></p>
+              <ul>
+                <li>
+                  <strong>Subtotal:</strong> ₱ ${totalprice.Subtotal}<br>
+                  <strong>Delivery Fee:</strong> ₱ ${totalprice.DeliveryFee}<br>
+                  <strong>Discount Applied:</strong> ₱ ${totalprice.Discount}<br>
+                  <strong>Total Price:</strong> ₱ ${totalprice.Total}
+                </li>
+              </ul>
+            <p><strong>Special Instructions:</strong> ${specialinstruction}</p>
+            <hr>
+          </div>
+        </td>
+      `;
+
+
+          // Append both rows to the table body
+          dataBody.appendChild(summaryRow);
+          dataBody.appendChild(detailsRow);
+          const detailsButton = summaryRow.querySelector('.details-button');
+
+          let detailsButtonClicked = false;
+
+          summaryRow.addEventListener('click', () => {
+            detailsButton.click();
+            detailsButtonClicked = false;
+          });
+
+          const headerHeight = 80;
+
+          detailsButton.addEventListener('click', () => {
+            // Check if the details button was already clicked
+            if (!detailsButtonClicked) {
+              if (openDetailsRow !== detailsRow) {
+                // Close the currently open details row
+                if (openDetailsRow) {
+                  openDetailsRow.style.display = 'none';
+                }
+
+                detailsRow.style.display = 'table-row';
+                openDetailsRow = detailsRow;
+              } else {
+                // Toggle open/close if the same details row is clicked
+                if (detailsRow.style.display === 'none') {
+                  detailsRow.style.display = 'table-row';
+                  window.scrollBy(0, -headerHeight);
+                } else {
+                  detailsRow.style.display = 'none';
+                }
+              }
+
+              // Set the flag to true after the first click
+              detailsButtonClicked = true;
+            } else {
+              // Reset the flag for subsequent clicks
+              detailsButtonClicked = false;
+            }
+          });
+
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        hideLoading();
+      }
+    }
+
+
+    // Fetch data when the page loads
+    fetchData();
+
+
+    function handleRowExpansion(row) {
+      const allSummaryRows = document.querySelectorAll('.summary-row');
+      const allDetailsRows = document.querySelectorAll('.details-row');
+
+      allSummaryRows.forEach((summaryRow, index) => {
+        if (row === summaryRow) {
+          const detailsRow = allDetailsRows[index];
+          if (detailsRow.style.display === 'none') {
+            detailsRow.style.display = 'table-row';
+            summaryRow.classList.add('selected-row');
+          } else {
+            detailsRow.style.display = 'none';
+            summaryRow.classList.remove('selected-row');
+          }
+        } else {
+          const detailsRow = allDetailsRows[index];
+          detailsRow.style.display = 'none';
+          summaryRow.classList.remove('selected-row');
+        }
+      });
+    }
+
+    document.getElementById('data-body').addEventListener('click', function (event) {
+      if (event.target.classList.contains('details-button')) {
+        const clickedRow = event.target.parentElement.parentElement;
+        handleRowExpansion(clickedRow);
+
+        // Remove the selected-row class from all rows
+        const allRows = document.querySelectorAll('tr');
+        allRows.forEach((row) => {
+          row.classList.remove('selected-row');
+        });
+
+        // Add the selected-row class to the clicked row
+        clickedRow.classList.add('selected-row');
+
+        // Extract data from the clicked row
+        const cells = clickedRow.querySelectorAll('td'); // Get all cells in the row
+
+        // Assuming the order of data in the row matches the table headers, you can access the data like this:
+        const orderID = cells[0].textContent;
+        const username = cells[1].textContent;
+        const orderDate = cells[2].textContent;
+        const totalprice = cells[3].textContent;
+        const paymentStatus = cells[4].textContent;
+        const deliverystatus = cells[5].textContent;
+        const items = []; // Initialize an array for items
+
+        // Find the details row associated with the clicked summary row
+        const detailsRow = clickedRow.nextElementSibling;
+
+        // Extract and parse the item details from the details row
+        const itemCells = detailsRow.querySelectorAll('li');
+        itemCells.forEach((itemCell) => {
+          const itemName = itemCell.querySelector('strong').textContent;
+          const quantity = itemCell.textContent.split(':')[1].trim(); // Extract quantity
+          items.push({
+            itemName,
+            quantity
+          });
+        });
+
+        // Populate the text input fields with the extracted data
+        document.getElementById('updateorderid').value = orderID;
+        document.getElementById('updatedstatus').value = deliverystatus;
+
+        // Set the hidden input field for the orderId
+        const orderIdInputElement = document.getElementById('orderIdInput');
+        if (orderIdInputElement) {
+          orderIdInputElement.value = orderID;
+        } 
+
+      }
+    });
+
+    async function markAsPreparing() {
+      const orderId = document.getElementById('updateorderid').value;
+
+      try {
+        const updateResponse = await fetch('/updateDeliveryStatus', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            orderId,
+            deliverystatus: 'Preparing', // Set the new delivery status here
+          }),
+        });
+
+        const updateResult = await updateResponse.json();
+        if (updateResult.message === 'Delivery status updated successfully!') {
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Delivery status updated to "Preparing"',
+          });
+
+          console.log('Delivery status updated in the database.');
+
+          // Update the UI with the new delivery status
+          document.getElementById('updatedstatus').value = 'Preparing';
+
+          fetchData();
+        } else {
+          // Display an error alert
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Select an Order before Updating',
+          });
+        }
+      } catch (error) {
+        console.error('Error updating delivery status:', error);
+
+        // Display a generic error alert
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'An error occurred while updating the delivery status.',
+        });
+      }
+    }
+
+
+    // Modify the markAsDelivering function
+    async function markAsDelivering() {
+      const orderId = document.getElementById('updateorderid').value;
+
+      try {
+
+        // Update the delivery status to "Delivering" in the "CustomerOrders" collection
+        const updateResponse = await fetch('/updateDeliveryStatus', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            orderId,
+            deliverystatus: 'Out for delivery', // Set the new delivery status here
+          }),
+        });
+
+        const updateResult = await updateResponse.json();
+        if (updateResult.message === 'Delivery status updated successfully!') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Delivery status updated to "Out for delivery',
+          });
+          console.log('Delivery status updated in the database.');
+
+          // Update the UI with the new delivery status
+          document.getElementById('updatedstatus').value = 'Out for delivery';
+          const emailresponse = await fetch('/senddeliveryemail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderId,
+            }),
+          });
+
+          fetchData();
+        } else {
+          // Display an error alert
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Select an Order before Updating',
+          });
+        }
+      } catch (error) {
+        console.error('Error updating delivery status:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'An error occurred while updating the delivery status.',
+        });
+      }
+    }
+
+    async function markAsDelivered() {
+      const orderId = document.getElementById('updateorderid').value;
+
+      // Show a confirmation alert
+      const result = await Swal.fire({
+        title: 'Confirm',
+        text: 'Setting this order to "Delivered" will move it to the order history. Do you want to proceed?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, mark as delivered',
+        cancelButtonText: 'Cancel',
+      });
+
+      if (result.isConfirmed) {
+        try {
+          // Update the delivery status in the "CustomerOrders" collection
+          const updateResponse = await fetch('/updateDeliveryStatus', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderId,
+              deliverystatus: 'Delivered', // Set the new delivery status here
+            }),
+          });
+
+          const updateResult = await updateResponse.json();
+          if (updateResult.message === 'Delivery status updated successfully!') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Delivery status updated to "Delivered"',
+            });
+            console.log('Delivery status updated in the database.');
+
+            // Update the UI with the new delivery status
+            document.getElementById('updatedstatus').value = 'Delivered';
+
+            fetchData(); // Assuming fetchData() updates the UI with the new data
+          } else {
+            // Display an error alert
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Select an Order before Updating',
+            });
+          }
+        } catch (error) {
+          console.error('Error updating delivery status:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while updating the delivery status.',
+          });
+        }
+      }
+    }
+
+    async function CancelOrder() {
+      const orderId = document.getElementById('updateorderid').value;
+      try {
+        const {
+          value: reason
+        } = await Swal.fire({
+          title: 'Cancel Order',
+          input: 'text',
+          inputLabel: 'Reason for Cancellation',
+          inputPlaceholder: 'Enter your reason here',
+          showCancelButton: true,
+          confirmButtonText: 'Cancel Order',
+          cancelButtonText: 'Close',
+          inputValidator: (value) => {
+            if (!value) {
+              return 'Please enter a reason for cancellation';
+            }
+          },
+        });
+
+        if (reason) {
+          const response = await fetch('/cancelOrderAdmin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderId,
+              reason,
+            }),
+          });
+
+          if (response.status === 200) {
+            // Order cancellation was successful
+            Swal.fire('Cancelled!', 'Order has been canceled.', 'success');
+            const emailresponse = await fetch('/sendcancelemail', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                orderId,
+                reason,
+              }),
+            });
+
+            fetchData();
+          } else {
+            Swal.fire('Error', 'Error in Canceling Order', 'error');
+          }
+        }
+      } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Select an Order before Updating',
+          });
+      }
+    }
+
+    async function cancelItem(orderId, itemIndex) {
+    try {
+      const {
+        value: reason
+      } = await Swal.fire({
+        title: 'Cancel Item',
+        input: 'text',
+        inputLabel: 'Reason for Cancellation',
+        inputPlaceholder: 'Enter your reason here',
+        showCancelButton: true,
+        confirmButtonText: 'Cancel Item',
+        cancelButtonText: 'Close',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Please enter a reason for cancellation';
+          }
+        },
+      });
+
+      if (reason) {
+        const updateResponse = await fetch('/cancelItem', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            orderId,
+            itemIndex,
+            reason,
+          }),
+        });
+
+        const updateResult = await updateResponse.json();
+        if (updateResult.message === 'Item canceled successfully!') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Item canceled successfully',
+          });
+
+          // Fetch updated data
+          fetchData();
+        } else {
+          // Display an error alert
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to cancel item',
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error canceling item:', error);
+
+      // Display a generic error alert
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred while canceling the item.',
+      });
+    }
+  }
+
+    async function markAsAttemptDelivery() {
+      const orderId = document.getElementById('updateorderid').value;
+      try {
+        const {
+          value: reason
+        } = await Swal.fire({
+          title: 'Failed Delivery Attempt',
+          input: 'text',
+          inputLabel: 'Reason for Failed Delivery Attempt',
+          inputPlaceholder: 'Enter the reason here',
+          showCancelButton: true,
+          confirmButtonText: 'Failed Delivery Attempt',
+          cancelButtonText: 'Close',
+          inputValidator: (value) => {
+            if (!value) {
+              return 'Please enter a reason for Failed Delivery Attempt';
+            }
+          },
+        });
+
+        if (reason) {
+          const response = await fetch('/AttemptOrderAdmin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderId,
+              reason,
+            }),
+          });
+
+          if (response.status === 200) {
+            Swal.fire('Attempt', 'Failed Delivery Attempt.', 'success');
+            const emailresponse = await fetch('/sendattemptdeliveryemail', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                orderId,
+                reason,
+              }),
+            });
+
+            fetchData();
+          } else {
+            Swal.fire('Error', 'Error in Canceling Order', 'error');
+          }
+        }
+      } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Select an Order before Updating',
+          });
+      }
+    }
+    
+    function setIconText(icon) {
+      const status = icon.parentElement.getAttribute('data-status');
+      const searchInput = document.getElementById('search-input');
+      searchInput.value = status;
+      performSearch(); // Trigger the dynamic search
+    }
+
+    function performSearch() {
+      // Get the search query from the input field
+      const searchQuery = document.getElementById('search-input').value.toLowerCase();
+
+      // Get all rows of the table
+      const tableRows = document.querySelectorAll('#data-body tr');
+
+      // Loop through each row and check if it contains the search query
+      tableRows.forEach((row) => {
+        const cells = row.querySelectorAll('td');
+        let found = false;
+
+        // Loop through each cell in the row
+        cells.forEach((cell) => {
+          const cellText = cell.textContent.toLowerCase();
+          if (cellText.includes(searchQuery)) {
+            found = true;
+          }
+        });
+
+        // Show or hide the row based on the search result
+        if (found) {
+          row.style.display = '';
+
+          // Check if the row is a detailsRow and its corresponding summaryRow
+          // is not displayed, then show the summaryRow
+          if (row.classList.contains('details-row')) {
+            const summaryRow = row.previousElementSibling;
+            if (summaryRow.style.display === 'none') {
+              summaryRow.style.display = 'table-row';
+            }
+          }
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+      const drawer = document.querySelector('.drawer');
+
+      menuIcon.addEventListener('click', function () {
+        if (drawer.style.left === '0px' || !drawer.style.left) {
+          drawer.style.left = '-250px'; // Hide the drawer
+        } else {
+          drawer.style.left = '0'; // Show the drawer
+        }
+      });
+      const closeDrawerButton = document.getElementById('closeDrawer');
+      closeDrawerButton.addEventListener('click', function () {
+        drawer.style.left = '-250px'; // Hide the drawer
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const menuItems = document.querySelectorAll('.nav-items .menu-item');
+
+        quickSearchInput.addEventListener('input', function () {
+            const searchTerm = quickSearchInput.value.toLowerCase();
+
+            menuItems.forEach(function (menuItem) {
+                const menuItemText = menuItem.innerText.toLowerCase();
+
+                // Check if the search term is present in the menu item text
+                if (menuItemText.includes(searchTerm)) {
+                    menuItem.style.display = 'block';
+                } else {
+                    menuItem.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    //LOGOUT FUNCTION
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutButton = document.getElementById('logoutButton');
+      const preparingButton = document.getElementById('preparingButton');
+      const outfordeliveryButton = document.getElementById('outfordeliveryButton');
+      const deliveredButton = document.getElementById('deliveredButton');
+      const failedattemptoneButton = document.getElementById('failedattemptoneButton');
+      const cancelorderButton = document.getElementById('cancelorderButton');
+
+      const useradminname = sessionStorage.getItem('username');
+      console.log("Username:", useradminname);
+
+      fetch(`/check-user-type?username=${useradminname}`)
+        .then(response => response.json())
+        .then(data => {
+          const userType = data.userType;
+
+          if (userType === "DeliveryPerson") {
+            preparingButton.style.display = 'none';
+            outfordeliveryButton.style.display = 'none';
+            cancelorderButton.style.display = 'none';
+            deliveredButton.style.display = 'inline-block';
+            failedattemptoneButton.style.display = 'inline-block';
+          }
+        })
+        .catch(error => console.error('Error checking user type:', error));
+
+
+
+
+      // Check if the user is authenticated by making a GET request to a route that
+      // returns the user information when authenticated
+      fetch('/check-auth', {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.isAuthenticated) {
+            // If the user is authenticated, show the logout button
+            logoutButton.style.display = 'block';
+
+            // Add a click event listener to the logout button
+            logoutButton.addEventListener('click', function () {
+              // Display a confirmation dialog
+              const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+              // Check if the user confirmed the logout
+              if (isConfirmed) {
+                // Send a logout request to the server when confirmed
+                fetch('/logout', {
+                    method: 'GET',
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.message === 'Logout successful') {
+                      // Redirect to the login page or another page after logout
+                      window.location.href = '/';
+                    } else {
+                      console.error('Logout failed:', data.error);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during logout:', error);
+                  });
+              }
+            });
+          } else {
+            // If the user is not authenticated, keep the logout button hidden
+            logoutButton.style.display = 'none';
+          }
+        })
+        .catch(error => {
+          console.error('Error checking authentication:', error);
+        });
+    });
+
+    $(document).ready(function () {
+    // Toggle the category-sidebar on button click
+    $("#toggleSidebarBtn").click(function () {
+        $(".select-order-section .search-container").slideToggle();
+        $("#updateForm").slideToggle();
+        $("h3").slideToggle();
+        $("#toggleIcon").toggleClass("fas fa-chevron-ip fas fa-chevron-down"); // Corrected class names
+    });
+});
+
+  </script>
+</body>
+
+</html>

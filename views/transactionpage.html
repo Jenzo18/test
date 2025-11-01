@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This is the transaction page">
+  <title>Bahay Pares Tapsihan Transaction Page</title>
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="/css/transactionpage.css" />
+  <!--JQuery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+        <input type="hidden" span id="welcomeUsername">
+        <input type="hidden" id="userId" name="userId">
+      </div>
+      <div class="nav-items">
+        <a href="/"><i class="fas fa-home" style="color: #002DB3;  margin-right: 3px;"></i> Home</a>
+        <a href="/menu"><i class="fas fa-utensils" style="color: #002DB3;  margin-right: 3px;"></i> Menu</a>
+        <a href="/Vieworder"><i class="fas fa-truck" style="color: #002DB3;  margin-right: 3px;"></i> Delivery
+          Status</a>
+        <a href="/AboutUs"><i class="fas fa-info-circle" style="color: #002DB3;  margin-right: 3px;"></i> About Us</a>
+        <a href="/ContactUs"><i class="fas fa-phone" style="color: #002DB3;  margin-right: 3px;"></i> Customer Care</a>
+      </div>
+      <div class="dropdown">
+        <button id="profileIcon" class="dropbtn" style="display: none;">
+          <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon" loading="lazy">
+        </button>
+        <div class="dropdown-content">
+          <a href="/Profile"><i class="fas fa-user"></i>Profile</a>
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-content">
+    </div>
+
+    <!-- Responsive Drawer -->
+    <div class="drawer">
+      <button id="closeDrawer" class="exit-button" title = "Hide Drawer">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="nav-items">
+        <table>
+          <tr>
+            <td>
+              <a href="/Profile" id="profileMenu" style="display: none;">
+                <div class="profile-link">
+                  <img src="/images/iconprofile.png" alt="Profile">
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: left;"><a href="/">Home</a></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;"><a href="/menu">Menu</a></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;"><a href="/Vieworder">Delivery Status</a></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;"><a href="/AboutUs">About Us</a></td>
+          </tr>
+          <tr>
+            <td style="text-align: left;"><a href="/ContactUs">Customer Care</a></td>
+          </tr>
+
+          <tr></tr>
+          <tr>
+            <td>
+              <a href="#" id="logoutMenu" style="display: none;">Logout</a>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </header>
+
+  <br>
+  <div class="transaction_container">
+    <div class="containers" style="max-width: 700px;">
+      <h2>DELIVERING TO</h2>
+      <div class="address-section">
+        <div class="containers" style="max-width: 100%;">
+          <table class="options-table no-hover">
+            <form method="POST" action="">
+              <div>
+                <h3><i class="fas fa-map-marker-alt"></i> Enter Your Address</h3>
+              </div>
+              <hr>
+              <p id="delivery-fee-warning" class="warning" style="text-align: left;">
+                <i class="fas fa-truck"></i> Delivery is only available in selected areas of Cavite.
+              </p>
+              <div class="col-md-6 mb-3" id="city-container">
+                <label for="city" class="form-label">City/Municipality</label>
+                <select class="form-select" id="city"></select>
+              </div>
+
+              <div class="col-md-6 mb-3" id="barangay-container">
+                <label for="barangay" class="form-label">Barangay</label>
+                <select class="form-select" id="barangay"></select>
+              </div>
+              <div class="col-md-6 mb-3" id="street-container">
+                <label for="street-text" class="form-label">Street Name, Building, House No.*</label>
+                <input type="text" class="form-control form-control-md" name="street_text" id="street-text">
+              </div>
+            </form>
+          </table>
+        </div>
+      </div>
+
+      <h2>PAYMENT</h2>
+      <div class="containers" style="max-width: 100%;">
+        <div class="payment-section">
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="CoD" checked>
+              <div class="payment-button">Cash on Delivery (CoD)</div>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="payment" value="E-Wallet">
+              <div class="payment-button">E-Wallets</div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="table.center">
+        <h2>DISCOUNT</h2>
+        <div class="containers" style="max-width: 100%;">
+          <!-- Add this section within the "address-section" div -->
+          <div class="discount-section">
+            <table class="options-table no-hover">
+              <tr>
+                <td>
+                  <p class="transactionp">ID must be presented.</p>
+                  <select id="discount-select" onchange="toggleDiscountFields()" title = "SELECT AVAILID TYPE FOR A DISCOUNT">
+                    <option value="none">None</option>
+                    <option value="senior">Senior Citizen Card</option>
+                    <option value="pwd">PWD Card</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="card-name-row" style="display: none;">
+                <td><label>Name of Card:</label></td>
+                <td><input type="text" id="card-name"></td>
+              </tr>
+              <tr id="card-id-row" style="display: none;">
+                <td><label>ID No:</label></td>
+                <td><input type="number" id="card-id"></td>
+              </tr>
+            </table>
+            <button class="confirm-order-btn" onclick="applyDiscount()">Apply Discount</button>
+            <button class="reset-discount-btn" onclick="resetDiscount()">Reset</button>
+          </div>
+        </div>
+
+        <div class="order-details">
+          <h2>ORDER SUMMARY</h2>
+          <table>
+            <tbody id="order-body" class="options-table no-hover">
+              <!-- Data from MongoDB will be inserted here -->
+            </tbody>
+            <tfoot id="order-footer">
+              <!-- Add the following rows with left-aligned and right-aligned cells -->
+              <tr style="background-color: #ebebeb;">
+                <td class="left-align">Subtotal</td>
+                <td class="right-align" id="sub-total"></td>
+              </tr>
+              <tr style="background-color: #ebebeb;">
+                <td class="left-align">Delivery Fee</td>
+                <td class="right-align" id="delivery-fee"></td>
+              </tr>
+              <tr style="background-color: #ebebeb;">
+                <td class="left-align">Discount</td>
+                <td class="right-align" id="customer-discount">Php 0.00</td>
+              </tr>
+              <tr style="background-color: #ebebeb;">
+                <td class="left-align">Total</td>
+                <td class="right-align" id="total-price"></td>
+              </tr>
+            </tfoot>
+            <div>
+              <label for="additionalmessage" class="form-label">Special Instructions</label>
+              <input type="text" name="additionalmessage" id="additionalmessage" placeholder="e.g no egg">
+            </div>
+          </table>
+        </div>
+
+        <hr>
+        <div class="checkbox-container">
+          <div class="checkbox-container2">
+            <input type="checkbox" id="confirmationCheckbox" onchange="togglePlaceOrderButton()">
+            <label for="confirmationCheckbox"><p>I have read and agree to the <a href="/terms" target="_blank" id="termsLink">Terms and
+              Conditions</a> and <a href="/policy" target="_blank" id="privacyLink">Privacy Policy</a></p></label>
+          </div>
+        </div>
+
+
+      </div>
+      <table class="ordersummarybutton" style="display: none;">
+        <table class="options-table no-hover">
+          <tr>
+            <td></td>
+            <td>
+              <button class="confirm-order-btn" onclick="buy()" id="placeOrderBtn">Place Order</button>
+            </td>
+            <td>
+              <button class="button-like-link" onclick="redirectToMenu()">Cancel</button>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </div>
+
+  <!-- Overlay for "Restaurant Closed" -->
+  <div id="overlay" class="overlay">
+    <div class="overlay-content">
+      <h2>Currently Closed</h2>
+      <p class="transactionp">Sorry, but Bahay Pares Tapsihan is currently closed. Please try again during our operating
+        hours.</p>
+      <br>
+      <p class="transactionp">Thank you!</p>
+      <br>
+      <button onclick="redirectToHomePage()">OK</button>
+    </div>
+  </div>
+
+  <br><br>
+
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <a href="/"><img class="footlogo" src="/images/bahaypareslogo.png" alt="Logo" Style="width: 50%; height: auto;"loading="lazy"></a>
+      <p class="footer-links">
+        <a href="/index" class="link-1">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="#">Delivery Status</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+      </p>
+      <p class="footer-company-name">© 2023 Bahay Pares Tapsihan – Dasmariñas.</p>
+    </div>
+    <div class="footer-center">
+      <div>
+        <h2>Contacts</h2>
+        <i class="fa fa-phone"></i>
+        <p>+63 975 336 5406</p>
+      </div>
+      <div style="white-space: nowrap;">
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:bahayparestapsihan@gmail.com" >bahayparestapsihan@gmail.com</a></p>
+      </div>
+      <div>
+        <i class="fab fa-facebook-messenger"></i>
+        <p><a href="https://www.messenger.com/t/100783298129453" target="_blank">Messenger</a></p>
+      </div>
+      <h2>Like Our Page</h2>
+      <div>
+        <i class="fab fa-facebook-f"></i>
+        <p><a href="https://www.facebook.com/tapsihansapasongbayog/" target="_blank">Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <h2>About Us</h2>
+      <p class="footer-company-about">
+        As we navigate the post-pandemic world, dining out has become increasingly more complex, but no more so than in
+        Bahay Pares tapsihan restaurant. The establishment, renowned for its world-class tapsi and excellent service,
+        has been on a mission to revolutionize the dining experience for their guests. In the wake of social distancing
+        measures, they have invested in building an online ordering system that offers convenience and accessibility.
+      
+      </p>
+      <h2>Visit Us</h2>
+      <div class="footer-right-location">
+        <i class="fa fa-map-marker"></i>
+        <p>89 Burol Main 4114 Dasmariñas, Philippines</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
+
+<script src="/javascript/ph-address-selector.js"></script>
+<script src="/javascript/transaction.js"></script>

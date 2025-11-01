@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This is the profile page, users can view and edit their account">
+  <title>Bahay Pares Tapsihan Profile Page</title>
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/Updateorder"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+      </div>
+      <div class="nav-items">
+        <a id="updateOrderLink" href="/Updateorder">Update Delivery Status</a>
+        <a id="menuCustomizationLink" href="/menucustomization">Menu Update</a>
+        <a id="orderHistoryLink" href="/OrderHistory">Order History</a>
+        <a id="manageAccountsLink" href="/superadmin">Accounts and Configurations</a>
+      </div>
+      <div class="profile-label" id="profile-label">
+        <span id="welcomeUsername" class="welcomeusername"></span>
+        <div class="logout-link">
+          <a href="/AdminProfile"><i class="fas fa-user"></i>Profile</a>
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-content">
+      <!-- Responsive Drawer -->
+      <div class="drawer">
+        <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+          <div class="circle-background">
+            <i class="fas fa-times"></i>
+          </div>
+        </button>
+        <div class="nav-items">
+          <div class="quick-search-container">
+            <input type="text" id="quickSearchInput" placeholder="Quick Search">
+          </div>
+          <a href="/AdminProfile" class="menu-item" id="profileMenu">Profile</a>
+          <a id="updateOrderLink" class="menu-item" href="/Updateorder">Update Delivery Status</a>
+          <a id="menuCustomizationLink" class="menu-item" href="/menucustomization">Menu Update</a>
+          <a id="orderHistoryLink" class="menu-item" href="/OrderHistory">Order History</a>
+          <a id="manageAccountsLink" class="menu-item" href="/superadmin">Accounts and Configurations</a>
+        </div>
+      </div>
+    </header>
+    <div id="profileContent">
+      <!-- Add more user profile data here -->
+    </div>
+    <section>
+      <div class="main-content">
+        <div class="profile-container">
+          <div class="profile-info">
+            <img class="myacc" src="/images/myaccountlogo.png" alt="My Account">
+          </div>
+          <p><i class="fas fa-user"></i> Name: <span id="usernamePlaceholder">Loading...</span></p>
+          <p><button class="editpass" id="editProfileBtn">Edit Profile</button></p>
+          <p><button class="editpass" id="editpasss">Change Password</button></p>
+
+          <section>
+            <div class="main-content">
+              <div id="updatePasswordContainer" class="update-password-popup" style="display: none;">
+                <div class="update-password-popup-content">
+                  <h2 class="formh2">Update Password</h2>
+                  <form id="updatePasswordForm">
+                    <div class="form-group">
+                      <div class="inputbox">
+                        <input type="password" id="currentPasswordUpdate" name="currentPasswordUpdate" required>
+                        <label for="currentPasswordUpdate">Current Password</label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="inputbox">
+                        <input type="password" id="newPasswordUpdate" name="newPasswordUpdate" required>
+                        <label for="newPasswordUpdate">New Password</label>
+                      </div>
+                    </div>
+                    <div class="button-group">
+                      <button type="button" class="update-button">Update Password</button>
+                      <button id="closeUpdatePassword" class="close-button">Close</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <!-- Edit Profile Form -->
+    <section>
+        <div class="main-content">
+          <div id="editProfileContainer" class="edit-profile-popup" style="display: none;">
+            <div class="edit-profile-popup-content">
+              <h2 class="formh2">Edit Profile</h2>
+              <form id="editProfileForm">
+                <input type="hidden" id="userId" name="userId">
+                <div class="form-group">
+                  <div class="inputbox">
+                    <input type="text" id="username" name="name" placeholder=" " required>
+                    <label for="username">Name</label>
+                  </div>
+                </div>
+            <div class="button-group">
+              <button class="update-button" id="update-profile">Update Profile</button>
+              <button id="closeEditProfile" class="close-button">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+      
+        </div></div>
+
+
+  <br><br><br><br><br><br><br>
+
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <a href="/"><img class="footlogo" src="/images/bahaypareslogo.png" alt="Logo" Style="width: 50%; height: auto;"loading="lazy"></a>
+      <p class="footer-links">
+        <a href="/index" class="link-1">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="#">Delivery Status</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+      </p>
+      <p class="footer-company-name">© 2023 Bahay Pares Tapsihan – Dasmariñas.</p>
+    </div>
+    <div class="footer-center">
+      <div>
+        <h2>Contacts</h2>
+        <i class="fa fa-phone"></i>
+        <p>+63 975 336 5406</p>
+      </div>
+      <div style="white-space: nowrap;">
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:bahayparestapsihan@gmail.com" >bahayparestapsihan@gmail.com</a></p>
+      </div>
+      <div>
+        <i class="fab fa-facebook-messenger"></i>
+        <p><a href="https://www.messenger.com/t/100783298129453" target="_blank">Messenger</a></p>
+      </div>
+      <h2>Like Our Page</h2>
+      <div>
+        <i class="fab fa-facebook-f"></i>
+        <p><a href="https://www.facebook.com/tapsihansapasongbayog/" target="_blank">Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <h2>About Us</h2>
+      <p class="footer-company-about">
+        As we navigate the post-pandemic world, dining out has become increasingly more complex, but no more so than in
+        Bahay Pares tapsihan restaurant. The establishment, renowned for its world-class tapsi and excellent service,
+        has been on a mission to revolutionize the dining experience for their guests. In the wake of social distancing
+        measures, they have invested in building an online ordering system that offers convenience and accessibility.
+      
+      </p>
+      <h2>Visit Us</h2>
+      <div class="footer-right-location">
+        <i class="fa fa-map-marker"></i>
+        <p>89 Burol Main 4114 Dasmariñas, Philippines</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const username = sessionStorage.getItem('username');
+
+  if (username) {
+    try {
+      // Update the 'welcomeUsername' element with the retrieved username
+      const welcomeUsername = document.getElementById('welcomeUsername');
+      welcomeUsername.textContent = username;
+
+      // Fetch email based on the username
+      const response = await fetch(`/getEmailByUsername?username=${username}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        // Successfully fetched the email
+        const fetchedEmail = data.email;
+
+        // Update the 'usernamePlaceholder' element with the fetched email
+        const usernamePlaceholder = document.getElementById('usernamePlaceholder');
+        usernamePlaceholder.textContent = username;
+
+        // Update sessionStorage with the fetched email
+        sessionStorage.setItem('fetchedEmail', fetchedEmail);
+        // You can update this based on your actual data model
+      } else {
+        // Handle errors when fetching the email
+        console.error('Error fetching email:', data.error || response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching email:', error);
+    }
+  }
+});
+
+
+ // Edit Profile section
+ const editProfileBtn = document.getElementById('editProfileBtn');
+    const editProfileContainer = document.getElementById('editProfileContainer');
+    const closeEditProfileButton = document.getElementById('closeEditProfile');
+
+    // Event listener for Edit Profile button
+    editProfileBtn.addEventListener('click', function () {
+      // Show the edit profile container
+      showContainer(editProfileContainer);
+    });
+
+    closeEditProfileButton.addEventListener('click', function (event) {
+      // Prevent the default behavior of the button (form submission)
+      event.preventDefault();
+      document.getElementById('username').value = '';
+      // Hide the edit profile container with animation
+      hideContainerWithAnimation(editProfileContainer);
+    });
+
+    const updateProfileButton = document.getElementById('update-profile');
+
+    updateProfileButton.addEventListener('click', async (event) => {
+      // Prevent the default behavior of the button (form submission)
+      event.preventDefault();
+
+      // Get the email from session storage
+      const userEmail = sessionStorage.getItem('fetchedEmail');
+      if (!userEmail) {
+        console.error('User email not found in session storage');
+        return;
+      }
+
+      // Get the updated username from the form
+      const updatedUsername = document.getElementById('username').value.trim();
+
+      // Check if the username is entered
+      if (!updatedUsername) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Please enter a username to update your profile',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return;
+      }
+
+      // Call the handleProfileUpdates function with the userEmail, updatedUsername, and callback
+      await handleProfileUpdates(userEmail, updatedUsername, (newUsername) => {
+  // Update the displayed username on the page
+  const welcomeUsername = document.getElementById('welcomeUsername');
+  welcomeUsername.textContent = newUsername;
+
+  // Update the stored username in sessionStorage
+  sessionStorage.setItem('username', newUsername);
+
+  // You can also update any other elements displaying the username here
+});
+    });
+
+
+async function handleProfileUpdates(userEmail, newUsername, updateCallback) {
+  try {
+    const isValid = validateEditProfileForm();
+
+    if (!isValid) {
+      return;
+    }
+
+    const response = await fetch('/update-username', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        newUsername,
+      }),
+    });
+
+    console.log('Response status:', response.status);
+
+    const data = await response.json();
+    console.log('Response data:', data);
+
+    if (response.status === 200) {
+      // Profile updated successfully
+      console.log('Profile updated successfully:', data.message);
+
+      // Update the displayed username
+      updateCallback(newUsername);
+
+      // Show success notification with check mark animation
+      Swal.fire({
+        title: 'Profile Updated!',
+        text: 'Your profile has been successfully updated.',
+        icon: 'success',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp',
+        },
+        confirmButtonText: 'OK',
+      }).then(() => {
+        // Delay for 300 milliseconds before reloading the page
+        setTimeout(() => {
+          window.location.href = '/AdminProfile'; // Update the URL if necessary
+        }, 300);
+      });
+    } else {
+      // Handle errors in profile update
+      console.error('Profile update error:', data.error);
+
+      // Display an error message to the user using Swal.fire or another method
+      Swal.fire({
+        title: 'Error!',
+        text: 'Invalid Username. Try Again!',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    }
+  } catch (error) {
+    console.error('Profile update error:', error);
+
+    // Handle any network or other errors here
+    // Display an error message to the user using Swal.fire or another method
+    Swal.fire({
+      title: 'Error!',
+      text: 'An unexpected error occurred. Please try again later.',
+      icon: 'error',
+      confirmButtonText: 'OK',
+    });
+  }
+}
+
+
+// Update Password section
+const updatePasswordBtn = document.getElementById('editpasss');
+const updatePasswordContainer = document.getElementById('updatePasswordContainer');
+const closeUpdatePasswordButton = document.getElementById('closeUpdatePassword');
+const updatePasswordForm = document.getElementById('updatePasswordForm');
+const updateButton = document.querySelector('.update-button');
+
+updatePasswordBtn.addEventListener('click', () => 
+showContainer(updatePasswordContainer));
+
+closeUpdatePasswordButton.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  // Clear the currentPasswordUpdate and newPasswordUpdate text fields
+  document.getElementById('currentPasswordUpdate').value = '';
+  document.getElementById('newPasswordUpdate').value = '';
+
+  // Hide the update password container with animation
+  hideContainerWithAnimation(updatePasswordContainer);
+});
+
+updateButton.addEventListener('click', async (event) => {
+  event.preventDefault();
+
+  const isValid = validateUpdatePasswordForm();
+
+  if (!isValid) {
+    return;
+  }
+
+  const userEmail = sessionStorage.getItem('fetchedEmail');
+
+  if (!userEmail) {
+    console.error('User email not found in storage');
+    return;
+  }
+
+  const currentPasswordUpdate = document.getElementById('currentPasswordUpdate').value;
+  const newPasswordUpdate = document.getElementById('newPasswordUpdate').value;
+
+  try {
+    const response = await fetch('/update-password-by-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        currentPassword: currentPasswordUpdate,
+        newPassword: newPasswordUpdate,
+      }),
+    });
+
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log('Password updated successfully:', data.message);
+
+      // Close the updatePasswordContainer with animation
+      hideContainerWithAnimation(updatePasswordContainer);
+
+      // Clear the currentPasswordUpdate and newPasswordUpdate text fields
+      document.getElementById('currentPasswordUpdate').value = '';
+      document.getElementById('newPasswordUpdate').value = '';
+
+      Swal.fire({
+        title: 'Password Updated!',
+        text: 'Your password has been successfully updated.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+    } else if (response.status === 401) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The current password you entered is incorrect. Please try again.',
+        confirmButtonText: 'OK',
+      });
+    } else {
+      const data = await response.json();
+      console.error('Password update error:', data.error);
+    }
+  } catch (error) {
+    console.error('Error updating password:', error);
+  }
+});
+
+
+// Additional functions
+function showContainer(container) {
+  container.style.display = 'block';
+}
+
+function hideContainerWithAnimation(container) {
+  container.classList.add('hide');
+  setTimeout(() => {
+    container.style.display = 'none';
+    container.classList.remove('hide');
+  }, 300);
+}
+function validateEditProfileForm() {
+      const username = document.getElementById('username').value.trim();
+
+      // Validate username (non-empty)
+      if (!username) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Please enter a valid username',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return false;
+      }
+
+      // If the username is provided, return true to submit the form
+      return true;
+    }
+
+function validateUpdatePasswordForm() {
+      const currentPassword = document.getElementById('currentPasswordUpdate').value.trim();
+      const newPassword = document.getElementById('newPasswordUpdate').value.trim();
+
+      if (currentPassword === '') {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Please enter your current password',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return false;
+      }
+
+      if (newPassword.length < 8 || !/[a-z]/.test(newPassword) || !/[A-Z]/.test(newPassword)) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Please enter a new password with at least 8 characters, including at least one lowercase and one uppercase letter',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return false;
+      }
+
+      if (currentPassword === newPassword) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Current password and new password should not be the same',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+        return false;
+      }
+
+      return true;
+    }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuIcon = document.querySelector('.menu-icon');
+  const drawer = document.querySelector('.drawer');
+
+  menuIcon.addEventListener('click', () => {
+    drawer.style.left = (drawer.style.left === '0px' || !drawer.style.left) ? '-250px' : '0';
+  });
+
+  const closeDrawerButton = document.getElementById('closeDrawer');
+  closeDrawerButton.addEventListener('click', () => {
+    drawer.style.left = '-250px';
+  });
+
+  const quickSearchInput = document.getElementById('quickSearchInput');
+  const menuItems = document.querySelectorAll('.nav-items .menu-item');
+
+  quickSearchInput.addEventListener('input', () => {
+    const searchTerm = quickSearchInput.value.toLowerCase();
+
+    menuItems.forEach((menuItem) => {
+      const menuItemText = menuItem.innerText.toLowerCase();
+
+      if (menuItemText.includes(searchTerm)) {
+        menuItem.style.display = 'block';
+      } else {
+        menuItem.style.display = 'none';
+      }
+    });
+  });
+
+  const logoutButton = document.getElementById('logoutButton');
+
+  fetch('/check-auth', {
+    method: 'GET',
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.isAuthenticated) {
+        logoutButton.style.display = 'block';
+        const profileIcon = document.getElementById('profileIcon');
+        const profileMenu = document.getElementById('profileMenu');
+        logoutButton.addEventListener('click', () => {
+          const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+          if (isConfirmed) {
+            fetch('/logout', {
+              method: 'GET',
+            })
+              .then(response => response.json())
+              .then(data => {
+                if (data.message === 'Logout successful') {
+                  window.location.href = '/';
+                } else {
+                  console.error('Logout failed:', data.error);
+                }
+              })
+              .catch(error => {
+                console.error('Error during logout:', error);
+              });
+          }
+        });
+      } else {
+        logoutButton.style.display = 'none';
+        const profileIcon = document.getElementById('profileIcon');
+            logoutButton.style.display = 'none';
+            profileIcon.style.display = 'none';
+            const profileMenu = document.getElementById('profileMenu');
+            profileMenu.style.display = 'none'; // Show in drawer
+      }
+    })
+    .catch(error => {
+      console.error('Error checking authentication:', error);
+    });
+});
+
+  </script>
+
+</body>
+
+</html>

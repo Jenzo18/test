@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the registration page">
+  
+    <title>Bahay Pares Tapsihan Register Page</title>
+    <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/register.css" />
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a href="/"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+            </div>
+            <div class="menu-icon" id="menuIcon">
+                <i class="fas fa-bars fa-2x"></i>
+                <input type="hidden" span id="welcomeUsername">
+                <input type="hidden" id="userId" name="userId">
+            </div>
+            <div class="nav-items">
+                <a href="/"><i class="fas fa-home" style="color: #002DB3;  margin-right: 3px;"></i> Home</a>
+                <a href="/menu"><i class="fas fa-utensils" style="color: #002DB3;  margin-right: 3px;"></i> Menu</a>
+                <a href="/Vieworder"><i class="fas fa-truck" style="color: #002DB3;  margin-right: 3px;"></i> Delivery
+                    Status</a>
+                <a href="/AboutUs"><i class="fas fa-info-circle" style="color: #002DB3;  margin-right: 3px;"></i> About
+                    Us</a>
+                <a href="/ContactUs"><i class="fas fa-phone" style="color: #002DB3;  margin-right: 3px;"></i> Customer
+                    Care</a>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-content">
+                    <a href="/Profile"><i class="fas fa-user"></i>Profile</a>
+                    <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                  </div>
+            </div>
+        </nav>
+        <div class="header-content">
+        </div>
+
+        <!-- Responsive Drawer -->
+    <div class="drawer">
+        <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+          <div class="circle-background">
+              <i class="fas fa-times"></i>
+          </div>
+        </button>      
+          <div class="nav-items">
+            <div class="quick-search-container">
+              <input type="text" id="quickSearchInput" placeholder="Quick Search">
+          </div>
+              <a href="/Profile" class="menu-item" id="profileMenu"><i class="fas fa-user"></i> Profile</a>
+              <a href="/" class="menu-item"><i class="fas fa-home"></i>Home</a>
+              <a href="/menu" class="menu-item"><i class="fas fa-utensils"></i> Menu</a>
+              <a href="/Vieworder" class="menu-item"><i class="fas fa-truck"></i>Delivery Status</a>
+              <a href="/AboutUs" class="menu-item"><i class="fas fa-info-circle"></i> About Us</a>
+              <a href="/ContactUs" class="menu-item"><i class="fas fa-phone"></i> Customer Care</a>
+              <a href="#" id="logoutMenu" style="display: none;" class="menu-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </div>
+        </div>
+    </header>
+
+
+    <section>
+        <div class="main-content">
+            <div class="welcome-signin-container">
+                <div class="signin-login-section">
+                    <!-- Login Form -->
+                    <div class="login-section">
+                        <h2>Create an Account</h2>
+                        <p>Already have an Account? <a href="/" id="loginLink">Login</a></p>
+                        <div class="login-form">
+                            <form id="insertForm">
+                                <div class="name-input-container">
+                                    <div class="inputbox">
+                                        <input type="text" id="firstName" name="firstName" required title = "First Name">
+                                        <label>First Name</label>
+                                    </div>
+                                    <div class="inputbox">
+                                        <input type="text" id="lastName" name="lastName" required title = "Last Name" >
+                                        <label>Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="inputbox">
+                                    <input type="text" id="phone" name="phone" required placeholder="+63"
+                                        maxlength="13">
+                                    <label style="top: -6px;">Phone Number</label>
+                                </div>
+                                <div class="inputbox">
+                                    <input type="text" id="email" name="email" required title = "Email">
+                                    <label>Email</label>
+                                </div>
+                                <div class="inputbox">
+                                    <input type="password" id="password" name="password" required title = "Password">
+                                    <label>Password</label>
+                                </div>
+                                <div class="inputbox">
+                                    <input type="password" id="cpassword" name="cpassword" required title = "Confirm Password">
+                                    <label>Confirm Password</label>
+                                </div>
+                                <span id="emailError" class="error-message"></span>
+                                <p>By signing up you agree to our <a href="/terms" id="termsLink">Terms and
+                                        Conditions</a> and <a href="/policy" id="privacyLink">Privacy Policy</a></p>
+                                <button type="button" onclick="insertRecord()">Create Account</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-distributed">
+        <div class="footer-left">
+          <a href="/"><img class="footlogo" src="/images/bahaypareslogo.png" alt="Logo" Style="width: 50%; height: auto;"loading="lazy"></a>
+          <p class="footer-links">
+            <a href="/index" class="link-1">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="#">Delivery Status</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+          </p>
+          <p class="footer-company-name">© 2023 Bahay Pares Tapsihan – Dasmariñas.</p>
+        </div>
+        <div class="footer-center">
+          <div>
+            <h2>Contacts</h2>
+            <i class="fa fa-phone"></i>
+            <p>+63 975 336 5406</p>
+          </div>
+          <div style="white-space: nowrap;">
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:bahayparestapsihan@gmail.com" >bahayparestapsihan@gmail.com</a></p>
+          </div>
+          <div>
+            <i class="fab fa-facebook-messenger"></i>
+            <p><a href="https://www.messenger.com/t/100783298129453" target="_blank">Messenger</a></p>
+          </div>
+          <h2>Like Our Page</h2>
+          <div>
+            <i class="fab fa-facebook-f"></i>
+            <p><a href="https://www.facebook.com/tapsihansapasongbayog/" target="_blank">Facebook</a></p>
+          </div>
+        </div>
+        <div class="footer-right">
+          <h2>About Us</h2>
+          <p class="footer-company-about">
+            As we navigate the post-pandemic world, dining out has become increasingly more complex, but no more so than in
+            Bahay Pares tapsihan restaurant. The establishment, renowned for its world-class tapsi and excellent service,
+            has been on a mission to revolutionize the dining experience for their guests. In the wake of social distancing
+            measures, they have invested in building an online ordering system that offers convenience and accessibility.
+          
+          </p>
+          <h2>Visit Us</h2>
+          <div class="footer-right-location">
+            <i class="fa fa-map-marker"></i>
+            <p>89 Burol Main 4114 Dasmariñas, Philippines</p>
+          </div>
+        </div>
+      </footer>
+    <hr height="200px" width="50%" color="white" align="center">
+
+    <script>
+        function validate() {
+            var x = document.getElementById("password");
+            var y = document.getElementById("cpassword");
+            if (x.value == y.value) {
+                return;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Error',
+                    text: 'Passwords do not match',
+                });
+            }
+        }
+
+        function generateUserId(username, email) {
+            const inputString = username + email;
+            const hashCode = Math.abs(hashCodeFromString(inputString));
+            const userId = padWithZeros(hashCode, 12);
+            return userId;
+        }
+
+        function hashCodeFromString(input) {
+            let hash = 0;
+            if (input.length === 0) return hash;
+            for (let i = 0; i < input.length; i++) {
+                const char = input.charCodeAt(i);
+                hash = (hash << 5) - hash + char;
+            }
+            return hash;
+        }
+
+        function padWithZeros(number, length) {
+            let str = number.toString();
+            while (str.length < length) {
+                str = '0' + str;
+            }
+            return str;
+        }
+
+        function updatePhoneNumber(input) {
+            var prefix = "+63 ";
+            var value = input.value;
+            if (value.startsWith(prefix)) {} else if (value === "+63") {
+                input.value = prefix;
+            } else {
+                input.value = prefix + value;
+            }
+        }
+
+        async function checkExistingEmail(email) {
+            try {
+                const response = await fetch('/checkEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email }),
+                });
+
+                const result = await response.json();
+
+                if (result.exists) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: `Invalid Email. Try Again!`,
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                    });
+                    return true; // Email exists
+                }
+
+                return false; // Email doesn't exist
+            } catch (error) {
+                console.error('Error checking existing email:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while checking the existing email.',
+                });
+                return true; // Assume email exists to prevent the record from being inserted
+            }
+        }
+
+        async function insertRecord() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const cpassword = document.getElementById('cpassword').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!firstName || !lastName || !email || !password || !cpassword || !phone) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Input Error',
+                    text: 'Please fill in all fields.',
+                });
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please enter a valid email address.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            const phoneRegex = /^\+63\d{10}$/;
+            if (!phoneRegex.test(phone)) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Please enter a valid phone number. Ex: +63xxxxxxxxxx',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Password must be at least 8 characters long and include at least one uppercase letter and one lowercase letter.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            if (password !== cpassword) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Error',
+                    text: 'Passwords do not match',
+                });
+                return;
+            }
+
+            if (await checkExistingEmail(email)) {
+                return; // Stop the insertion if the email already exists
+            }
+
+            const username = firstName + ' ' + lastName; // Combine First Name and Last Name
+            const userId = generateUserId(username, email);
+
+            const data = {
+                username: username,
+                email: email,
+                password: password,
+                userId: userId,
+                phone: phone,
+            };
+
+            try {
+                const response = await fetch('/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                Swal.fire({
+                    title: 'Account Created',
+                    text: result.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('insertForm').reset();
+                        window.location.href = '/';
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error inserting record:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while inserting the record.',
+                });
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+      const drawer = document.querySelector('.drawer');
+
+      menuIcon.addEventListener('click', function () {
+        if (drawer.style.left === '0px' || !drawer.style.left) {
+          drawer.style.left = '-250px'; // Hide the drawer
+        } else {
+          drawer.style.left = '0'; // Show the drawer
+        }
+      });
+      const closeDrawerButton = document.getElementById('closeDrawer');
+      closeDrawerButton.addEventListener('click', function () {
+        drawer.style.left = '-250px'; // Hide the drawer
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const menuItems = document.querySelectorAll('.nav-items .menu-item');
+
+        quickSearchInput.addEventListener('input', function () {
+            const searchTerm = quickSearchInput.value.toLowerCase();
+
+            menuItems.forEach(function (menuItem) {
+                const menuItemText = menuItem.innerText.toLowerCase();
+
+                // Check if the search term is present in the menu item text
+                if (menuItemText.includes(searchTerm)) {
+                    menuItem.style.display = 'block';
+                } else {
+                    menuItem.style.display = 'none';
+                }
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>

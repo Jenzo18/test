@@ -1,0 +1,205 @@
+.tabs {
+    display: inline-block;
+    max-width: 85%;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    /* Center the tabs and button */
+  }
+  .tables {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #ddd;
+    overflow-x: auto;
+  }download-button
+
+  .tables th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .tables th {
+    background-color: #f7f7f7;
+  }
+
+  .tables tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .tab {
+    display: inline-block;
+    padding: 10px 30px;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    align-items: center;
+    text-align: center;
+    /* Background color for tabs */
+  }
+  .noreport{
+    align-items: center;
+        text-align: center;
+  }
+  .noreport .p {
+    display: none;
+  }
+  .active {
+    background-color: #0d47a1 ;
+    color: #fff;
+  }
+
+  .reports-sales {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .total-orders-box {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .total-orders-box h2 {
+    color: #333;
+    font-size: 18px;
+  }
+  
+  .total-orders-box p {
+    color: #666;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+
+  .order-history-container {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: #0d47a1 ;
+    color: #fff;
+    border: none;
+  }
+
+  .download-button:hover {
+    background-color: #0056b3;
+    /* Darker color on hover */
+  }
+
+  .menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  .container {
+    width: 100%; /* Expand to 100% of the available width */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px;
+  }
+    .containerz {
+    margin:  0 auto;
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    }
+    .containerz h2{
+      margin:  0 auto;
+      max-width: 80%;
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      }
+      
+    .table-container {
+      max-width: 100%; /* Ensure the table doesn't overflow the container */
+      overflow-x: auto;
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+      }
+    .table-container table {
+      width: 100%; /* Make the table expand to the full width of its container */
+      text-align: center; /* Reset text alignment within the table */
+      align-items: center;
+    }
+
+/* Style for Search Container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px; 
+}
+
+/* Style for Search Input */
+#menuSearch {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+/* Optional: Add styles for placeholder text */
+#menuSearch::placeholder {
+  color: #888;
+}
+/* Add this style to your existing CSS */
+.additional-tabs-container {
+  display: flex;
+  gap:10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+
+
+  /* Responsive styles for mobile */
+@media only screen and (max-width: 768px) {
+  .tabs {
+    display: block;
+    align-items: center;
+    text-align: center;
+  }
+
+  .tab, .download-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #menuSearch {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .table-container table {
+    font-size: 14px; 
+  }
+}

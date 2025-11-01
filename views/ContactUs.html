@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="This is the page for delivery status">
+  <title>Bahay Pares Tapsihan Contact us Page</title>
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/contactus.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+        <input type="hidden" span id="welcomeUsername">
+        <input type="hidden" id="userId" name="userId">
+      </div>
+      <div class="nav-items">
+        <a href="/"><i class="fas fa-home" style="color: #002DB3;  margin-right: 3px;" ></i> Home</a>
+        <a href="/menu"><i class="fas fa-utensils" style="color: #002DB3;  margin-right: 3px;"></i> Menu</a>
+        <a href="/Vieworder"><i class="fas fa-truck"style="color: #002DB3;  margin-right: 3px;"></i> Delivery Status</a>
+        <a href="/AboutUs"><i class="fas fa-info-circle"style="color: #002DB3;  margin-right: 3px;"></i> About Us</a>
+        <a href="/ContactUs"><i class="fas fa-phone"style="color: #002DB3;  margin-right: 3px;"></i> Customer Care</a>
+      </div>
+      <div class="dropdown">
+        <button id="profileIcon" class="dropbtn" style="display: none;">
+          <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon" loading="lazy">
+        </button>
+        <div class="dropdown-content">
+          <a href="/Profile"><i class="fas fa-user"></i>Profile</a>
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-content">
+    </div>
+
+    <!-- Responsive Drawer -->
+    <div class="drawer">
+      <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+        <div class="circle-background">
+            <i class="fas fa-times"></i>
+        </div>
+      </button>      
+        <div class="nav-items">
+          <div class="quick-search-container">
+            <input type="text" id="quickSearchInput" placeholder="Quick Search">
+        </div>
+            <a href="/Profile" class="menu-item" id="profileMenu"><i class="fas fa-user"></i> Profile</a>
+            <a href="/" class="menu-item"><i class="fas fa-home"></i>Home</a>
+            <a href="/menu" class="menu-item"><i class="fas fa-utensils"></i> Menu</a>
+            <a href="/Vieworder" class="menu-item"><i class="fas fa-truck"></i>Delivery Status</a>
+            <a href="/AboutUs" class="menu-item"><i class="fas fa-info-circle"></i> About Us</a>
+            <a href="/ContactUs" class="menu-item"><i class="fas fa-phone"></i> Customer Care</a>
+            <a href="#" id="logoutMenu" style="display: none;" class="menu-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+  </header>
+  <div class="parallax-background"></div>
+
+  <section>
+      <form id="contactForm" action="/insertcomments" method="POST">
+        <img src="/images/contactuslogo.png" alt="Profile" class="contactuslogo">
+        <div class="inputbox">
+          <input type="text" id="fname" name="fname" required title="Input your First Name Here">
+          <label>First Name</label>
+        </div>
+        <div class="inputbox">
+          <input type="text" id="lname" name="lname" required title="Input your Last Name Here">
+          <label>Last Name</label>
+        </div>
+        <div class="inputbox">
+          <input type="text" id="email" name="email" required title="Input your Email Name Here">
+          <label>Email</label>
+        </div>
+        <div class="textareabox">
+          <textarea id="message" name="message" required></textarea>
+          <label for="message">Message</label>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <p>For inquiries, please email <a href="mailto:bahayparestapsihan@gmail.com">bahayparestapsihan@gmail.com</a></p>
+  </section>
+
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <a href="/"><img class="footlogo" src="/images/bahaypareslogo.png" alt="Logo" Style="width: 50%; height: auto;"loading="lazy"></a>
+      <p class="footer-links">
+        <a href="/index" class="link-1">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="#">Delivery Status</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+      </p>
+      <p class="footer-company-name">© 2023 Bahay Pares Tapsihan – Dasmariñas.</p>
+    </div>
+    <div class="footer-center">
+      <div>
+        <h2>Contacts</h2>
+        <i class="fa fa-phone"></i>
+        <p>+63 975 336 5406</p>
+      </div>
+      <div style="white-space: nowrap;">
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:bahayparestapsihan@gmail.com" >bahayparestapsihan@gmail.com</a></p>
+      </div>
+      <div>
+        <i class="fab fa-facebook-messenger"></i>
+        <p><a href="https://www.messenger.com/t/100783298129453" target="_blank">Messenger</a></p>
+      </div>
+      <h2>Like Our Page</h2>
+      <div>
+        <i class="fab fa-facebook-f"></i>
+        <p><a href="https://www.facebook.com/tapsihansapasongbayog/" target="_blank">Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <h2>About Us</h2>
+      <p class="footer-company-about">
+        As we navigate the post-pandemic world, dining out has become increasingly more complex, but no more so than in
+        Bahay Pares tapsihan restaurant. The establishment, renowned for its world-class tapsi and excellent service,
+        has been on a mission to revolutionize the dining experience for their guests. In the wake of social distancing
+        measures, they have invested in building an online ordering system that offers convenience and accessibility.
+      
+      </p>
+      <h2>Visit Us</h2>
+      <div class="footer-right-location">
+        <i class="fa fa-map-marker"></i>
+        <p>89 Burol Main 4114 Dasmariñas, Philippines</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const username = sessionStorage.getItem('username');
+    const userId = sessionStorage.getItem('userId');
+
+    function sendEmail() {
+      const fname = document.getElementById('fname').value;
+      const lname = document.getElementById('lname').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const subject = 'Contact Us Inquiry';
+      const body = `First Name: ${fname}\nLast Name: ${lname}\nEmail: ${email}\nMessage: ${message}`;
+      const recipient = 'bahayparestapsihan@gmail.com';
+
+      const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      // Open the user's default email application
+      window.location.href = mailtoLink;
+    }
+
+    // Attach the sendEmail function to the Submit button's click event
+    const submitButton = document.querySelector('form button');
+    submitButton.addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the form submission
+      sendEmail();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+      const drawer = document.querySelector('.drawer');
+
+      menuIcon.addEventListener('click', function () {
+        if (drawer.style.left === '0px' || !drawer.style.left) {
+          drawer.style.left = '-250px'; // Hide the drawer
+        } else {
+          drawer.style.left = '0'; // Show the drawer
+        }
+      });
+      const closeDrawerButton = document.getElementById('closeDrawer');
+      closeDrawerButton.addEventListener('click', function () {
+        drawer.style.left = '-250px'; // Hide the drawer
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const menuItems = document.querySelectorAll('.nav-items .menu-item');
+
+        quickSearchInput.addEventListener('input', function () {
+            const searchTerm = quickSearchInput.value.toLowerCase();
+
+            menuItems.forEach(function (menuItem) {
+                const menuItemText = menuItem.innerText.toLowerCase();
+
+                // Check if the search term is present in the menu item text
+                if (menuItemText.includes(searchTerm)) {
+                    menuItem.style.display = 'block';
+                } else {
+                    menuItem.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    //LOGOUT FUNCTION
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutButton = document.getElementById('logoutButton');
+
+      // Check if the user is authenticated by making a GET request to a route that
+      // returns the user information when authenticated
+      fetch('/check-auth', {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.isAuthenticated) {
+            logoutButton.style.display = 'block';
+            document.getElementById('profileIcon').style.display = 'block';
+
+            // Add a click event listener to the logout button
+            logoutButton.addEventListener('click', function () {
+              // Display a confirmation dialog
+              const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+              // Check if the user confirmed the logout
+              if (isConfirmed) {
+                // Send a logout request to the server when confirmed
+                fetch('/logout', {
+                    method: 'GET',
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.message === 'Logout successful') {
+                      // Redirect to the login page or another page after logout
+                      window.location.href = '/';
+                    } else {
+                      console.error('Logout failed:', data.error);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during logout:', error);
+                  });
+              }
+            });
+          } else {
+            document.getElementById('profileIcon').style.display = 'none';
+            logoutButton.style.display = 'none';
+          }
+        })
+        .catch(error => {
+          console.error('Error checking authentication:', error);
+        });
+    });
+
+  </script>
+</body>
+
+</html>

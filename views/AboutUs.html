@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This is the page about the restaurant and its location">
+ 
+  <title>Bahay Pares Tapsihan About us Page</title>
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <link rel="stylesheet" type="text/css" href="css/aboutus.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+        <input type="hidden" span id="welcomeUsername">
+        <input type="hidden" id="userId" name="userId">
+      </div>
+      <div class="nav-items">
+        <a href="/"><i class="fas fa-home" style="color: #002DB3;  margin-right: 3px;" ></i> Home</a>
+        <a href="/menu"><i class="fas fa-utensils" style="color: #002DB3;  margin-right: 3px;"></i> Menu</a>
+        <a href="/Vieworder"><i class="fas fa-truck"style="color: #002DB3;  margin-right: 3px;"></i> Delivery Status</a>
+        <a href="/AboutUs"><i class="fas fa-info-circle"style="color: #002DB3;  margin-right: 3px;"></i> About Us</a>
+        <a href="/ContactUs"><i class="fas fa-phone"style="color: #002DB3;  margin-right: 3px;"></i> Customer Care</a>
+      </div>
+      <div class="dropdown">
+        <button id="profileIcon" class="dropbtn" style="display: none;">
+          <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon" loading="lazy">
+        </button>
+        <div class="dropdown-content">
+          <a href="/Profile"><i class="fas fa-user"></i>Profile</a>
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+    </nav> 
+    <div class="header-content">
+    </div>
+
+    <!-- Responsive Drawer -->
+    <div class="drawer">
+      <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+        <div class="circle-background">
+            <i class="fas fa-times"></i>
+        </div>
+      </button>      
+        <div class="nav-items">
+          <div class="quick-search-container">
+            <input type="text" id="quickSearchInput" placeholder="Quick Search">
+        </div>
+            <a href="/Profile" class="menu-item" id="profileMenu"><i class="fas fa-user"></i> Profile</a>
+            <a href="/" class="menu-item"><i class="fas fa-home"></i>Home</a>
+            <a href="/menu" class="menu-item"><i class="fas fa-utensils"></i> Menu</a>
+            <a href="/Vieworder" class="menu-item"><i class="fas fa-truck"></i>Delivery Status</a>
+            <a href="/AboutUs" class="menu-item"><i class="fas fa-info-circle"></i> About Us</a>
+            <a href="/ContactUs" class="menu-item"><i class="fas fa-phone"></i> Customer Care</a>
+            <a href="#" id="logoutMenu" style="display: none;" class="menu-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+  
+  </header>
+  <div class="parallax-background"></div>
+
+  <section>
+    <div class="about-us-container">
+      <img src="/images/aboutuslogo.png" alt="Profile" class="aboutuslogo">
+      <form id="loginForm">
+        <p>Your ultimate destination for affordable and delectable fast food in the heart of Dasmarinas.
+          We're your go-to spot, operating daily from 10:00 AM until midnight, with a wide range of services
+          including delivery,
+          pick-up, and dine-in experience. Our restaurant has a diverse menu featuring mouthwatering dishes
+          such as Chicken,
+          Tocino, Pork Tapa, Chicken Bulaklak, and Bagnet. Come savor the flavors that define BAHAY PARES
+          Tapsihan,
+          where Affordability Meets Flavor.</p>
+      </form>
+      <div class="separator-line"></div>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15462.349394135093!2d120.9347753214818!3d14.335385806787281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d54f22bfe639%3A0x83ff8979b1e10729!2sBahay%20Pares%20Tapsihan!5e0!3m2!1sen!2sph!4v1696834643794!5m2!1sen!2sph"
+          width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Location"></iframe>
+      </div>
+
+      <div>
+
+  </section>
+
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <a href="/"><img class="footlogo" src="/images/bahaypareslogo.png" alt="Logo" Style="width: 50%; height: auto;"loading="lazy"></a>
+      <p class="footer-links">
+        <a href="/index" class="link-1">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="#">Delivery Status</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+      </p>
+      <p class="footer-company-name">© 2023 Bahay Pares Tapsihan – Dasmariñas.</p>
+    </div>
+    <div class="footer-center">
+      <div>
+        <h2>Contacts</h2>
+        <i class="fa fa-phone"></i>
+        <p>+63 975 336 5406</p>
+      </div>
+      <div style="white-space: nowrap;">
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:bahayparestapsihan@gmail.com" >bahayparestapsihan@gmail.com</a></p>
+      </div>
+      <div>
+        <i class="fab fa-facebook-messenger"></i>
+        <p><a href="https://www.messenger.com/t/100783298129453" target="_blank">Messenger</a></p>
+      </div>
+      <h2>Like Our Page</h2>
+      <div>
+        <i class="fab fa-facebook-f"></i>
+        <p><a href="https://www.facebook.com/tapsihansapasongbayog/" target="_blank">Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <h2>About Us</h2>
+      <p class="footer-company-about">
+        As we navigate the post-pandemic world, dining out has become increasingly more complex, but no more so than in
+        Bahay Pares tapsihan restaurant. The establishment, renowned for its world-class tapsi and excellent service,
+        has been on a mission to revolutionize the dining experience for their guests. In the wake of social distancing
+        measures, they have invested in building an online ordering system that offers convenience and accessibility.
+      
+      </p>
+      <h2>Visit Us</h2>
+      <div class="footer-right-location">
+        <i class="fa fa-map-marker"></i>
+        <p>89 Burol Main 4114 Dasmariñas, Philippines</p>
+      </div>
+    </div>
+  </footer>
+
+  
+
+  <script>
+    const username = sessionStorage.getItem('username');
+    const userId = sessionStorage.getItem('userId');
+
+    if (username) {
+      // Update the welcomeUsername element with the username
+      const welcomeUsername = document.getElementById('welcomeUsername');
+      welcomeUsername.textContent = username;
+
+      // Fetch the userId based on the displayed username
+      sessionStorage.setItem('username', username);
+      fetch(`/getUserByUserName?username=${username}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.userId) {
+            sessionStorage.setItem('userId', data.userId);
+          } else {
+            // Handle the case where the user was not found
+            console.error('User not found');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching userId:', error);
+        });
+    } else {
+      // User is not logged in, you can choose to do nothing or display a login prompt
+      // Here, we will not show the login prompt
+      // const loginPrompt = document.getElementById('login-prompt');
+      // loginPrompt.style.display = 'block'; // Show the login prompt
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+      const drawer = document.querySelector('.drawer');
+
+      menuIcon.addEventListener('click', function () {
+        if (drawer.style.left === '0px' || !drawer.style.left) {
+          drawer.style.left = '-250px'; // Hide the drawer
+        } else {
+          drawer.style.left = '0'; // Show the drawer
+        }
+      });
+      const closeDrawerButton = document.getElementById('closeDrawer');
+      closeDrawerButton.addEventListener('click', function () {
+        drawer.style.left = '-250px'; // Hide the drawer
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const menuItems = document.querySelectorAll('.nav-items .menu-item');
+
+        quickSearchInput.addEventListener('input', function () {
+            const searchTerm = quickSearchInput.value.toLowerCase();
+
+            menuItems.forEach(function (menuItem) {
+                const menuItemText = menuItem.innerText.toLowerCase();
+
+                // Check if the search term is present in the menu item text
+                if (menuItemText.includes(searchTerm)) {
+                    menuItem.style.display = 'block';
+                } else {
+                    menuItem.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutButton = document.getElementById('logoutButton');
+      const logoutMenu = document.getElementById('logoutMenu');
+      fetch('/check-auth', {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.isAuthenticated) {
+            const profileIcon = document.getElementById('profileIcon');
+            const profileMenu = document.getElementById('profileMenu');
+            profileIcon.style.display = 'block';
+            profileMenu.style.display = 'block'; // Show in drawer
+            logoutMenu.style.display = 'block';
+            // Add a click event listener to the logout button
+            logoutButton.addEventListener('click', function () {
+              // Display a confirmation dialog
+              const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+              // Check if the user confirmed the logout
+              if (isConfirmed) {
+                // Send a logout request to the server when confirmed
+                fetch('/logout', { // Check if this URL is correct
+                    method: 'GET',
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.message === 'Logout successful') {
+                      // Redirect to the login page or another page after logout
+                      window.location.href = '/';
+                    } else {
+                      console.error('Logout failed:', data.error);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during logout:', error);
+                  });
+              }
+            });
+            logoutMenu.addEventListener('click', function () {
+              // Display a confirmation dialog
+              const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+              // Check if the user confirmed the logout
+              if (isConfirmed) {
+                // Send a logout request to the server when confirmed
+                fetch('/logout', { // Check if this URL is correct
+                    method: 'GET',
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.message === 'Logout successful') {
+                      // Redirect to the login page or another page after logout
+                      window.location.href = '/';
+                    } else {
+                      console.error('Logout failed:', data.error);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during logout:', error);
+                  });
+              }
+            });
+          } else {
+            const profileIcon = document.getElementById('profileIcon');
+            logoutButton.style.display = 'none';
+            profileIcon.style.display = 'none';
+            const profileMenu = document.getElementById('profileMenu');
+            profileMenu.style.display = 'none'; // Show in drawer
+            logoutMenu.style.display = 'none';
+
+
+          }
+        })
+        .catch(error => {
+          console.error('Error checking authentication:', error);
+        });
+    });
+
+    const parallaxBackground = document.querySelector('.parallax-background');
+
+    window.addEventListener('scroll', function () {
+      const scrollPosition = window.scrollY;
+      parallaxBackground.style.height = 400 - scrollPosition * 0.5 + 'px';
+    });
+  </script>
+
+</body>
+
+</html>

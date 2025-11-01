@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This page allows superadmin to view and download sales report daily, weekly, monthly, and yearly">
+  <title>Bahay Pares Tapsihan Order History Page</title>
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="/css/orderhistory.css" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/Updateorder"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+        <input type="hidden" id="userId" name="userId">
+      </div>
+      <div class="nav-items">
+        <a id="updateOrderLink" href="/Updateorder">Update Delivery Status</a>
+        <a id="menuCustomizationLink" href="/menucustomization">Menu Update</a>
+        <a id="orderHistoryLink" href="/OrderHistory">Order History</a>
+        <a id="manageAccountsLink" href="/superadmin">Accounts and Configurations</a>
+      </div>
+      <div class="profile-label" id="profile-label">
+        <span id="welcomeUsername" class="welcomeusername"></span>
+        <div class="logout-link">
+          <a href="/AdminProfile"><i class="fas fa-user"></i>Profile</a>
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button id="profileIcon" class="dropbtn" style="display: none;">
+          <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon" loading="lazy">
+        </button>
+      </div>
+    </nav>
+    <div class="header-content">
+    </div>
+
+            <!-- Responsive Drawer -->
+            <div class="drawer">
+              <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+                <div class="circle-background">
+                    <i class="fas fa-times"></i>
+                </div>
+              </button>      
+                <div class="nav-items">
+                  <div class="quick-search-container">
+                    <input type="text" id="quickSearchInput" placeholder="Quick Search">
+                </div>
+                    <a href="/AdminProfile" class="menu-item" id="profileMenu">Profile</a>
+                    <a id="updateOrderLink" class="menu-item" href="/Updateorder">Update Delivery Status</a>
+                    <a id="menuCustomizationLink" class="menu-item" href="/menucustomization">Menu Update</a>
+                    <a id="orderHistoryLink" class="menu-item" href="/OrderHistory">Order History</a>
+                    <a id="manageAccountsLink" class="menu-item" href="/superadmin">Accounts and Configurations</a>
+                </div>
+              </div>
+  </header>
+
+  <!-- Add labels for Cancelled and Delivered for each category -->
+<div class="reports-sales">
+  <div class="total-orders-box">
+    <h2>Orders Today</h2>
+    <p>Total: <span id="ordersTodayCount">Loading...</span></p>
+    <p>Cancelled: <span id="cancelledTodayCount">Loading...</span></p>
+    <p>Delivered: <span id="deliveredTodayCount">Loading...</span></p>
+  </div>
+
+  <div class="total-orders-box">
+    <h2>Orders This Week</h2>
+    <p>Total: <span id="ordersThisWeekCount">Loading...</span></p>
+    <p>Cancelled: <span id="cancelledThisWeekCount">Loading...</span></p>
+    <p>Delivered: <span id="deliveredThisWeekCount">Loading...</span></p>
+  </div>
+
+  <div class="total-orders-box">
+    <h2>Orders This Month</h2>
+    <p>Total: <span id="ordersThisMonthCount">Loading...</span></p>
+    <p>Cancelled: <span id="cancelledThisMonthCount">Loading...</span></p>
+    <p>Delivered: <span id="deliveredThisMonthCount">Loading...</span></p>
+  </div>
+
+  <div class="total-orders-box">
+    <h2>Orders This Year</h2>
+    <p>Total: <span id="ordersThisYearCount">Loading...</span></p>
+    <p>Cancelled: <span id="cancelledThisYearCount">Loading...</span></p>
+    <p>Delivered: <span id="deliveredThisYearCount">Loading...</span></p>
+  </div>
+</div>
+
+
+  <!-- Main Content Container -->
+  <div class="containerz">
+    <div class="order-history-container">
+      <h1>Order History</h1>
+      <div class="tabs">
+        <div class="tab active" id="daily-tab">Daily</div>
+        <div class="tab" id="weekly-tab">Weekly</div>
+        <div class="tab" id="monthly-tab">Monthly</div>
+        <div class="tab" id="yearly-tab">Yearly</div>
+      </div>
+  
+      <div display="none"><center><button id="download-report" class="download-button">Download Report</button></center></div>
+      <div class="search-container">
+        <input type="text" id="menuSearch" placeholder="Search menu items...">
+      </div>
+      <hr>
+      <div class="table-container" id="report-container"></div>
+      <canvas id="reportChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+
+</body>
+
+<script>
+       // Get the username from sessionStorage
+       const username = sessionStorage.getItem('username');
+        if (username) {
+            const welcomeUsername = document.getElementById('welcomeUsername');
+            welcomeUsername.textContent = username;
+
+            // Fetch the userId based on the displayed username
+            sessionStorage.setItem('username', username); 
+        }
+    
+        async function generateReport(reportType) {
+      try {
+        let reportEndpoint = '';
+        let reportTitle = '';
+
+        switch (reportType) {
+          case 'daily':
+            reportEndpoint = '/generateDailyReport';
+            reportTitle = 'Daily Report';
+            break;
+          case 'weekly':
+            reportEndpoint = '/generateWeeklyReport';
+            reportTitle = 'Weekly Report';
+            break;
+          case 'monthly':
+            reportEndpoint = '/generateMonthlyReport';
+            reportTitle = 'Monthly Report';
+            break;
+          case 'yearly':
+            reportEndpoint = '/generateYearlyReport';
+            reportTitle = 'Yearly Report';
+            break;
+          default:
+            console.error('Invalid report type selected.');
+            return;
+        }
+
+        // Make an AJAX request to get the report data
+        const response = await fetch(reportEndpoint);
+
+        if (!response.ok) {
+          throw new Error(`Error fetching report data. Status: ${response.status}`);
+        }
+        // Receive the report data as HTML (formatted report)
+        const reportData = await response.text();
+
+        // Display the formatted report in the report-container div
+        const reportContainer = document.getElementById('report-container');
+        reportContainer.innerHTML = reportData;
+
+        // Highlight the active tab
+        document.querySelectorAll('.tab').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        document.getElementById(`${reportType}-tab`).classList.add('active');
+
+        // Show the download button
+        document.getElementById('download-report').style.display = 'block';
+      } catch (error) {
+        console.error('^ No orders found for this time period ^');
+        const reportContainer = document.getElementById('report-container');
+        reportContainer.innerHTML = `
+          <style>
+            .logos {
+              width: 200px;
+              height: 100%;
+              filter: grayscale(100%);
+              align-items: center;
+              text-align: center;
+              opacity: 50%;
+            }
+          </style>
+          <img class="logos" src="/images/bahaypareslogo.png" alt="Logo">
+          <br>
+          No order report present at this current period
+        `;
+
+        // Highlight the active tab
+        document.querySelectorAll('.tab').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        document.getElementById(`${reportType}-tab`).classList.add('active');
+      }
+    }
+
+function generateCSV(reportType) {
+    const reportContainer = document.getElementById('report-container');
+    const reportTable = reportContainer.querySelector('table');
+
+    if (!reportTable) {
+        console.error('No report table found for download.');
+        return;
+    }
+
+    // Get the table's rows
+    const rows = reportTable.querySelectorAll('tr');
+
+    if (rows.length < 2) {
+        console.error('No data rows found for download.');
+        return;
+    }
+
+    // Extract the column headers from the first row
+    const headerRow = rows[0];
+    const columnHeaders = Array.from(headerRow.querySelectorAll('th')).map(header => header.textContent);
+
+    // Extract the data rows, starting from the second row
+    const dataRows = Array.from(rows).slice(1);
+
+    // Calculate the total price, total delivery fee, number of delivered items, and number of cancelled items
+    let totalPrice = 0;
+    let totalDeliveryFee = 0;
+    let deliveredCount = 0;
+    let cancelledCount = 0;
+    let totalDeliveredPrice = 0; // New variable to store the total price of delivered items
+
+    dataRows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+
+        // Assuming the total price is in the 11th column, delivery fee in the 9th column,
+        // delivery status in the 12th column, and cancellation status in the 13th column
+        const totalPriceCell = cells[10]; // Adjust the index to 10 for the 11th column
+        const deliveryFeeCell = cells[8]; // Adjust the index to 8 for the 9th column
+        const deliveryStatusCell = cells[11]; // Adjust the index to 11 for the 12th column
+        const cancellationStatusCell = cells[11]; // Adjust the index to 12 for the 13th column
+
+        const totalPriceValue = parseFloat(totalPriceCell.textContent.replace(/[^\d.]/g, '')) || 0;
+        const deliveryFeeValue = parseFloat(deliveryFeeCell.textContent.replace(/[^\d.]/g, '')) || 0;
+
+        totalPrice += totalPriceValue;
+
+        // Check if the delivery status is 'Delivered' and increment the delivered count
+        if (deliveryStatusCell.textContent.trim().toLowerCase() === 'delivered') {
+            deliveredCount++;
+            totalDeliveredPrice += totalPriceValue; // Increment the totalDeliveredPrice for delivered items
+            totalDeliveryFee += deliveryFeeValue; // Increment the totalDeliveryFee for delivered items
+        }
+
+        // Check if the cancellation status is 'Cancelled' and increment the cancelled count
+        if (cancellationStatusCell.textContent.toLowerCase().includes('cancelled')) {
+            cancelledCount++;
+        }
+    });
+
+    // Get the current date and time
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+    });
+
+    // Combine column headers, report title, and total price/delivery fee/delivered count/cancelled count into a CSV content
+    const csvRows = [
+        `"Report as of (${formattedDate})"`,
+        columnHeaders.join(','), // Combine column headers into a CSV row
+    ].concat(dataRows.map(row => {
+        const cells = Array.from(row.querySelectorAll('td')).map(cell => {
+            if (cell.textContent === 'Phone No.') {
+                const locationCell = row.querySelector('td[headers="location"]');
+                return `"${cell.textContent} ${locationCell.textContent}"`;
+            }
+            return `"${cell.textContent}"`;
+        });
+
+        return cells.join(',');
+    }));
+
+    // Add rows for the total price, total delivery fee, number of delivered items, and number of cancelled items
+    csvRows.push(`"Total Orders","${deliveredCount + cancelledCount}"`);
+    csvRows.push(`"Number of Delivered Items","${deliveredCount}"`);
+    csvRows.push(`"Number of Cancelled Items","${cancelledCount}"`);
+
+    const csvContent = csvRows.join('\n');
+
+    // Create a Blob with the CSV content
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+
+    // Create an anchor element to trigger the download
+    const anchor = document.createElement('a');
+    anchor.href = URL.createObjectURL(blob);
+
+    // Set the download attribute with the formatted date and time
+    anchor.download = `${formattedDate.replace(/ /g, '_')}_Report.csv`;
+
+    // Trigger a click event to initiate the download
+    anchor.click();
+}
+
+  // Add event listeners for generating and downloading reports
+  document.getElementById('daily-tab').addEventListener('click', () => generateReport('daily'));
+  document.getElementById('weekly-tab').addEventListener('click', () => generateReport('weekly'));
+  document.getElementById('monthly-tab').addEventListener('click', () => generateReport('monthly'));
+  document.getElementById('yearly-tab').addEventListener('click', () => generateReport('yearly'));
+
+  // Automatically generate the initial daily report on page load
+  generateReport('daily');
+
+  // Add a click event to the "Download Report" button
+  const downloadReportButton = document.getElementById('download-report');
+  downloadReportButton.addEventListener('click', generateCSV);
+  
+
+  // Function to handle menu item search
+  function searchMenuItems() {
+    const searchInput = document.getElementById('menuSearch');
+    const searchTerm = searchInput.value.toLowerCase();
+    const tableRows = document.querySelectorAll('#menuTableBody2 tr');
+
+    tableRows.forEach(row => {
+      let rowContent = row.textContent.toLowerCase();
+      if (rowContent.includes(searchTerm)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+
+  // Function to handle search input for the main report
+  function handleSearch() {
+   // Get the search input value
+    const searchInput = document.getElementById('menuSearch').value.toLowerCase();
+
+    // Filter the report data based on the search input
+    const reportContainer = document.getElementById('report-container');
+    const reportTable = reportContainer.querySelector('table');
+
+    if (!reportTable) {
+      console.error('No report table found for search.');
+      return;
+    }
+
+    // Get all rows in the table
+    const rows = reportTable.querySelectorAll('tr');
+
+    // Loop through each data row
+    rows.forEach(row => {
+      // Skip the header row
+      if (row.querySelector('th')) {
+        return;
+      }
+
+      // Check if any cell in the row contains the search input
+      const cells = row.querySelectorAll('td');
+      let found = false;
+
+      cells.forEach(cell => {
+        const cellContent = cell.textContent.toLowerCase();
+
+        // Check if the cell content contains the search input
+        if (cellContent.includes(searchInput) || cellContent.replace(/\D/g, '').includes(searchInput)) {
+          found = true;
+        }
+      });
+
+      // Show or hide the row based on the search result
+      row.style.display = found ? '' : 'none';
+    });
+  }
+
+  // Add event listeners to the search inputs
+  const searchInput = document.getElementById('menuSearch');
+  searchInput.addEventListener('input', () => {
+    searchMenuItems();
+    handleSearch();
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+      const drawer = document.querySelector('.drawer');
+
+      menuIcon.addEventListener('click', function () {
+        if (drawer.style.left === '0px' || !drawer.style.left) {
+          drawer.style.left = '-250px'; // Hide the drawer
+        } else {
+          drawer.style.left = '0'; // Show the drawer
+        }
+      });
+      const closeDrawerButton = document.getElementById('closeDrawer');
+      closeDrawerButton.addEventListener('click', function () {
+        drawer.style.left = '-250px'; // Hide the drawer
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        quickSearchInput.addEventListener('input', function () {
+            const searchTerm = quickSearchInput.value.toLowerCase();
+
+            menuItems.forEach(function (menuItem) {
+                const menuItemText = menuItem.innerText.toLowerCase();
+
+                // Check if the search term is present in the menu item text
+                if (menuItemText.includes(searchTerm)) {
+                    menuItem.style.display = 'block';
+                } else {
+                    menuItem.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', async function () {
+  try {
+    // Fetch orders for today
+    const ordersTodayResponse = await fetch('/getOrdersToday');
+    if (!ordersTodayResponse.ok) {
+      throw new Error(`No orders found today. Status: ${ordersTodayResponse.status}`);
+    }
+    const ordersTodayData = await ordersTodayResponse.json();
+
+    console.log('Orders Today Data:', ordersTodayData);
+
+    const ordersTodayCountElement = document.getElementById('ordersTodayCount');
+    ordersTodayCountElement.textContent = ordersTodayData.totalOrdersToday;
+
+    const cancelledTodayCountElement = document.getElementById('cancelledTodayCount');
+    cancelledTodayCountElement.textContent = ordersTodayData.cancelledCountToday;
+
+    const deliveredTodayCountElement = document.getElementById('deliveredTodayCount');
+    deliveredTodayCountElement.textContent = ordersTodayData.deliveredCountToday;
+
+    // Fetch orders for this week
+    const ordersThisWeekResponse = await fetch('/getOrdersThisWeek');
+    if (!ordersThisWeekResponse.ok) {
+      throw new Error(`No orders found for this week. Status: ${ordersThisWeekResponse.status}`);
+    }
+    const ordersThisWeekData = await ordersThisWeekResponse.json();
+    console.log('Orders This Week Data:', ordersThisWeekData);
+
+    const ordersThisWeekCountElement = document.getElementById('ordersThisWeekCount');
+    ordersThisWeekCountElement.textContent = ordersThisWeekData.totalOrdersThisWeek;
+
+    const cancelledThisWeekCountElement = document.getElementById('cancelledThisWeekCount');
+    cancelledThisWeekCountElement.textContent = ordersThisWeekData.cancelledCountThisWeek;
+
+    const deliveredThisWeekCountElement = document.getElementById('deliveredThisWeekCount');
+    deliveredThisWeekCountElement.textContent = ordersThisWeekData.deliveredCountThisWeek;
+
+    // Fetch orders for this month
+    const ordersThisMonthResponse = await fetch('/getOrdersThisMonth');
+    if (!ordersThisMonthResponse.ok) {
+      throw new Error(`No orders found for this month. Status: ${ordersThisMonthResponse.status}`);
+    }
+    const ordersThisMonthData = await ordersThisMonthResponse.json();
+
+    const ordersThisMonthCountElement = document.getElementById('ordersThisMonthCount');
+    ordersThisMonthCountElement.textContent = ordersThisMonthData.totalOrdersThisMonth;
+
+    const cancelledThisMonthCountElement = document.getElementById('cancelledThisMonthCount');
+    cancelledThisMonthCountElement.textContent = ordersThisMonthData.cancelledCountThisMonth;
+
+    const deliveredThisMonthCountElement = document.getElementById('deliveredThisMonthCount');
+    deliveredThisMonthCountElement.textContent = ordersThisMonthData.deliveredCountThisMonth;
+
+    // Fetch orders for this year
+    const ordersThisYearResponse = await fetch('/getOrdersThisYear');
+    if (!ordersThisYearResponse.ok) {
+      throw new Error(`No orders found for this year. Status: ${ordersThisYearResponse.status}`);
+    }
+    const ordersThisYearData = await ordersThisYearResponse.json();
+
+    const ordersThisYearCountElement = document.getElementById('ordersThisYearCount');
+    ordersThisYearCountElement.textContent = ordersThisYearData.totalOrdersThisYear;
+
+    const cancelledThisYearCountElement = document.getElementById('cancelledThisYearCount');
+    cancelledThisYearCountElement.textContent = ordersThisYearData.cancelledCountThisYear;
+
+    const deliveredThisYearCountElement = document.getElementById('deliveredThisYearCount');
+    deliveredThisYearCountElement.textContent = ordersThisYearData.deliveredCountThisYear;
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+
+
+  // LOGOUT FUNCTION
+  const logoutButton = document.getElementById('logoutButton');
+  fetch('/check-auth', {
+      method: 'GET',
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.isAuthenticated) {
+        logoutButton.style.display = 'block';
+        logoutButton.addEventListener('click', function () {
+          const isConfirmed = window.confirm('Are you sure you want to logout?');
+          if (isConfirmed) {
+            fetch('/logout', {
+                method: 'GET',
+              })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.message === 'Logout successful') {
+                  window.location.href = '/';
+                } else {
+                  console.error('Logout failed:', data.error);
+                }
+              })
+              .catch((error) => {
+                console.error('Error during logout:', error);
+              });
+          }
+        });
+      } else {
+        logoutButton.style.display = 'none';
+      }
+    })
+    .catch((error) => {
+      console.error('Error checking authentication:', error);
+    });
+</script>
+
+</html>

@@ -1,0 +1,310 @@
+.adminContainer {
+    display: flex;
+    flex-direction: column; /* Keep this as column for the main container */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.admin-sections {
+    display: flex;
+    flex-direction: row; /* Keep this as row to have tabs horizontally */
+    justify-content: flex-start; /* Align tabs to the left */
+    align-items: center;
+    gap: 5px;
+}
+
+#eyeIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  #eye {
+    font-size: 20px;
+    color: #666;
+  }
+
+/* Apply some basic styling to the table */
+table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+  }
+
+
+.admin-section table {
+    text-align: center;
+}
+  
+  /* Style the table header */
+  th {
+    background-color: #f2f2f2;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  /* Style the table rows */
+  td {
+    border: 1px solid #ddd;
+    padding: 12px;
+  }
+  
+  /* Style the delete button */
+  button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    color: black;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  
+  /* Hover effect on delete button */
+  button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+
+  .drawer button {
+    background-color: transparent;
+  }
+  
+
+  .admin-section {
+    width: 20%;
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.admin-section2 {
+    width: 80%;
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.menu-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 34px;
+}
+
+.switch-label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(0, -40%);
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(66px);
+}
+
+.tabcontainer {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #ddd;
+    color: #555;
+}
+
+.tab.active {
+    background-color: #ddd;
+    color: #555;
+}
+
+.inputbox{
+    margin: 15px 0;
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+    border-bottom: 2px solid black;
+    align-items: center;
+    text-align: center;
+}
+
+.inputbox input[type="email"]:focus ~ label,
+.inputbox input[type="email"]:valid ~ label {
+    top: -5px;
+}
+
+.inputbox label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform:translateY(-50%);
+    color: black;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+input:focus ~ label,
+input:valid ~ label{
+    top: -5px;
+}
+
+select:focus ~ label,
+select:valid ~ label,
+select:not(:placeholder-shown) ~ label {
+    top: -5px;
+}
+
+.inputbox input,
+.inputbox select {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 0px 35px 0px 5px;
+    color: black;
+}
+
+
+.registeradminbutton {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    color: black;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.registeradminbutton:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.deliveryfeelabel {
+    text-align: left;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+@media screen and (max-width: 1000px) {
+    .tabcontainer {
+        font-size: 12px;
+        overflow-x: auto;
+        width: 90%;
+    }
+
+    
+    .tab {
+        font-size: 12px;
+    }
+
+    .admin-section {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    .tabcontainer {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+}

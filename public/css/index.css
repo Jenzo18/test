@@ -1,0 +1,584 @@
+
+
+h1 {
+  text-align: left;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #004080;
+  text-align: left;
+}
+.circle_logo{
+  margin-top: 150px; 
+  width: 50%; filter: 
+  saturate(200%); 
+  border-radius: 50%; 
+  background-color: #f5f5f5;
+ }
+a {
+  text-decoration: none;
+}
+
+.parallax-background {
+  /*For header*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  z-index: -1;
+  background-image: url("/images/headerbackground.jpg");
+  background-size: cover;
+  background-position: center;
+  transition: height 0.3s;
+}
+
+
+nav.navClass {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+
+  border: none;
+  text-align: center;
+  max-height: 60px;
+}
+
+.login-section {
+  width: 100%;
+  background-color: transparent;
+  margin-top: 250px;
+  border-left: 1px solid black;
+
+}
+
+.inputbox {
+  position: relative;
+  margin: 30px;
+  width: 310px;
+  border-bottom: 2px solid black;
+  margin-left: 55px;
+}
+
+.inputbox label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: black;
+  font-size: 1em;
+  pointer-events: none;
+  transition: .5s;
+}
+
+input:focus~label,
+input:valid~label {
+  top: -5px;
+}
+
+
+.inputbox input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0px 35px 0px 5px;
+  color: black;
+
+}
+
+
+.inputbox ion-icon {
+  position: absolute;
+  right: -30px;
+  color: black;
+  font-size: 1.2em;
+  top: 20px;
+}
+
+.loginButton {
+  background-color: #0d47a1;
+  width: 200px;
+  height: 50px;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 #ffffff;
+  transition: ease-out 0.3s;
+}
+
+.loginButton:hover {
+  box-shadow: inset 300px 0 0 0 #ffffff;
+  cursor: pointer;
+  color: blue;
+  border: 2px solid blue;
+}
+
+.loginFormButton {
+  color: #004080;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin: 0px 10px;
+  border-radius: 100px;
+  background-color: transparent;
+  display: inline-block;
+}
+
+.welcome-section img{
+  text-align: center;
+}
+
+.loginFormButton:hover {
+  color: rgb(15, 3, 43);
+}
+
+.welcome-section {
+  flex: 1;
+  max-width: 600px;
+  color: rgb(21, 21, 22);
+  text-align: left;
+}
+
+.welcome-section p {
+  flex: 1;
+  max-width: 600px;
+  color: rgb(21, 21, 22);
+  text-align: left;
+}
+
+.special-offers {
+  display: block;
+  white-space: nowrap;
+  padding: 40px;
+  border-radius: 20px;
+  background-color: transparent;
+  overflow: hidden;
+  max-width: 80%; 
+  max-height: 408px; 
+  overflow: hidden;
+  position: relative;
+}
+
+.special-offer {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  height: 300px;
+  margin-right: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: filter 0.3s;
+
+}
+
+.special-offer img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+
+.special-offer h3 {
+  color: #333;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+}
+
+.special-offer p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: transform 0.3s;
+}
+
+.special-offer:hover {
+  filter: saturate(200%);
+}
+
+.special-offer:hover h3,
+.special-offer:hover p {
+  transform: scale(1.1);
+}
+
+.special-offer p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+
+
+.special-offers {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}
+
+.special-offer2 {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  position: relative;
+  transition: filter 0.3s;
+}
+
+.special-offer2 img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.special-offer2 h3 {
+  color: #333;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+  overflow-wrap: break-word;
+}
+
+.special-offer2 p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: transform 0.3s;
+  overflow-wrap: break-word;
+}
+
+.special-offer2:hover {
+  filter: saturate(200%);
+}
+
+.special-offer2:hover h3,
+.special-offer2:hover p {
+  transform: scale(1.1);
+}
+
+.special-offer2 p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.offers-main-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 40px;
+  background-image: url(/images/WHITEWOOD.jpg);
+  
+}
+
+.offers-text-container {
+  padding-bottom: 70px;
+  max-width: 30%;
+}
+
+.offers-text-container p {
+  text-align: left;
+}
+
+.offers-text-container h2 {
+  text-align: left;
+  padding-top: 40px;
+  color: #004080;
+}
+
+#featuredMenu .special-offer {
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in-out {
+  animation: fadeInOut 10s ease-in-out;
+  opacity: 0;
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  5%,
+  95% {
+    opacity: 1;
+  }
+}
+
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+
+}
+
+.overlay h3 {
+  margin: 0;
+  font-size: 1.5em;
+
+}
+
+.overlay p {
+  margin: 0;
+  font-size: 1em;
+
+}
+
+@media (max-width: 1000px) {
+
+  .offers-main-container{
+    display: block; 
+    justify-content: center; 
+    text-align:center; 
+    align-items: center;
+    padding: 0;
+  }
+
+  .offers-text-container {
+    margin-left: 20px;
+  }
+
+  .offers-text-container {
+    padding-bottom: 20px;
+    max-width: 500px;
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .signin-login-section {
+    margin:0;
+  }
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Header image */
+  .parallax-background {
+    height: 200px;
+  }
+
+  /* Navigation */
+  nav.navClass {
+    padding: 10px 20px; 
+  }
+
+  /* Login section */
+  .login-section {
+    margin-top: 50px; 
+    border-left: none;
+    width: 80%;
+    margin-left: 10%; 
+  }
+
+  /* Input box */
+  .inputbox {
+    width: 80%;
+    margin: 15px auto; 
+    margin-left: 0; 
+  }
+
+  /* Login button */
+  .loginButton {
+    width: 100%; 
+  }
+
+  /* Welcome section */
+  .welcome-section {
+    max-width: 100%; 
+    margin-left: 0; 
+    align-content: center;
+    align-items: center;
+  }
+
+  .welcome-section p {
+    max-width: 100%;
+    text-align: center;
+    margin-left: 0;
+  }
+  .welcome-section img {
+    max-width: 60%; 
+    text-align: center;
+    align-items: center;
+    display:block;
+    position: relative;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #004080;
+    text-align: center;
+  }
+
+  /* Special offers */
+  .special-offers {
+    padding: 20px; 
+    max-height: none; 
+  }
+
+  .special-offer,
+  .special-offer2 {
+    width: 100%; 
+    margin-right: 0;
+    margin-bottom: 20px; 
+  }
+
+  .imagelogin{
+    display:none;
+  }
+  h2{
+    text-align: center;
+    text-justify: center;
+  }
+ .restaurant-image{
+  display: none;
+ }
+ .circle_logo{
+  text-align: center;
+  align-items: center;
+  margin-top: 10px; 
+  width: 50%; 
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  display: block;
+ }
+  
+}
+
+@media screen and (max-width: 480px) {
+
+  .signin-login-section {
+    margin:0;
+  }
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Header image */
+  .parallax-background {
+    height: 200px;
+  }
+
+  /* Navigation */
+  nav.navClass {
+    padding: 10px 20px; 
+  }
+
+  /* Login section */
+  .login-section {
+    margin-top: 50px; 
+    border-left: none;
+    width: 80%;
+    margin-left: 10%; 
+  }
+
+  /* Input box */
+  .inputbox {
+    width: 80%;
+    margin: 15px auto; 
+    margin-left: 0; 
+  }
+
+  /* Login button */
+  .loginButton {
+    width: 100%; 
+  }
+
+  /* Welcome section */
+  .welcome-section {
+    max-width: 100%; 
+    margin-left: 0; 
+    align-content: center;
+    align-items: center;
+  }
+
+  .welcome-section p {
+    max-width: 100%;
+    text-align: center;
+    margin-left: 0;
+  }
+  .welcome-section img {
+    max-width: 60%; 
+    text-align: center;
+    align-items: center;
+    display:block;
+    position: relative;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #004080;
+    text-align: center;
+  }
+
+  /* Special offers */
+  .special-offers {
+    padding: 20px; 
+    max-height: none; 
+  }
+
+  .special-offer,
+  .special-offer2 {
+    width: 100%; 
+    margin-right: 0;
+    margin-bottom: 20px; 
+  }
+
+  .imagelogin{
+    display:none;
+  }
+  h2{
+    text-align: center;
+    text-justify: center;
+  }
+ .restaurant-image{
+  display: none;
+ }
+ .circle_logo{
+  text-align: center;
+  align-items: center;
+  margin-top: 10px; 
+  width: 50%; 
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  display: block;
+ }
+}

@@ -1,0 +1,519 @@
+
+
+.contactsContainer {
+  display: flex;
+  justify-content: space-between;
+  /* Separate contact methods */
+  margin-top: 20px;
+}
+
+.contact-method {
+  flex: 1;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-right: 20px;
+}
+
+/* Style the email and phone number containers */
+.contact-method h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.contact-method table {
+  width: 100%;
+}
+
+.contact-method td {
+  padding: 5px 10px;
+}
+
+.contact-method input {
+  padding: 5px;
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.generated-user-id {
+  display: inline-block;
+  margin-left: 10px;
+  /* Adjust the margin as needed */
+  color: #333;
+  /* Adjust the color as needed */
+}
+
+/* Style the email container */
+.email-container {
+  display: flex;
+  align-items: center;
+  /* Vertically align items */
+}
+
+/* Add margin to separate email input and error message */
+.email-container input {
+  margin-right: 5px;
+}
+
+
+p {
+  align-items: center;
+  text-align: center;
+}
+
+.signin-login-section nav {
+  background-color: #f9f9f9;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+
+
+
+/*nav.button{
+  text-align: center;
+  padding: 20px 0px;
+  background-color: #0056b3;
+}*/
+
+section {
+  padding: 40px;
+  text-align: center;
+}
+
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+}
+
+.containerform {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+}
+
+
+
+.welcome-signin-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+
+.menu-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+
+.menu-item img {
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 8px;
+
+}
+
+.menu-item h3 {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #004080;
+  line-height: 1.0;
+}
+
+.menu-item p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.0;
+}
+
+textarea {
+  padding: 10px;
+  width: 250px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 10px;
+}
+
+
+
+.special-offer {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+.special-offer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.special-offer-content {
+  padding: 20px;
+}
+
+.special-offer h3 {
+  color: #333;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.special-offer p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+button {
+  background-color: #ffffff;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.details-button:hover {
+  background-color: rgb(36, 170, 36);
+}
+
+
+.ContactsSection {
+  position: relative;
+  background-color: transparent;
+  /* Set background to transparent */
+  margin: 20px 0;
+  padding: 20px;
+  z-index: 1;
+  /* Ensure the login section is above the background */
+
+}
+
+.signin-login-section {
+  position: relative;
+  background-color: transparent;
+  /* Set background to transparent */
+  margin: 20px 0;
+  padding: 20px;
+  z-index: 1;
+  /* Ensure the login section is above the background */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+.login-section h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 28px;
+  color: #004080;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+
+.admin-sections {
+  display: flex;
+  justify-content: space-between;
+  /* Distribute sections evenly */
+  align-items: flex-start;
+  /* Align sections at the top */
+  flex-wrap: wrap;
+  /* Wrap to the next line if the screen is too narrow */
+  margin: 20px;
+  /* Add some margin for spacing */
+}
+
+.admin-section {
+  flex: 1;
+  /* Let each section grow equally to take up available space */
+  padding: 20px;
+  border: 1px solid #ddd;
+  /* Add a border for separation */
+  margin: 10px;
+  /* Add margin around each section */
+  background-color: #f9f9f9;
+  /* Add a background color for clarity */
+}
+
+/* Add this CSS code to your existing <style> section */
+.search-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#search-input {
+  padding: 5px;
+}
+
+#search-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.status-icon i {
+  font-size: 24px;
+  /* Set the desired icon size */
+  margin-right: 10px;
+  /* Add some space between the icon and text input */
+  cursor: pointer;
+  /* Add a pointer cursor to indicate clickability */
+}
+
+.status-icon i:hover {
+  color: #007bff;
+  /* Change the icon color on hover (you can choose a different color) */
+}
+
+.admin-section h1 {
+  text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+
+  /* Styles for screens with a maximum width of 1024px */
+  .logo {
+    max-width: 120px;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  nav a {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  /* Adjust other styles as needed for this screen size */
+}
+
+@media screen and (max-width: 768px) {
+
+  /* Styles for screens with a maximum width of 768px */
+  .logo {
+    max-width: 80px;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  nav {
+    padding: 10px 0;
+  }
+
+  nav a {
+    padding: 8px 12px;
+    font-size: 15px;
+  }
+
+  .special-offer {
+    margin-bottom: 30px;
+  }
+
+
+  /* Adjust other styles as needed for this screen size */
+}
+
+@media screen and (max-width: 480px) {
+
+  /* Styles for screens with a maximum width of 480px */
+  .logo {
+    max-width: 80px;
+  }
+
+  header h1 {
+    font-size: 1px;
+  }
+
+  nav {
+    padding: 10px 0;
+  }
+
+  nav a {
+    padding: 8px 12px;
+    font-size: 15px;
+  }
+
+  .special-offers {
+    width: 90%;
+    /* Make the container full width */
+    margin-bottom: 30px;
+  }
+
+  .main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    max-width: 20%;
+    margin: 0 auto;
+  }
+}
+
+/* Loading overlay styles */
+#loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.loader-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  /* Set the width of the image as desired */
+  height: 200px;
+  /* Set the height of the image as desired */
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.map {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.footer {
+  background-color: #0056b3;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.social-icons {
+  display: inline-block;
+}
+
+.social-icons a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+.copyright {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Style for the Contact Us form */
+#contactForm {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#contactForm input[type="text"],
+#contactForm input[type="email"],
+#contactForm textarea {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#contactForm button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#contactForm button:hover {
+  background-color: #0056b3;
+}
+
+/* Optional: Style for placeholder text */
+#contactForm input[type="text"]::placeholder,
+#contactForm input[type="email"]::placeholder,
+#contactForm textarea::placeholder {
+  color: #888;
+}
+

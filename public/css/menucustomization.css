@@ -1,0 +1,300 @@
+
+
+
+.item-details{
+    max-width: 100%;
+    text-align: left;
+    align-items: left;
+    overflow-x: auto;
+}
+
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Customize Menu Styles */
+#categoryDropdownContainer,
+.form-item {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#customCategory,
+#newCategory {
+    display: none;
+    margin-top: 10px;
+        width: 100%;
+    box-sizing: border-box;
+
+}
+.update-menu-btn{
+    background-color: #046727;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.update-menu-btn:hover{
+    background-color: #02aa56;
+    
+}
+.file-input-container {
+    display: block;
+    margin-top: 10px;
+}
+
+/* Item Details Styles */
+.item-details {
+    margin-top: 20px;
+}
+
+table {
+    background-color: #f2f2f2;
+    width: 100%;
+    border:none;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #dbd9d9;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.search-container {
+    margin-top: 10px;
+}
+
+/* Button Styles */
+.button-container {
+    margin-top: 20px;
+}
+
+.menu-container2 {
+    width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: hidden;
+    overflow-y: auto;
+    }
+    
+    .menu-form {
+    text-align: left;
+    padding: 20px;
+    }
+    .menu-form .form-item {
+        margin-bottom: 10px;
+    }
+    
+    .menu-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    }
+    
+    .menu-form .form-item {
+    flex: 0 0 calc(30% - 10px);
+    margin-bottom: 10px; /* Add spacing between items */
+    position: relative;
+    }
+    
+    .menu-form label {
+    font-size: 18px;
+    color: #333;
+    display: block;
+    }
+    .menu-form select,
+    .menu-form input[type="text"],
+    .menu-form input[type="number"] {
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    
+    .menu-form input[type="checkbox"] {
+    margin: 0;
+    }
+    
+    /* Style for the toggle button */
+.toggle-button {
+    background-color: #046727; /* Button background color */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+    
+    .toggle-button:hover {
+    background-color: #02aa56; /* Hover color */
+    }
+    
+    .edit-button {
+      background-color: #0d47a1; /* Red color */
+      color: #fff; /* Text color */
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .edit-button:hover {
+      background-color: #0056b3; /* Hover color */
+    }
+    
+    /* Style for the "Available" text */
+    .available {
+    color: #27ae60; /* Green color */
+    }
+    
+    /* Style for the "Unavailable" text */
+    .unavailable {
+    color: #AA2313; /* Red color */
+    }
+    
+    /* Style for the Delete button */
+    .delete-button {
+    background-color: #AA2313; /* Red color */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+    
+    .delete-button:hover {
+    background-color: #c0392b; /* Hover color */
+    }
+    
+  
+    .file-input-container {
+    color: #000000;
+    padding: 10px;
+    cursor: pointer;
+    }
+    
+    
+    .file-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    }
+    
+  
+    .file-input-label {
+    font-size: 16px;
+    text-align: center;
+    }
+    
+    .button-container {
+    text-align: center;
+    margin-top: 20px; 
+    }
+
+    .add-to-cart-btn2 {
+        background-color: #0d47a1;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 5px;
+        }
+
+        #description {
+            height:100%;
+            max-width: 300px; 
+            max-height: 500px; 
+            resize: vertical; 
+        }
+        .bigger-checkbox {
+            width: 30px; 
+            height: 30px; 
+            }
+
+            @media only screen and (max-width: 768px) {
+                .menu-container2 {
+                    width: 100%; 
+                    padding: 10px; 
+                }
+            
+                .menu-form .form-item {
+                    flex: 0 0 100%; 
+                }
+            
+                .menu-form label {
+                    font-size: 16px; 
+                }
+            
+                .menu-form select,
+                .menu-form input[type="text"],
+                .menu-form input[type="number"] {
+                    width: 100%;
+                }
+            
+          
+            }
+            
+    
+            @media only screen and (max-width: 480px) {
+                .menu-form label {
+                    font-size: 14px; /
+                }
+            
+      
+            }
+          /* Mobile-friendly styles */
+          @media only screen and (max-width: 600px) {
+            .item-details table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px; 
+            }
+    
+            .item-details th,
+            .item-details td {
+                box-sizing: border-box;
+                text-align: left;
+                padding: 8px; 
+            }
+    
+            .item-container {
+                border-bottom: 1px solid #ddd; /* Add a border to separate items */
+                margin-bottom: 10px; /* Add some space between items */
+            }
+    
+            .item-details th {
+                background-color: #f2f2f2;
+                width: 100%; /* Full width for the headers in mobile view */
+            }
+    
+            .search-container {
+                margin-top: 10px;
+            }
+
+        }

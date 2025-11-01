@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This is the page for delivery status">
+  <title>Bahay Pares Tapsihan View Order Page</title>
+  <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="/css/deliverystatus.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <a href="/"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+      </div>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars fa-2x"></i>
+        <input type="hidden" span id="welcomeUsername">
+        <input type="hidden" id="userId" name="userId">
+      </div>
+      <div class="nav-items">
+        <a href="/"><i class="fas fa-home" style="color: #002DB3;  margin-right: 3px;"></i> Home</a>
+        <a href="/menu"><i class="fas fa-utensils" style="color: #002DB3;  margin-right: 3px;"></i> Menu</a>
+        <a href="/Vieworder"><i class="fas fa-truck" style="color: #002DB3;  margin-right: 3px;"></i> Delivery
+          Status</a>
+        <a href="/AboutUs"><i class="fas fa-info-circle" style="color: #002DB3;  margin-right: 3px;"></i> About Us</a>
+        <a href="/ContactUs"><i class="fas fa-phone" style="color: #002DB3;  margin-right: 3px;"></i> Customer Care</a>
+      </div>
+      <div class="dropdown">
+        <button id="profileIcon" class="dropbtn" style="display: none;">
+          <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon" loading="lazy">
+        </button>
+        <div class="dropdown-content">
+          <a href="/Profile"><i class="fas fa-user"></i>Profile</a>
+          <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-content">
+    </div>
+
+    <!-- Responsive Drawer -->
+    <div class="drawer">
+      <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+        <div class="circle-background">
+            <i class="fas fa-times"></i>
+        </div>
+      </button>      
+        <div class="nav-items">
+          <div class="quick-search-container">
+            <input type="text" id="quickSearchInput" placeholder="Quick Search">
+        </div>
+            <a href="/Profile" class="menu-item" id="profileMenu"><i class="fas fa-user"></i> Profile</a>
+            <a href="/" class="menu-item"><i class="fas fa-home"></i>Home</a>
+            <a href="/menu" class="menu-item"><i class="fas fa-utensils"></i> Menu</a>
+            <a href="/Vieworder" class="menu-item"><i class="fas fa-truck"></i>Delivery Status</a>
+            <a href="/AboutUs" class="menu-item"><i class="fas fa-info-circle"></i> About Us</a>
+            <a href="/ContactUs" class="menu-item"><i class="fas fa-phone"></i> Customer Care</a>
+            <a href="#" id="logoutMenu" style="display: none;" class="menu-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+  </header>
+  <br>
+  <div class="containers">
+    <img src="/images/myorderslogo.png" alt="Profile" class="myorderslogo">
+    <div class="tab">
+      <button class="tablinks" id="active" onclick="openTab('active')">Active Orders</button>
+      <button class="tablinks" id="past" onclick="openTab('past')">Past Orders</button>
+      <button class="tablinks" id="cancel" onclick="openTab('cancel')">Cancelled Orders</button>
+    </div>
+    <div id="active-orders">
+      <!-- Active Orders Container -->
+    </div>
+    <div id="past-orders" style="display: none;">
+      <!-- Past Orders Container -->
+    </div>
+    <div id="cancel-orders" style="display: none;">
+      <!-- Cancelled Orders Container -->
+    </div>
+  </div>
+
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <a href="/"><img class="footlogo" src="/images/bahaypareslogo.png" alt="Logo" Style="width: 50%; height: auto;"loading="lazy"></a>
+      <p class="footer-links">
+        <a href="/index" class="link-1">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="#">Delivery Status</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+      </p>
+      <p class="footer-company-name">© 2023 Bahay Pares Tapsihan – Dasmariñas.</p>
+    </div>
+    <div class="footer-center">
+      <div>
+        <h2>Contacts</h2>
+        <i class="fa fa-phone"></i>
+        <p>+63 975 336 5406</p>
+      </div>
+      <div style="white-space: nowrap;">
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:bahayparestapsihan@gmail.com" >bahayparestapsihan@gmail.com</a></p>
+      </div>
+      <div>
+        <i class="fab fa-facebook-messenger"></i>
+        <p><a href="https://www.messenger.com/t/100783298129453" target="_blank">Messenger</a></p>
+      </div>
+      <h2>Like Our Page</h2>
+      <div>
+        <i class="fab fa-facebook-f"></i>
+        <p><a href="https://www.facebook.com/tapsihansapasongbayog/" target="_blank">Facebook</a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <h2>About Us</h2>
+      <p class="footer-company-about">
+        As we navigate the post-pandemic world, dining out has become increasingly more complex, but no more so than in
+        Bahay Pares tapsihan restaurant. The establishment, renowned for its world-class tapsi and excellent service,
+        has been on a mission to revolutionize the dining experience for their guests. In the wake of social distancing
+        measures, they have invested in building an online ordering system that offers convenience and accessibility.
+      
+      </p>
+      <h2>Visit Us</h2>
+      <div class="footer-right-location">
+        <i class="fa fa-map-marker"></i>
+        <p>89 Burol Main 4114 Dasmariñas, Philippines</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const username = sessionStorage.getItem('username');
+    const userId = sessionStorage.getItem('userId');
+
+    function createOrderContainer(order) {
+      const orderContainer = document.createElement('div');
+      orderContainer.classList.add('order-container');
+
+      // Assuming order.orderDate is in a format that JavaScript's Date constructor can parse.
+      const orderDate = new Date(order.orderDate);
+
+      const formattedOrderDate = orderDate.toLocaleString('en-US', {
+        timeZone: 'Asia/Manila',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+
+      // Create a unique container for each order
+      orderContainer.innerHTML = `
+    <div class="order-details">
+      <div class="order-header">
+        <span><img src="/images/bahaypareslogo.png" alt="Logo" width="70px" height="70px" style="filter: grayscale(100%);"></span><br>
+        <span class="order-id">Order ID: <br>${order.orderId}</span><br>
+        <span class="order-date">Order Date: <br>${formattedOrderDate}</span><br>
+        <span class="delivery-status">Delivery Status: <br>${order.deliverystatus}</span><br>
+        <button class="cancel-button" onclick="cancelOrder('${order.orderId}')">Cancel</button>
+      </div>
+      <div class="order-items">
+        <!-- Loop through cart items and create item elements here -->
+      </div>
+      <div class="order-total" style="font-size: 12px;">Subtotal: Php ${order.totalprice.Subtotal}</div>
+      <div class="order-total" style="font-size: 12px;">Delivery Fee: Php ${order.totalprice.DeliveryFee}</div>
+      <div class="order-total" style="font-size: 12px;">Discount: Php ${order.discount.CustomerDiscount} | ${order.discount.SelectedDiscount}</div>
+      <div class="order-total" style="font-size: 12px;">${order.paymentmethod}</div>
+      <div class="order-total" style="font-size: 20px;">Total: Php ${order.totalprice.Total}</div>
+    </div>
+  `;
+
+      return orderContainer;
+    }
+
+    function createDeliveredOrderContainer(order) {
+      const orderContainer = document.createElement('div');
+      orderContainer.classList.add('order-container');
+
+      // Assuming order.orderDate is in a format that JavaScript's Date constructor can parse.
+      const orderDate = new Date(order.orderDate);
+
+      const formattedOrderDate = orderDate.toLocaleString('en-US', {
+        timeZone: 'Asia/Manila',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+
+
+      // Create a unique container for each order
+      orderContainer.innerHTML = `
+    <div class="order-details">
+      <div class="order-header">
+        <span><img src="/images/bahaypareslogo.png" alt="Logo" width="70px" height="70px" style="filter: grayscale(100%);"></span><br>
+        <span class="order-id">Order ID: <br>${order.orderId}</span><br>
+        <span class="order-date">Order Date: <br>${formattedOrderDate}</span><br>
+        <span class="delivery-status">Delivery Status: <br>${order.deliverystatus}</span><br>
+      </div>
+      <div class="order-items">
+        <!-- Loop through cart items and create item elements here -->
+      </div>
+      <div class="order-total" style="font-size: 12px;">Subtotal: Php ${order.totalprice.Subtotal}</div>
+      <div class="order-total" style="font-size: 12px;">Delivery Fee: Php ${order.totalprice.DeliveryFee}</div>
+      <div class="order-total" style="font-size: 12px;">Discount: Php ${order.discount.CustomerDiscount} | ${order.discount.SelectedDiscount}</div>
+      <div class="order-total" style="font-size: 12px;">${order.paymentmethod}</div>
+      <div class="order-total" style="font-size: 20px;">Total: Php ${order.totalprice.Total}</div>
+    </div>
+  `;
+
+      // Create item elements and add them to the "order-items" section
+      const orderItemsContainer = orderContainer.querySelector('.order-items');
+      order.items.forEach(item => {
+        const itemElement = createItemElement(item);
+        orderItemsContainer.appendChild(itemElement);
+      });
+
+      return orderContainer;
+    }
+
+
+    function createItemElement(item) {
+      const itemElement = document.createElement('div');
+      itemElement.classList.add('item');
+      itemElement.innerHTML = `
+        <span class="item-name">${item.name}</span><br>
+        <span class="item-quantity">Quantity: ${item.quantity}</span><br>
+        <span class="item-price">Price: Php ${item.price.toFixed(2)}</span>
+      `;
+      return itemElement;
+    }
+
+    function openTab(tabName) {
+      const tabs = document.getElementsByClassName('tablinks');
+      for (const tab of tabs) {
+        tab.classList.remove('active');
+      }
+
+      // Hide all order tables by default
+      document.getElementById('active-orders').style.display = 'none';
+      document.getElementById('past-orders').style.display = 'none';
+      document.getElementById('cancel-orders').style.display = 'none';
+
+      // Show the selected order table
+      const selectedTab = document.getElementById(tabName + '-orders');
+      if (selectedTab) {
+        selectedTab.style.display = 'block';
+      }
+
+      // Add the "active" class to the clicked tab button
+      const selectedTabButton = document.getElementById(tabName);
+      if (selectedTabButton) {
+        selectedTabButton.classList.add('active');
+      }
+
+      // Call the corresponding fetch function based on the tab clicked
+      if (tabName === 'past') {
+        fetchAllOrders2();
+      } else if (tabName === 'active') {
+        fetchAllOrders();
+      } else {
+        fetchAllOrders3();
+      }
+    }
+
+    // Initially, set the "Active Orders" tab as active
+    openTab('active');
+
+
+    async function cancelOrder(orderId) {
+      try {
+        const {
+          value: reason
+        } = await Swal.fire({
+          title: 'Cancel Order',
+          input: 'text',
+          inputLabel: 'Reason for Cancellation',
+          inputPlaceholder: 'Enter your reason here',
+          showCancelButton: true,
+          confirmButtonText: 'Cancel Order',
+          cancelButtonText: 'Close',
+          inputValidator: (value) => {
+            if (!value) {
+              return 'Please enter a reason for cancellation';
+            }
+          },
+        });
+
+        if (reason) {
+          const response = await fetch('/cancelOrder', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderId,
+              reason,
+            }),
+          });
+
+          if (response.status === 200) {
+            // Order cancellation was successful
+            Swal.fire('Cancelled!', 'Order has been canceled.', 'success');
+            fetchAllOrders(); // Refresh the order list
+          } else {
+            // Handle cancellation failure
+            Swal.fire('Error', 'You cannot cancel an order that is already Preparing or Delivering', 'error');
+          }
+        }
+      } catch (error) {
+        console.error('Error canceling order:', error);
+      }
+    }
+
+
+    async function fetchAllOrders() {
+      try {
+        const response = await fetch('/allOrders');
+        const allOrders = await response.json();
+
+        const sortedOrders = allOrders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+        const activeOrdersContainer = document.getElementById('active-orders');
+        activeOrdersContainer.innerHTML = '';
+
+        const activeOrders = allOrders.filter(order => !order.deliverystatus.includes('Delivered') && !order
+          .deliverystatus.includes('Cancelled'));
+        if (activeOrders.length === 0) {
+          // Create a container for the logo and text
+          const placeholderContainer = document.createElement('div');
+          placeholderContainer.style.padding = '50px';
+          placeholderContainer.style.textAlign = 'center';
+
+          // Create a placeholder image for the restaurant logo
+          const logoElement = document.createElement('img');
+          logoElement.src = "/images/bahaypareslogo.png"; // Set the image URL for the restaurant logo
+          logoElement.alt = 'Restaurant Logo';
+          logoElement.style.width = '250px'; // Set width, adjust as needed
+          logoElement.style.height = '250px'; // Set height, adjust as needed
+          logoElement.style.filter = 'grayscale(100%)';
+          logoElement.style.opacity = '50%';
+
+          // Create a message and append the logo
+          const noOrdersMessage = document.createElement('p');
+          noOrdersMessage.textContent = 'No active orders found. Please Order in our Menu!';
+
+          // Create a button element
+          const orderButton = document.createElement('button');
+          orderButton.style.backgroundColor = "#0d47a1"; 
+          orderButton.style.color = "white";
+          orderButton.style.border = "none";
+          orderButton.style.padding = "10px 30px";
+          orderButton.style.textAlign = "center";
+          orderButton.style.textDecoration = "none";
+          orderButton.style.display = "inline-block";
+          orderButton.style.fontSize = "16px";
+          orderButton.style.cursor = "pointer";
+          orderButton.style.borderRadius = "4px";
+          orderButton.style.margin = "0 10px";
+          orderButton.textContent = 'Order Now';
+          
+          orderButton.addEventListener('click', () => {
+            window.location.href = '/Menu'; // Replace '/order' with the actual URL of your order page
+          });
+
+          // Append the logo, the message, and the button to the container
+          placeholderContainer.appendChild(logoElement);
+          placeholderContainer.appendChild(noOrdersMessage);
+          placeholderContainer.appendChild(orderButton);
+
+          activeOrdersContainer.appendChild(placeholderContainer);
+        } else {
+          activeOrders.forEach(order => {
+            const orderContainer = createOrderContainer(order);
+            const orderItemsContainer = orderContainer.querySelector('.order-items');
+            order.items.forEach(item => {
+              const itemElement = createItemElement(item);
+              orderItemsContainer.appendChild(itemElement);
+            });
+            activeOrdersContainer.appendChild(orderContainer);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    async function fetchAllOrders2() {
+      try {
+        const response = await fetch('/allOrders');
+        const allOrders = await response.json();
+
+        const sortedOrders = allOrders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+        const pastOrdersContainer = document.getElementById('past-orders');
+        pastOrdersContainer.innerHTML = ''; // Clear any existing content
+
+        // Filter orders that are "delivered"
+        const deliveredOrders = allOrders.filter(order => order.deliverystatus === 'Delivered');
+
+        if (deliveredOrders.length === 0) {
+          // Create a container for the logo and text
+          const placeholderContainer = document.createElement('div');
+          placeholderContainer.style.padding = '50px';
+          placeholderContainer.style.textAlign = 'center';
+
+          // Create a placeholder image for the restaurant logo
+          const logoElement = document.createElement('img');
+          logoElement.src = "/images/bahaypareslogo.png"; // Set the image URL for the restaurant logo
+          logoElement.alt = 'Restaurant Logo';
+          logoElement.style.width = '250px'; // Set width, adjust as needed
+          logoElement.style.height = '250px'; // Set height, adjust as needed
+          logoElement.style.filter = 'grayscale(100%)';
+          logoElement.style.opacity = '50%';
+
+          // Create a message and append the logo
+          const noDeliveredOrdersMessage = document.createElement('p');
+          noDeliveredOrdersMessage.textContent = 'No delivered orders found. Please Order in our Menu!';
+
+          // Create a button element
+          const orderButton = document.createElement('button');
+          orderButton.style.backgroundColor = "#0056b3"; // Background color should be corrected
+          orderButton.style.color = "white";
+          orderButton.style.border = "none";
+          orderButton.style.padding = "10px 30px";
+          orderButton.style.textAlign = "center";
+          orderButton.style.textDecoration = "none";
+          orderButton.style.display = "inline-block";
+          orderButton.style.fontSize = "16px";
+          orderButton.style.cursor = "pointer";
+          orderButton.style.borderRadius = "4px";
+          orderButton.style.margin = "0 10px";
+          orderButton.textContent = 'Order Now';
+          // Add an event listener to handle the button click and navigate to the order page
+          orderButton.addEventListener('click', () => {
+            window.location.href = '/Menu'; // Replace '/Menu' with the actual URL of your order page
+          });
+
+          // Append the logo, the message, and the button to the container
+          placeholderContainer.appendChild(logoElement);
+          placeholderContainer.appendChild(noDeliveredOrdersMessage);
+          placeholderContainer.appendChild(orderButton);
+
+          pastOrdersContainer.appendChild(placeholderContainer);
+        } else {
+          deliveredOrders.forEach(order => {
+            const orderContainer = createDeliveredOrderContainer(order);
+            pastOrdersContainer.appendChild(orderContainer);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    async function fetchAllOrders3() {
+      try {
+        const response = await fetch('/allOrders');
+        const allOrders = await response.json();
+
+        const sortedOrders = allOrders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+
+        const cancelOrdersContainer = document.getElementById('cancel-orders');
+        cancelOrdersContainer.innerHTML = ''; // Clear any existing content
+
+        const cancelledOrders = allOrders.filter(order => order.deliverystatus.includes('Cancelled'));
+
+        if (cancelledOrders.length === 0) {
+          // Create a container for the logo and text
+          const placeholderContainer = document.createElement('div');
+          placeholderContainer.style.padding = '50px';
+          placeholderContainer.style.textAlign = 'center';
+
+          // Create a placeholder image for the restaurant logo
+          const logoElement = document.createElement('img');
+          logoElement.src = "/images/bahaypareslogo.png"; // Set the image URL for the restaurant logo
+          logoElement.alt = 'Restaurant Logo';
+          logoElement.style.width = '250px'; // Set width, adjust as needed
+          logoElement.style.height = '250px'; // Set height, adjust as needed
+          logoElement.style.filter = 'grayscale(100%)';
+          logoElement.style.opacity = '50%';
+
+          // Create a message and append the logo
+          const noCancelledOrdersMessage = document.createElement('p');
+          noCancelledOrdersMessage.textContent = 'No cancelled orders found. Please Order in our Menu!';
+
+          // Create a button element
+          const orderButton = document.createElement('button');
+          orderButton.style.backgroundColor = "#0056b3"; // Background color should be corrected
+          orderButton.style.color = "white";
+          orderButton.style.border = "none";
+          orderButton.style.padding = "10px 30px";
+          orderButton.style.textAlign = "center";
+          orderButton.style.textDecoration = "none";
+          orderButton.style.display = "inline-block";
+          orderButton.style.fontSize = "16px";
+          orderButton.style.cursor = "pointer";
+          orderButton.style.borderRadius = "4px";
+          orderButton.style.margin = "0 10px";
+          orderButton.textContent = 'Order Now';
+          orderButton.addEventListener('click', () => {
+            window.location.href = '/Menu'; 
+          });
+
+          // Append the logo, the message, and the button to the container
+          placeholderContainer.appendChild(logoElement);
+          placeholderContainer.appendChild(noCancelledOrdersMessage);
+          placeholderContainer.appendChild(orderButton);
+
+          cancelOrdersContainer.appendChild(placeholderContainer);
+        } else {
+          cancelledOrders.forEach(order => {
+            const orderContainer = createDeliveredOrderContainer(order);
+            cancelOrdersContainer.appendChild(orderContainer);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon');
+      const drawer = document.querySelector('.drawer');
+
+      menuIcon.addEventListener('click', function () {
+        if (drawer.style.left === '0px' || !drawer.style.left) {
+          drawer.style.left = '-250px'; // Hide the drawer
+        } else {
+          drawer.style.left = '0'; // Show the drawer
+        }
+      });
+      const closeDrawerButton = document.getElementById('closeDrawer');
+      closeDrawerButton.addEventListener('click', function () {
+        drawer.style.left = '-250px'; // Hide the drawer
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const menuItems = document.querySelectorAll('.nav-items .menu-item');
+
+        quickSearchInput.addEventListener('input', function () {
+            const searchTerm = quickSearchInput.value.toLowerCase();
+
+            menuItems.forEach(function (menuItem) {
+                const menuItemText = menuItem.innerText.toLowerCase();
+
+                // Check if the search term is present in the menu item text
+                if (menuItemText.includes(searchTerm)) {
+                    menuItem.style.display = 'block';
+                } else {
+                    menuItem.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutButton = document.getElementById('logoutButton');
+      const logoutMenu = document.getElementById('logoutMenu');
+      fetch('/check-auth', {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.isAuthenticated) {
+            const profileIcon = document.getElementById('profileIcon');
+            const profileMenu = document.getElementById('profileMenu');
+            profileIcon.style.display = 'block';
+            profileMenu.style.display = 'block'; // Show in drawer
+            logoutMenu.style.display = 'block';
+            logoutButton.addEventListener('click', function () {
+              // Display a confirmation dialog
+              const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+              if (isConfirmed) {
+                // Send a logout request to the server when confirmed
+                fetch('/logout', { 
+                    method: 'GET',
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.message === 'Logout successful') {
+                      // Redirect to the login page or another page after logout
+                      window.location.href = '/';
+                    } else {
+                      console.error('Logout failed:', data.error);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during logout:', error);
+                  });
+              }
+            });
+            logoutMenu.addEventListener('click', function () {
+              // Display a confirmation dialog
+              const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+              // Check if the user confirmed the logout
+              if (isConfirmed) {
+                // Send a logout request to the server when confirmed
+                fetch('/logout', { 
+                    method: 'GET',
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.message === 'Logout successful') {
+                      // Redirect to the login page or another page after logout
+                      window.location.href = '/';
+                    } else {
+                      console.error('Logout failed:', data.error);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during logout:', error);
+                  });
+              }
+            });
+          } else {
+            const profileIcon = document.getElementById('profileIcon');
+            logoutButton.style.display = 'none';
+            profileIcon.style.display = 'none';
+            const profileMenu = document.getElementById('profileMenu');
+            profileMenu.style.display = 'none';
+            logoutMenu.style.display = 'none';
+
+
+          }
+        })
+        .catch(error => {
+          console.error('Error checking authentication:', error);
+        });
+    });
+  </script>
+
+
+
+</body>
+
+</html>

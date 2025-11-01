@@ -1,0 +1,299 @@
+.transaction_container {
+    margin-top: 20px;
+
+}
+
+.containers select {
+    width: 100%;
+}
+
+h2 {
+    margin: 0;
+    text-align: left;
+}
+
+.confirm-order-btn {
+    background-color: #00cc66;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    }
+
+    .confirm-order-btn:disabled {
+      background-color: #ccc; /* Change the background color for disabled state */
+      color: #666; /* Change the text color for disabled state */
+      cursor: not-allowed; /* Change cursor style for disabled state */
+  }
+
+  .checkbox-container {
+    text-align: center;
+  }
+
+  #confirmationCheckbox {
+    padding: 10px;
+    margin: 0;
+    width: 20px; 
+        border: 2px solid #3498db; /* Border color for the checkbox */
+        border-radius: 4px; /* Border radius for a rounded appearance */
+  }
+
+.checkbox-container2 {
+  align-items: center;
+  display: flex;
+}
+
+
+  .confirm-order-btn:disabled:hover {
+    background-color: #ccc;
+}
+
+.confirm-order-btn:hover {
+    background-color: #02a855;
+}
+
+.button-like-link {
+    background-color: #cc0000;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.button-like-link:hover {
+    background-color: #a80101;
+}
+        
+.containers input {
+    width: 96.5%;
+    padding: 10px;
+    /* Add padding for better spacing */
+    font-size: 16px;
+    /* Set font size */
+    border: 1px solid #ccc;
+    /* Add a border */
+    border-radius: 5px;
+    /* Add rounded corners */
+    background-color: #fff;
+    /* Background color */
+}
+
+.checkbox-container input {
+  text-align: center;
+  width: 5%;
+}
+
+input[type="radio"]{
+    visibility:hidden;
+}
+
+.payment-options {
+    display: flex;
+  }
+  
+  .payment-section {
+    justify-content: center;
+  align-items: center;
+  height: 12vh;
+  }
+  .payment-option {
+    margin-right: 10px;
+  }
+  
+  .payment-button {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+  }
+  
+  .payment-button:hover {
+    background-color: #f0f0f0;
+  }
+  .reset-discount-btn {
+    background-color:#00cc66;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    }
+  /* Style the selected option */
+  .payment-option input[type="radio"]:checked + .payment-button {
+    background-color: #180669; /* Change to your desired color */
+    color: #fff; /* Change to your desired text color */
+  }
+  
+
+.options-table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Style the tables */
+.options-table {
+    width: 100%;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+
+.options-table td {
+    padding: 10px;
+}
+
+.options-table label {
+    font-weight: bold;
+}
+
+/* Style the input field */
+.input-location {
+    width: 94%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.ordersummarybutton {
+    margin-top: 50px;
+}
+
+/* Style the warning container */
+.warning {
+    /* A formal-looking red color */
+    font-size: 16px;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Style the icon */
+.fas.fa-truck {
+    margin-right: 10px;
+   
+}
+
+/* Styles for the overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 80px;
+    border-radius: 5px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.overlay button {
+    background-color:  #180669;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.transactionp {
+    text-align: center;
+    margin: 2px;
+    text-align: left;   
+}
+
+
+
+
+
+
+
+
+    
+    .no-hover td {
+      padding: 5px;
+      text-align: left;
+      cursor: default; 
+      border: none;
+    }
+    
+    .no-hover tr:hover {
+      background-color: initial; /* Remove the background color change on hover */
+    }
+    
+    /* Style the select element */
+    select {
+    padding: 10px; /* Add padding for better spacing */
+    font-size: 16px; /* Set font size */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Add rounded corners */
+    width: 200px; /* Set the width as desired */
+    background-color: #fff; /* Background color */
+    }
+    
+    
+    /* Style the select options */
+    select option {
+    padding: 5px; /* Add padding for better spacing */
+    font-size: 14px; /* Set font size for options */
+    }
+    
+    /* Style the select when it's focused */
+    select:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: black; /* Change border color when focused */
+    }
+    
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    th, td {
+      padding: 10px;
+      text-align: left;
+      
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+    
+    
+    .left-align {
+      text-align: left;
+    }
+        
+    .right-align {
+      text-align: right;
+    }
+        

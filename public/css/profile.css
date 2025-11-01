@@ -1,0 +1,317 @@
+/* Add CSS styles for the round container */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  text-align: center;
+  padding: 70px 200px;
+  background-color: white;
+  border-radius: 10px;
+}
+.profile-container p{
+  font-size: 20px;
+}
+/* Add or modify the styles for the house logo */
+.profile-container .house {
+  position: absolute; /* Set the image to absolute position */
+  bottom: 0; /* Align the bottom of the image with the bottom of the container */
+  width: auto; /* Make the image take the full width of the container */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+.myacc{
+  height:100px;
+  width:auto;
+}
+.inputbox{
+  position: relative;
+  margin: 30px;
+  width: 310px;
+  border-bottom: 2px solid black;
+  margin-left: 55px;
+}
+
+.inputbox label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform:translateY(-50%);
+  color: black;
+  font-size: 1em;
+  pointer-events: none;
+  transition: .5s;
+}
+input:focus ~ label,
+input:valid ~ label{
+  top: -5px;
+}
+.formh2{
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #004080;
+    text-align: center;
+}
+
+.inputbox input{
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0px 35px 0px 5px;
+  color: black;
+  text-align:left;
+  
+}
+.inputbox ion-icon{
+position: absolute;
+right: -30px;
+color:  black;
+font-size: 1.2em;
+top: 20px;
+}
+.editpass{
+  background-color:#0d47a1 ;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.editpass:hover {
+  background-color:  #0056b3;
+}
+.parallax-background {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/houselogo.png'); /* Replace with the correct path to your logo */
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+.parallax-background.adjust-height {
+  height: 400px;
+}
+.update-password-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-out;
+  
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.update-password-popup-content {
+  background: white;
+  padding: 20px 50px;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.update-password-popup h2 {
+  margin-bottom: 20px;
+}
+.flex-container {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+}
+.update-password-popup input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.edit-profile-popup input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+
+.parallax-background.adjust-height {
+  height: 400px;
+}
+/* Add styles for the edit profile popup */
+.edit-profile-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;  
+}
+.edit-profile-popup-content {
+  background: white;
+  padding: 20px 50px;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.edit-profile-popup-content .button-group .update-button {
+  background-color: #007BFF;
+  /* Add a background color for the "Update Profile" button */
+  color: white;
+  /* Text color for the button */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor:pointer;
+}
+
+.edit-profile-popup-content .button-group .close-button {
+  background-color: #ccc;
+  /* Add a background color for the "Close" button */
+  color: black;
+  /* Text color for the button */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor:pointer;
+}
+.update-password-popup-content .button-group .update-button {
+  background-color: #007BFF;
+  /* Add a background color for the "Update Profile" button */
+  color: white;
+  /* Text color for the button */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor:pointer;
+  /* Add space between the buttons */
+}
+
+.update-password-popup-content .button-group .close-button {
+  background-color: #ccc;
+  /* Add a background color for the "Close" button */
+  color: black;
+  /* Text color for the button */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor:pointer;
+}
+
+.fas.fa-eye {
+  cursor: pointer;
+  margin-right: 5px;
+  color: #007BFF;
+}
+
+.fas.fa-edit {
+  cursor: pointer;
+  margin-right: 5px;
+  color: #007BFF;
+}
+
+.input-field {
+  display: inline-block;
+  width: 250px;
+
+}
+
+.edit-profile-popup,
+.update-password-popup {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.edit-profile-popup.hide,
+.update-password-popup.hide {
+  opacity: 0;
+}
+
+
+@media screen and (max-width: 900px) {
+  .profile-info img{
+    width:90%;
+    height:80%;
+  }
+
+  .profile-container {
+    padding: 50px 20px; 
+  }
+
+  .profile-container p{
+    font-size:14px;
+  }
+
+  .editpass {
+    width: 200px; 
+  }
+
+  .update-password-popup-content,
+  .edit-profile-popup-content {
+    padding: 20px 50px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile-container {
+    padding: 30px 10px; 
+  }
+  .profile-container p {
+    font-size: 14px;
+  }
+  
+  /* Add or modify the styles for the house logo */
+  .profile-container .house {
+    position: absolute; 
+    bottom: 0; 
+    width: 100%;
+    height: auto; /* Maintain the aspect ratio */
+  }
+  
+  .myacc {
+    height: auto;
+    width: 80%; 
+  }
+
+  .editpass {
+    width: 200px;
+  }
+
+
+}
+
+/* Existing CSS styles below */

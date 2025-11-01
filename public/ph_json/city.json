@@ -1,0 +1,55 @@
+[{
+    "city_code": "042103",
+    "city_name": "Bacoor City",
+    "province_code": "0421",
+    "psgc_code": "042103000",
+    "region_desc": "04"
+}, {
+    "city_code": "042104",
+    "city_name": "Carmona",
+    "province_code": "0421",
+    "psgc_code": "042104000",
+    "region_desc": "04"
+}, {
+    "city_code": "042106",
+    "city_name": "Dasmariñas",
+    "province_code": "0421",
+    "psgc_code": "042106000",
+    "region_desc": "04"
+}, {
+    "city_code": "042108",
+    "city_name": "General Trias",
+    "province_code": "0421",
+    "psgc_code": "042108000",
+    "region_desc": "04"
+}, {
+    "city_code": "042109",
+    "city_name": "Imus City",
+    "province_code": "0421",
+    "psgc_code": "042109000",
+    "region_desc": "04"
+}, {
+    "city_code": "042110",
+    "city_name": "Indang",
+    "province_code": "0421",
+    "psgc_code": "042110000",
+    "region_desc": "04"
+}, {
+    "city_code": "042118",
+    "city_name": "Silang",
+    "province_code": "0421",
+    "psgc_code": "042118000",
+    "region_desc": "04"
+}, {
+    "city_code": "042122",
+    "city_name": "Trece Martires City",
+    "province_code": "0421",
+    "psgc_code": "042122000",
+    "region_desc": "04"
+}, {
+    "city_code": "042123",
+    "city_name": "General Mariano Alvarez",
+    "province_code": "0421",
+    "psgc_code": "042123000",
+    "region_desc": "04"
+}]

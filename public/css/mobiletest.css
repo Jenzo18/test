@@ -1,0 +1,152 @@
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-image: url("/images/headerbackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    border-top: 5px solid #00356e;
+    padding: 20px 0;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.logo {
+    max-width: 130px;
+    margin-right: 10px;
+    background-color: #022c58;
+    border-right: 5px solid #00356e;
+    border-bottom: 5px solid #00356e;
+}
+
+/* Navigation Styles */
+nav {
+    padding: 20px 0;
+    background-color: #0056b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+}
+
+nav a {
+    color: #f9f9f9;
+    text-decoration: none;
+    padding: 10px 30px;
+    margin: 0 10px;
+    border-radius: 100px;
+    transition: background-color 0.3s;
+    font-weight: 700;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #00356e;
+}
+
+/* Loading Overlay Styles */
+#loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.loader-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    animation: spin 2s linear infinite;
+}
+
+/* Logout Button Styles */
+#logoutButton {
+    display: none;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 30px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#logoutButton:hover {
+    background-color: #d32f2f;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.social-icons {
+    display: inline-block;
+}
+
+.social-icons a {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 10px;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.copyright {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Responsive Design for iPhone */
+@media screen and (max-width: 375px) {
+    .logo {
+        max-width: auto;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        margin: 10px 0;
+        padding: 8px 16px;
+    }
+
+    #logoutButton {
+        margin: 10px 0;
+    }
+}

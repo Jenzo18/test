@@ -1,0 +1,32 @@
+.order-details {
+  margin: 0 auto; /* Center the table horizontally */
+  max-width: 800px; /* Set the maximum width for the table container */
+}
+
+.order-details table {
+  width: 100%; /* Set the table width to 100% of its container */
+  border-collapse: collapse; /* Collapse the table borders */
+}
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+.order-details th,
+.order-details td {
+  padding: 8px; /* Add padding to table cells */
+  border:  1px solid #ccc;
+}
+
+.order-details thead th {
+  background-color: #f2f2f2; /* Set background color for table header cells */
+}
+
+.order-details tfoot td {
+  background-color: #f2f2f2; /* Set background color for table footer cells */
+  font-weight: bold; /* Set font weight for total price cell */
+}
+
+table tbody tr:nth-child(even) {
+  background-color: white;
+}
+

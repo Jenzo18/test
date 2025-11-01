@@ -1,0 +1,873 @@
+body {
+    width: 100%;
+}
+
+.categories {
+    background-color: transparent;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+    width: 100%;
+}
+
+.h2cart {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #004080;
+    text-align: center;
+}
+
+#toggleSidebarBtn {
+    position: relative;
+    bottom: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 999; 
+    padding-top:30px;   
+    font-size: 14px;
+}
+
+#toggleIcon {
+    margin-top: 10px;
+}
+
+.category-sidebar {
+    width: 100%;
+}
+
+.category-box {
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    margin: 10px;
+    flex: 1;
+}
+
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Vertically center content */
+    text-align: center;
+    width: 100%;
+}
+
+.button-container-cart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* Vertically center content */
+    text-align: center;
+    width: 100%;
+}
+
+.category-button {
+    background-size: cover;
+    color: #fff;
+    font-weight: 900;
+    text-shadow: -2px -2px 0 #004288, 2px -2px 0 #004288, -2px 2px 0 #004288, 2px 2px 0 #004288;
+    border: none;
+    border-radius: 50%;
+    /* Make it a circle */
+    cursor: pointer;
+    width: 75px;
+    /* Set the width and height to the same value */
+    height: 75px;
+    /* This will make it a circle */
+    transition: transform 0.3s;
+    /* Add a transition for smooth animation */
+}
+
+.category-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category-button+label {
+    transform: scale(1.1);
+    cursor: pointer;
+    /* Make the label clickable */
+    font-size: 14px;
+    /* Set the font size */
+    color: #333;
+    /* Set the text color */
+    margin-top: 5px;
+    /* Adjust the spacing between the button and text */
+}
+
+.category-button+label::after {
+    content: attr(data-category);
+    /* Display the button's data-category as text */
+    font-size: 14px;
+}
+
+
+h1 {
+    height: 85px;
+    opacity: 70%;
+    margin-left: 20px;
+}
+
+
+/* Style for the allergen logo container */
+.allergen-logo {
+    display: flex;
+    align-items: center;
+    /* Vertically center the icons */
+    margin-right: 10px;
+}
+
+/* Style for allergen icons (using Font Awesome) */
+.allergen-logo i {
+    font-size: 24px;
+    margin-right: 10px;
+    margin-left: 5px;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+.allergen-logo i:hover {
+    font-size: 24px;
+    margin-right: 10px;
+    /* Adjust the spacing between icons */
+    margin-left: 5px;
+    transform: scale(1.05);
+}
+
+.toggled-icon {
+    filter: brightness(300%);
+    transform: scale(1.1);
+}
+
+.search-container {
+    width: 40%;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    top: 250px;
+    padding-bottom: 10px;
+    background-color: #f5f5f5;
+    z-index: 1;
+}
+
+.search-container input,
+.search-container button {
+    font-size: 14px; 
+}
+
+#search-input {
+    flex: 1;
+    font-family: 'Roboto hin', sans-serif;
+    border: none;
+    outline: none;
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#search-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.category-header {
+    z-index: 1;
+}
+
+/* Optional: Add margin between the icon container and the input/button */
+.allergen-logo {
+    margin-right: 10px;
+}
+
+input {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+.allergen-logo a i {
+    color: rgb(7, 7, 122)
+}
+
+.cart-container {
+    text-align: right;
+    max-height: 300px;
+    overflow-y: auto;
+
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+
+
+.add-to-cart-button {
+    background-color: #0d47a1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+.add-to-cart-button:disabled:hover {
+    background-color: #ccc; /* Change the background color for disabled state */
+    cursor: not-allowed; /* Change cursor style for disabled state */
+}
+
+.add-to-cart-button:hover {
+    background-color: #0056b3;
+    /* Change to the hover color you prefer */
+    transform: scale(1.05);
+}
+
+.add-to-cart-button i {
+    margin-right: 10px;
+    font-size: 15px;
+    /* Adjust the icon size */
+}
+
+
+h3 {
+    margin: 2px;
+    text-align: left;
+}
+
+/* Style the input container to create a horizontal layout */
+.input-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-right: 50px;
+}
+
+/* Style the quantity input to control its width and alignment */
+.quantity-input {
+    width: 50px;
+    padding: 8px 0;
+}
+
+
+.menup {
+    margin: 2px;
+    text-align: left;
+}
+
+.available-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.available-btn:hover {
+    background-color: #0056b3;
+}
+
+.unavailable-btn {
+    background-color: #dd0505;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.unavailable-btn:hover {
+    background-color: #a80505;
+}
+
+/* Style for the "Available" text */
+.available {
+    color: #27ae60;
+    /* Green color */
+}
+
+/* Style for the "Unavailable" text */
+.unavailable {
+    color: #e74c3c;
+    /* Red color */
+}
+
+
+.menu-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.menu-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* Color of the thumb */
+    border-radius: 6px;
+    /* Roundness of the thumb */
+}
+
+.menu-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+    /* Color of the thumb on hover */
+}
+
+.menu-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    /* Color of the track */
+}
+
+.menu-container::-webkit-scrollbar-track:hover {
+    background-color: #ddd;
+    /* Color of the track on hover */
+}
+
+/* Main container */
+.container {
+    width: 100%;
+    max-width: 1700px;
+    /* Set a maximum width to control the container's width on larger screens */
+    margin: 0 auto;
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+/* Categories container */
+.categories-container {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    top: 80px;
+    background-color: #f5f5f5;
+    width: 100%;
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    padding-bottom: 5px;
+}
+
+
+.menu-container {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    order: 2;
+
+}
+
+.menu-items-container {
+    width: 98%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22%, 1fr));
+    gap: 20px;
+}
+
+.menu-items-container > * {
+    margin-bottom: 20px;
+}
+
+.menu-items-container > h2 {
+    grid-column: span 4;
+}
+
+
+
+.exit-button {
+    margin-top: 20px;
+}
+
+
+.common-button {
+    color: black;
+    border: none;
+    padding: 10px 15px; /* Slightly increased padding for a more spacious look */
+    cursor: pointer;
+    display: inline-block; /* Display inline for a more compact appearance */
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center the text within the button */
+    text-decoration: none; /* Remove default link underline */
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.common-button:hover {
+    color: #0e3493; /* Darker blue on hover for a subtle effect */
+}
+
+/* Disabled button styles */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.confirm-order-btn {
+    background-color: #0d47a1;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.confirm-order-btn:hover {
+    background-color:  #0056b3;
+}
+
+.add-button,
+.remove-button,
+.remove-all-button {
+    margin: 0;
+}
+
+/* Styles for the overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 80px;
+    border-radius: 5px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.overlay button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.center-items {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-left: 20px;
+    padding-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+    transition: filter 0.3s;
+    align-items: center;
+    text-align: center;
+}
+
+.center-items img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.center-items h3 {
+    color: rgb(11, 3, 32);
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+    transition: transform 0.3s;
+    align-items: center;
+    text-align: center;
+}
+
+.center-items h4 {
+    align-items: center;
+    text-align: center;
+    margin: 2px;
+    color: rgb(7, 7, 122);
+}
+
+.center-items p {
+    color: #666;
+    font-size: 1rem;
+    transition: transform 0.3s;
+    align-items: center;
+    text-align: center;
+}
+
+.center-items:hover {
+    filter: saturate(200%);
+}
+
+.center-items p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.menuh2 {
+    text-align: center;
+    background-color: #0e3493;
+    color: #fff;
+}
+
+/* Cart container */
+.cart {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Cart table */
+.cart-table {
+    width: 90%;
+    margin-left: 20px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-table th {
+    background-color: #0e3493;
+    color: #fff;
+}
+
+/* Cart item rows */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+/* Item name column */
+.item-name {
+    flex: 2;
+}
+
+/* Price column */
+.item-price {
+    flex: 1;
+}
+
+/* Quantity column */
+.item-quantity {
+    flex: 1;
+}
+
+/* Action column (buttons) */
+.item-action {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+/* Cart total */
+.cart-total {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 700px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    transform: translateX(100%);
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.show-cart {
+    transform: translateX(0);
+}
+
+.cart-icon {
+    margin-left: 20px;
+    position: relative; /* or absolute */
+    right: 0;
+    top: 2.5px; 
+    cursor: pointer;
+    color: #002DB3;
+    white-space: nowrap;
+}
+
+
+/* Define the flying animation for the cart icon */
+@keyframes flyAnimation {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(5px, -8px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.cart-icon i {
+    animation: none;
+    /* Initially, no animation */
+    transition: transform 0.3s ease-in-out;
+}
+
+.cart-icon i.fly {
+    animation: flyAnimation 0.5s ease-in-out;
+    /* Apply the flying animation */
+    transform: translate(0, 0);
+}
+
+
+#cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 12px;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media screen and (max-width: 1400px) {
+
+    nav .nav-items a {
+        padding: 10px 10px;
+    }
+
+    .cart-icon {
+        right: 100px;
+    }
+
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    .category-button+label {
+        font-size: 10px;
+    }
+    
+    .cart {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .cart-icon {
+        right: 190;
+    }
+
+    .exit-button {
+        margin-top: 10px;
+    }
+
+    .categories {
+        overflow-x: auto;
+    }
+
+    /* Categories container */
+    .categories-container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .button-container {
+        width: 100%;
+        /* Set the width to match the button width */
+        margin: 0;
+        margin-right: 0;
+        padding: 0;
+    }
+
+    .search-container {
+        display: block;
+    }
+
+    #search-input {
+        width: 100%;
+    }
+
+    .search-container {
+        width: 85%;
+    }
+
+    .menu-container {
+        width: 70%;
+    }
+ 
+    .menu-items-container {
+        width: 90%;
+        grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+    }
+
+    .menu-items-container > h2 {
+        grid-column: span 2;
+    }
+
+    .center-items {
+        width: 100%;
+    }
+
+    .allergen-logo i {
+        font-size: 14px;
+        margin-right: 5px;
+
+    }
+
+    .input-container {
+        display: block;
+        margin-left: 0;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .cart-icon {
+        right: 100px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .common-button {
+        font-size: 10px;
+    }
+
+    .cart {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .cart-icon {
+        right: 0px;
+    }
+
+    .exit-button {
+        margin-top: 10px;
+    }
+
+    .categories {
+        padding: 0;
+        justify-content: space-between;
+        overflow-x: auto;
+        position: none;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .center-items {
+        margin-bottom: 30px;
+        margin-left: 0;
+    }
+
+    /* Categories container */
+    .categories-container {
+        width: 100%;
+    }
+
+
+    .category-button {
+        width: 60px;
+        margin: 0;
+        /* Set the width and height to the same value */
+        height: 60px;
+        /* This will make it a circle */
+        padding: 0;
+    }
+
+    .search-container {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    #search-input {
+        width: 150px;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .menu-container {
+        width: 70%;
+    }
+
+    .menu-items-container {
+        display:block;
+        width: 100%;
+    }
+
+    .allergen-logo i {
+        font-size: 16px;
+    }
+
+    .input-container {
+        display: block;
+        margin-left: 0;
+    }
+    
+    .button:disabled {
+        margin-left: 170px;
+    }
+
+    .cart-icon {
+        margin-right:100px;
+        margin-left: 30px;
+    }
+
+}

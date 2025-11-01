@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Menu page with features: cart, dynamic view of categories, allergen filter, dynamic view of items">
+
+    <title>Restaurant Menu</title>
+    <link rel="icon" href="/images/bahaypareslogo.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/menu.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <a href="/"><img class="logo" src="/images/bahaypareslogo.png" alt="Logo"></a>
+            </div>
+            <div class="menu-icon" id="menuIcon">
+                <i class="fas fa-bars fa-2x"></i>
+                <input type="hidden" span id="welcomeUsername">
+                <input type="hidden" id="userId" name="userId">
+            </div>
+            <div class="nav-items">
+                <a href="/"><i class="fas fa-home" style="color: #002DB3;  margin-right: 3px;"></i> Home</a>
+                <a href="/menu"><i class="fas fa-utensils" style="color: #002DB3;  margin-right: 3px;"></i> Menu</a>
+                <a href="/Vieworder"><i class="fas fa-truck" style="color: #002DB3;  margin-right: 3px;"></i> Delivery
+                    Status</a>
+                <a href="/AboutUs"><i class="fas fa-info-circle" style="color: #002DB3;  margin-right: 3px;"></i> About
+                    Us</a>
+                <a href="/ContactUs"><i class="fas fa-phone" style="color: #002DB3;  margin-right: 3px;"></i> Customer
+                    Care</a>
+            </div>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart fa-2x" style="position:relative;"></i>
+                <span id="cartItemCount">0</span>
+            </div>
+            <div class="dropdown">
+                <button id="profileIcon" class="dropbtn" style="display: none;">
+                    <img src="/images/iconprofile.png" alt="Profile" width="25" height="25" class="profile-icon"
+                        loading="lazy">
+                </button>
+                <div class="dropdown-content">
+                    <a href="/Profile"><i class="fas fa-user"></i>Profile</a>
+                    <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header-content">
+        </div>
+
+        <!-- Responsive Drawer -->
+        <div class="drawer">
+            <button id="closeDrawer" class="exit-button" title="Hide Drawer">
+                <div class="circle-background">
+                    <i class="fas fa-times"></i>
+                </div>
+            </button>
+            <div class="nav-items">
+                <div class="quick-search-container">
+                    <input type="text" id="quickSearchInput" placeholder="Quick Search">
+                </div>
+                <a href="/Profile" class="menu-item" id="profileMenu"><i class="fas fa-user"></i> Profile</a>
+                <a href="/" class="menu-item"><i class="fas fa-home"></i>Home</a>
+                <a href="/menu" class="menu-item"><i class="fas fa-utensils"></i> Menu</a>
+                <a href="/Vieworder" class="menu-item"><i class="fas fa-truck"></i>Delivery Status</a>
+                <a href="/AboutUs" class="menu-item"><i class="fas fa-info-circle"></i> About Us</a>
+                <a href="/ContactUs" class="menu-item"><i class="fas fa-phone"></i> Customer Care</a>
+                <a href="#" id="logoutMenu" style="display: none;" class="menu-item"><i class="fas fa-sign-out-alt"></i>
+                    Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="loading-overlay">
+        <div id="loading-spinner">
+            <img src="/images/bahaypareslogo.png" alt="Loading..." loading="lazy" class="loader-image">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="categories-container">
+
+            <div class="category-sidebar">
+                <div id="category-container" class="categories"></div>
+                <!--Categories-->
+                <hr>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="SEARCH OUR MENU">
+                    <button id="search-button" style="display: none;">Search</button>
+                    <div class="allergen-logo">
+                        <a href="link-to-milk" data-icon="Milk" title="Filter Out Milk"><i
+                                class="fa-solid fa-cow"></i></a>
+                        <a href="link-to-eggs" data-icon="Egg" title="Filter Out Egg"><i class="fas fa-egg"></i></a>
+                        <a href="link-to-soy" data-icon="Seafood" title="Filter Out Seafood"><i
+                                class="fa-solid fa-shrimp"></i></a>
+                        <a href="link-to-soy" data-icon="Tree nut" title="Filter Out Tree nut"><i
+                                class="fa-solid fa-acorn"></i></a>
+                        <a href="link-to-soy" data-icon="Peanut" title="Filter Out Peanut"><i
+                                class="fa-solid fa-peanuts"></i></a>
+                        <a href="link-to-wheat" data-icon="bread" title="Filter Out bread"><i
+                                class="fas fa-bread-slice"></i></a>
+                        <a href="link-to-soybean" data-icon="Soy" title="Filter Out Soy"><i
+                                class="fa-brands fa-pagelines"></i></a>
+                        <label style="white-space: nowrap" id="currentFilterLabel">Select Allergen Filter </label>
+                    </div>
+                </div>
+                <button id="toggleSidebarBtn" title="Toggle Category Section">
+                    <i id="toggleIcon" class="fas fa-chevron-up"></i>
+                </button>
+            </div>
+        </div>
+        <!--<div class="categories">
+            <h2>Categories</h2>
+            <div class="category-item"><a href="/dishes">Dishes</a></div>
+            <div class="category-item"><a href="/bundle">Bundles</a></div>
+            <div class="category-item"><a href="/cocktail">Cocktails</a></div>
+        </div>-->
+        <!--Search-->
+
+        <!-- Category Header -->
+        <div class="menu-items-container" id="menuTableBody2">
+
+        </div>
+
+        <aside class="cart">
+            <button id="close-cart" class="exit-button" title="Hide Cart">
+                <!-- Change the ID to close-cart -->
+                <i class="fas fa-times" style="color: #023469;"></i>
+            </button>
+            <h2 class="h2cart">Cart</h2>
+
+
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items"></tbody>
+            </table>
+            <div class="cart-total" id="cart-total">Subtotal: Php 0.00</div>
+            <button class="confirm-order-btn" id="confirm-order-btn" onclick="confirmOrder()">Checkout</button>
+        </aside>
+
+    </div>
+
+
+    <!-- Overlay for "Restaurant Closed" -->
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <h2>Currently Closed</h2>
+            <p class="menup">Sorry, but Bahay Pares Tapsihan is currently closed. Please try again during our operating
+                hours.</p>
+            <br>
+            <p class="menup">Thank you!</p>
+            <br>
+            <button onclick="redirectToHomePage()">OK</button>
+        </div>
+    </div>
+
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <a href="/"><img class="footlogo" src="/images/bahaypareslogo.png" alt="Logo"
+                    Style="width: 50%; height: auto;" loading="lazy"></a>
+            <p class="footer-links">
+                <a href="/index" class="link-1">Home</a>
+                <a href="/menu">Menu</a>
+                <a href="#">Delivery Status</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+            </p>
+            <p class="footer-company-name">© 2023 Bahay Pares Tapsihan – Dasmariñas.</p>
+        </div>
+        <div class="footer-center">
+            <div>
+                <h2>Contacts</h2>
+                <i class="fa fa-phone"></i>
+                <p>+63 975 336 5406</p>
+            </div>
+            <div style="white-space: nowrap;">
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:bahayparestapsihan@gmail.com">bahayparestapsihan@gmail.com</a></p>
+            </div>
+            <div>
+                <i class="fab fa-facebook-messenger"></i>
+                <p><a href="https://www.messenger.com/t/100783298129453" target="_blank">Messenger</a></p>
+            </div>
+            <h2>Like Our Page</h2>
+            <div>
+                <i class="fab fa-facebook-f"></i>
+                <p><a href="https://www.facebook.com/tapsihansapasongbayog/" target="_blank">Facebook</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <h2>About Us</h2>
+            <p class="footer-company-about">
+                As we navigate the post-pandemic world, dining out has become increasingly more complex, but no more so
+                than in
+                Bahay Pares tapsihan restaurant. The establishment, renowned for its world-class tapsi and excellent
+                service,
+                has been on a mission to revolutionize the dining experience for their guests. In the wake of social
+                distancing
+                measures, they have invested in building an online ordering system that offers convenience and
+                accessibility.
+
+            </p>
+            <h2>Visit Us</h2>
+            <div class="footer-right-location">
+                <i class="fa fa-map-marker"></i>
+                <p>89 Burol Main 4114 Dasmariñas, Philippines</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Function to fetch categories from the server
+        async function fetchCategories() {
+            try {
+                const response = await fetch('/categoryImages');
+                const categoryImages = await response.json();
+
+                // Call a function to dynamically create category buttons based on the fetched data
+                createCategoryButtons(categoryImages);
+            } catch (error) {
+                console.error('Error fetching category images:', error);
+            } finally {}
+        }
+
+        function createCategoryButtons(categoryImages) {
+            const categoryContainer = document.getElementById('category-container');
+
+            // Create buttons for each category
+            categoryImages.forEach(categoryData => {
+                const {
+                    category,
+                    image
+                } = categoryData;
+
+                // Create the outer div for the category box
+                const categoryBox = document.createElement('div');
+                categoryBox.classList.add('category-box');
+
+                // Create the inner div for the button container
+                const buttonContainer = document.createElement('div');
+                buttonContainer.classList.add('button-container');
+
+                // Create the button
+                const button = document.createElement('input');
+                button.type = 'button';
+                button.classList.add('category-button');
+                button.title = "Scroll to Category";
+                button.setAttribute('data-category', category);
+                button.style.backgroundImage = `url(data:image/jpeg;base64,${image})`;
+                button.addEventListener('click', () => {
+                    scrollToCategory(category);
+                    // Handle button click if needed
+                });
+
+                // Create the label for the button
+                const label = document.createElement('label');
+                label.setAttribute('for',
+                    `${category.toLowerCase()}-button`); // Adjust the label for attribute as needed
+                label.textContent = category;
+
+
+                // Append button and label to the button container
+                buttonContainer.appendChild(button);
+                buttonContainer.appendChild(label);
+
+                // Append the button container to the category box
+                categoryBox.appendChild(buttonContainer);
+
+                // Append the category box to the category container
+                categoryContainer.appendChild(categoryBox);
+            });
+        }
+
+        function scrollToCategory(category) {
+            const categoryHeader = document.getElementById(category);
+            if (categoryHeader) {
+                categoryHeader.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+
+        window.onload = function () {
+            fetchMenuData("COVID MEALS");
+            checkRestaurantState();
+            initializeCart();
+        }
+
+        // Add this at the beginning of your JavaScript code
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const currentFilterLabel = document.getElementById('currentFilterLabel');
+
+        let currentFilterTerm = ''; // Track the current filter term
+        let searchInputValue = ''; // Track the current search input value
+        let iconFilterTerm = ''; // Track the current icon filter term
+
+        // Function to show the loading overlay
+        function showLoading() {
+            loadingOverlay.style.display = 'block';
+            loadingSpinner.style.display = 'block';
+        }
+
+        // Function to hide the loading overlay
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+            loadingSpinner.style.display = 'none';
+        }
+
+        // Function to check restaurant state and display overlay
+        function checkRestaurantState() {
+            fetch('/checkRestaurantState')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.state === 'Closed') {
+                        document.getElementById('overlay').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function redirectToHomePage() {
+            window.location.href = '/';
+        }
+
+        const iconLinks = document.querySelectorAll('.allergen-logo a');
+
+        iconLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent the link from navigating
+                const iconText = event.currentTarget.dataset.icon; // Get the data-icon attribute
+                const icon = event.currentTarget.querySelector('i'); // Get the icon element
+
+
+                const previouslySelectedIcon = document.querySelector('.toggled-icon');
+
+                if (previouslySelectedIcon) {
+                    previouslySelectedIcon.classList.remove('toggled-icon');
+                }
+                // Toggle the icon filter term
+                if (iconFilterTerm === iconText.toLowerCase()) {
+                    iconFilterTerm = '';
+                    currentFilterLabel.textContent = 'Current Allergen Filter: None';
+                    console.log(`${iconText} is toggled off.`);
+
+                } else {
+                    iconFilterTerm = iconText.toLowerCase();
+                    currentFilterLabel.textContent = `Current Allergen Filter: ${iconText}`;
+                    console.log(`${iconText} is toggled on.`);
+                    icon.classList.add('toggled-icon');
+                }
+
+                filterMenuItems(searchInputValue, iconFilterTerm);
+            });
+        });
+
+
+        // Get the username from sessionStorage
+        const username = sessionStorage.getItem('username');
+        console.log('username:', username);
+
+        if (username) {
+            // Update the welcomeUsername element with the username
+            const welcomeUsername = document.getElementById('welcomeUsername');
+            welcomeUsername.textContent = username;
+
+            // Fetch the userId based on the displayed username
+            sessionStorage.setItem('username', username);
+            fetch(`/getUserByUserName?username=${username}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.userId) {
+                        // User found, store userId in sessionStorage
+                        sessionStorage.setItem('userId', data.userId);
+                    } else {
+                        // Handle the case where the user was not found
+                        console.error('User not found');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching userId:', error);
+                });
+        } else {
+            // User is not logged in, you can choose to do nothing or display a login prompt
+            // Here, we will not show the login prompt
+            // const loginPrompt = document.getElementById('login-prompt');
+            // loginPrompt.style.display = 'block'; // Show the login prompt
+        }
+
+
+        let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+        const confirmOrderBtn = document.getElementById("confirm-order-btn");
+        const cartTotalElement = document.getElementById("cart-total");
+
+        // Event listener for the cart icon
+        const cartIcon = document.getElementById("cartIcon");
+        cartIcon.addEventListener("click", () => {
+            toggleCartVisibility();
+        });
+
+        // Function to toggle the cart's visibility
+        function toggleCartVisibility() {
+            const cart = document.querySelector(".cart");
+            cart.classList.toggle("show-cart"); // Define a CSS class for showing the cart
+        }
+
+        // Event listener for the close button
+        const closeCartButton = document.getElementById("close-cart");
+        closeCartButton.addEventListener("click", () => {
+            toggleCartVisibility(); // Hide the cart when the close button is clicked
+        });
+
+
+        async function addToCart(itemName, itemPrice) {
+            const event = window.event || event; // Use window.event for IE compatibility
+            const button = event.target || event.srcElement;
+            const row = button.closest('div.center-items'); // Find the parent div of the clicked button
+
+            if (!row) {
+                console.error('Unable to find the parent row');
+                return;
+            }
+
+            const quantityInput = row.querySelector('.quantity-input');
+            const quantity = parseInt(quantityInput.value);
+
+            if (quantity < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please enter a valid quantity.',
+                });
+                return;
+            }
+
+            const response = await fetch(`/menufetchavailability?itemName=${itemName}&quantity=${quantity}`);
+            const data = await response.json();
+
+            if (data.availableStock < quantity) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Cannot add to cart order',
+                    text: `Available Stock for ${itemName}: ${data.availableStock}`,
+                });
+                return;
+            }
+
+
+            // Check if the item is already in the cart
+            const existingCartItem = cartItems.find(item => item.name === itemName);
+
+            if (existingCartItem) {
+                existingCartItem.quantity += quantity; // Update the quantity
+            } else {
+                const cartItem = {
+                    name: itemName,
+                    price: itemPrice,
+                    quantity: quantity
+                };
+                cartItems.push(cartItem); // Add new item to cart
+            }
+
+            updateCart();
+            quantityInput.value = "1"; // Reset quantity input to 1 after adding to cart
+            confirmOrderBtn.style.display = cartItems.length > 0 ? "block" : "none";
+            cartTotalElement.style.display = cartItems.length > 0 ? "block" : "none";
+
+            const cartIcon = document.getElementById("cartIcon").querySelector("i");
+            cartIcon.classList.add("fly");
+
+            // Remove the "fly" class after the animation duration
+            setTimeout(() => {
+                cartIcon.classList.remove("fly");
+            }, 500);
+            updateCartCount();
+        }
+
+        function initializeCart() {
+            const cartTotalElement = document.getElementById('cart-total');
+            const confirmOrderBtn = document.getElementById('confirm-order-btn');
+
+            // Load cart items from session storage
+            cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+
+            // Update the cart display
+            updateCart();
+
+            // Show or hide elements based on cart content
+            confirmOrderBtn.style.display = cartItems.length > 0 ? 'block' : 'none';
+            cartTotalElement.style.display = cartItems.length > 0 ? 'block' : 'none';
+
+            // Additional logic to update cart count or other UI elements
+            updateCartCount();
+        }
+
+
+        function removeAllFromCart(itemName) {
+            const itemIndex = cartItems.findIndex(item => item.name === itemName);
+            if (itemIndex !== -1) {
+                const item = cartItems[itemIndex];
+                cartItems.splice(itemIndex, 1);
+
+                updateCart();
+                confirmOrderBtn.style.display = cartItems.length > 0 ? "block" : "none";
+                cartTotalElement.style.display = cartItems.length > 0 ? "block" : "none";
+            }
+
+            updateCartCount();
+        }
+
+        function addFromCart(itemName) {
+            const itemIndex = cartItems.findIndex(item => item.name === itemName);
+            if (itemIndex !== -1) {
+                const item = cartItems[itemIndex];
+                item.quantity++;
+
+                updateCart();
+                confirmOrderBtn.style.display = cartItems.length > 0 ? "block" : "none";
+                cartTotalElement.style.display = cartItems.length > 0 ? "block" : "none";
+            }
+
+            updateCartCount();
+        }
+
+        function removeFromCart(itemName) {
+            const itemIndex = cartItems.findIndex(item => item.name === itemName);
+            if (itemIndex !== -1) {
+                const item = cartItems[itemIndex];
+                if (item.quantity > 1) {
+                    item.quantity--; // Decrease quantity by 1
+                } else {
+                    cartItems.splice(itemIndex, 1); // Remove the item completely if quantity is 0
+                }
+                updateCart();
+                confirmOrderBtn.style.display = cartItems.length > 0 ? "block" : "none";
+                cartTotalElement.style.display = cartItems.length > 0 ? "block" : "none";
+            }
+
+            updateCartCount();
+        }
+
+
+        // Function to update the cart
+        function updateCart() {
+            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+            const cartList = document.getElementById("cart-items");
+            cartList.innerHTML = "";
+
+            let total = 0;
+            cartItems.forEach(item => {
+                const row = document.createElement("tr");
+                const itemNameCell = document.createElement("td");
+                itemNameCell.innerText = item.name;
+                row.appendChild(itemNameCell);
+
+                const itemPriceCell = document.createElement("td");
+                itemPriceCell.innerText = `Php ${item.price.toFixed(2)}`;
+                row.appendChild(itemPriceCell);
+
+                const itemQuantityCell = document.createElement("td");
+                itemQuantityCell.innerText = item.quantity;
+                row.appendChild(itemQuantityCell);
+
+                // Create a container for the buttons
+                const buttonContainer = document.createElement("div");
+                buttonContainer.classList.add("button-container-cart");
+
+                // Create a common class for all buttons
+                const commonButtonClass = "common-button";
+
+                // Add an "Add" button
+                const addButton = document.createElement("button");
+                addButton.innerText = "+";
+                addButton.classList.add(commonButtonClass);
+                addButton.addEventListener("click", () => addFromCart(item.name));
+                buttonContainer.appendChild(addButton);
+
+                // Add a "Remove All" button
+                const removeAllButton = document.createElement("button");
+                removeAllButton.innerText = "Remove";
+                removeAllButton.addEventListener("click", () => removeAllFromCart(item.name));
+                removeAllButton.classList.add(commonButtonClass);
+                buttonContainer.appendChild(removeAllButton);
+
+                // Add a "Remove" button
+                const removeButton = document.createElement("button");
+                removeButton.innerText = "-";
+                removeButton.classList.add(commonButtonClass);
+                removeButton.addEventListener("click", () => removeFromCart(item.name));
+                buttonContainer.appendChild(removeButton);
+
+                row.appendChild(buttonContainer);
+
+                cartList.appendChild(row);
+                total += item.price * item.quantity;
+            });
+
+            cartTotalElement.innerText = `Subtotal: Php ${total.toFixed(2)}`;
+        }
+
+
+        function updateCartCount() {
+            const cartItemCount = document.getElementById('cartItemCount');
+            cartItemCount.textContent = cartItems.length;
+        }
+
+
+        async function generateOrderId() {
+            const min = 100;
+            const max = 99999;
+            const orderId = Math.floor(Math.random() * (max - min + 1)) + min;
+            return orderId.toString();
+        }
+
+        async function checkExistingOrderId(orderId) {
+            try {
+                const response = await fetch('/checkExistingOrderId', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        orderId
+                    })
+                });
+
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error checking existing order ID:', error);
+                throw new Error('An error occurred while checking the existing order ID.');
+            }
+        }
+
+        async function confirmOrder() {
+            const userId = sessionStorage.getItem('userId');
+            if (!userId) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please log in or refresh the page.',
+                });
+                return;
+            }
+
+            if (cartItems.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Your cart is empty. Please add items to the cart first.',
+                });
+                return;
+            }
+
+            let orderId;
+            let existingOrder = true;
+
+            while (existingOrder) {
+                orderId = await generateOrderId(); // Generate a random order ID
+                const checkResult = await checkExistingOrderId(orderId);
+                existingOrder = checkResult.error === 'Order ID already exists. Generate another one.';
+            }
+
+            // Store user ID, order ID, cart items, and customer discount in session storage
+            sessionStorage.setItem('userId', userId);
+            sessionStorage.setItem('orderId', orderId);
+            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+            // Send the cart data, order ID, and customer discount to the server
+            fetch('/confirmOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId,
+                        orderId,
+                        cartItems,
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Log the entire data object to the console
+
+                    // Check if the message property is present and contains the expected value
+                    if (data && data.message === "Order confirmed proceeding to transaction") {
+                        // Store the userId in sessionStorage for the transaction page
+                        reduceQuantityInDatabase(cartItems);
+                        sessionStorage.setItem('userId', userId);
+
+                        // Redirect to the transaction page
+                        window.location.href = '/transactionpage.html';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error confirming order:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred while confirming your order. Try Again',
+                    });
+                }).finally(() => {
+                    sessionStorage.removeItem('cartItems');
+                });
+        }
+
+        async function reduceQuantityInDatabase(cartItems) {
+            try {
+                // Use Promise.all to wait for all requests to complete
+                await Promise.all(cartItems.map(async (cartItem) => {
+                    const response = await fetch(
+                        `/reduceQuantity?itemName=${cartItem.name}&quantity=${cartItem.quantity}`, {
+                            method: 'PUT',
+                        });
+
+                    const result = await response.json();
+                    console.log(result); // Log the result of reducing quantity for each item
+                }));
+
+                console.log('All quantity reduction requests completed successfully.');
+            } catch (error) {
+                console.error('Error reducing quantity:', error);
+                // Handle the error as needed (e.g., show an alert to the user)
+            }
+        }
+
+
+        async function fetchMenuData() {
+            showLoading();
+            fetchCategories();
+            try {
+
+                const response = await fetch(`/menufetch2`);
+                let data = await response.json();
+                updateUI(data);
+            } catch (error) {
+                console.error('Error fetching menu data:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function groupBy(array, key) {
+            return array.reduce((result, item) => {
+                (result[item[key]] = result[item[key]] || []).push(item);
+                return result;
+            }, {});
+        }
+
+        function updateUI(data) {
+            const dataBody = document.getElementById('menuTableBody2');
+            dataBody.innerHTML = '';
+
+            // Group items by category
+            const groupedData = groupBy(data, 'category');
+
+            for (const category in groupedData) {
+                const categoryContainer = document.createElement('div');
+                categoryContainer.classList.add('category-container');
+                const categoryHeader = document.createElement('h2');
+                categoryHeader.textContent = category;
+                categoryHeader.id = category;
+                dataBody.appendChild(categoryHeader);
+
+                const fragment = document.createDocumentFragment();
+                for (const menu of groupedData[category]) {
+                    const menuItemDiv = document.createElement('div');
+                    menuItemDiv.classList.add('center-items');
+
+                    menuItemDiv.setAttribute('data-name', menu.name);
+                    menuItemDiv.setAttribute('data-status', menu.status);
+                    menuItemDiv.setAttribute('data-description', menu.description);
+
+                    const image = new Image();
+                    image.src = `data:image/jpeg;base64,${menu.image}`;
+                    image.alt = menu.name;
+
+                    const itemDetailsContainer = document.createElement('div'); // Container for itemName and statusText
+                    itemDetailsContainer.classList.add('item-details-container');
+
+                    const itemName = document.createElement('h3');
+                    itemName.textContent = menu.name;
+
+                    const statusSpan = document.createElement('span');
+                    const statusText = getStatusText(menu.status);
+                    statusSpan.textContent = statusText;
+
+                    let salePrice; // Declare salePrice variable
+
+                    if (menu.status === 'sale') {
+                        statusSpan.style.color = '#8B0000';
+                        // If the menu is on sale, display the sale price instead of the regular price
+                        salePrice = document.createElement('h4');
+                        salePrice.textContent = `Php ${menu.saleOldPrice}`;
+                        salePrice.style.textDecoration = 'line-through';
+                    } else if (menu.status === 'featured') {
+                        statusSpan.style.color = 'blue';
+                    } else if (menu.status === 'new') {
+                        statusSpan.style.color = 'green';
+                    } else {
+                        statusSpan.style.display = 'none';
+                    }
+
+                    // Set display to inline or inline-block
+                    itemName.style.display = 'inline';
+                    statusSpan.style.display = 'inline';
+
+                    itemDetailsContainer.appendChild(itemName);
+                    itemDetailsContainer.appendChild(statusSpan);
+
+                    const itemDescription = document.createElement('p');
+                    itemDescription.textContent = menu.description;
+
+                    const price = document.createElement('h4');
+                    price.textContent = `Php ${menu.price}`;
+
+                    const quantityInput = document.createElement('input');
+                    quantityInput.type = 'number';
+                    quantityInput.classList.add('quantity-input');
+                    quantityInput.title = "Quantity";
+                    quantityInput.min = '1';
+                    quantityInput.value = '1';
+
+                    const addToCartButton = document.createElement('button');
+                    addToCartButton.classList.add('add-to-cart-button');
+
+                    if (menu.availability === true) {
+                        const cartIcon = document.createElement('i');
+                        cartIcon.classList.add('fas', 'fa-shopping-cart');
+
+                        addToCartButton.appendChild(cartIcon);
+                        addToCartButton.appendChild(document.createTextNode(' Add to Cart'));
+
+                        addToCartButton.addEventListener('click', () => {
+                            addToCart(menu.name, parseFloat(menu.price), parseInt(quantityInput.value, 10));
+                        });
+                    } else {
+                        addToCartButton.textContent = 'Not Available';
+                        addToCartButton.disabled = true;
+                    }
+
+                    menuItemDiv.appendChild(image);
+                    menuItemDiv.appendChild(itemDetailsContainer); // Append the item details container
+                    menuItemDiv.appendChild(itemDescription);
+                    if (salePrice) {
+                        menuItemDiv.appendChild(salePrice); // Append salePrice if it's defined
+                    }
+                    menuItemDiv.appendChild(price);
+                    menuItemDiv.appendChild(quantityInput);
+                    menuItemDiv.appendChild(addToCartButton);
+
+                    fragment.appendChild(menuItemDiv);
+                }
+
+                dataBody.appendChild(fragment);
+                dataBody.appendChild(categoryContainer);
+            }
+        }
+
+        function scrollToCategory(category) {
+
+            const targetElement = document.getElementById(category);
+
+            if (targetElement) {
+                const topOffset = 350;
+                const targetPosition = targetElement.offsetTop - topOffset;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Function for initial filtering
+        function handleInitialFilter() {
+            filterMenuItems(searchInputValue, iconFilterTerm);
+        }
+
+
+        // Call the initial filtering function when the page loads
+        document.addEventListener('DOMContentLoaded', handleInitialFilter);
+
+        function getStatusText(status) {
+            if (status === 'sale') {
+                return ' SALE';
+            } else if (status === 'featured') {
+                return ' FEATURED';
+            } else if (status === 'new') {
+                return ' NEW';
+            } else {
+                return ''; // Hide the status for 'default'
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuIcon = document.querySelector('.menu-icon'); // Change the selector to use class
+            const drawer = document.querySelector('.drawer');
+
+            menuIcon.addEventListener('click', function () {
+                if (drawer.style.left === '0px' || !drawer.style.left) {
+                    drawer.style.left = '-250px'; // Hide the drawer
+                } else {
+                    drawer.style.left = '0'; // Show the drawer
+                }
+            });
+            const closeDrawerButton = document.getElementById('closeDrawer');
+            closeDrawerButton.addEventListener('click', function () {
+                drawer.style.left = '-250px'; // Hide the drawer
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const quickSearchInput = document.getElementById('quickSearchInput');
+            const menuItems = document.querySelectorAll('.nav-items .menu-item');
+
+            quickSearchInput.addEventListener('input', function () {
+                const searchTerm = quickSearchInput.value.toLowerCase();
+
+                menuItems.forEach(function (menuItem) {
+                    const menuItemText = menuItem.innerText.toLowerCase();
+
+                    // Check if the search term is present in the menu item text
+                    if (menuItemText.includes(searchTerm)) {
+                        menuItem.style.display = 'block';
+                    } else {
+                        menuItem.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutButton = document.getElementById('logoutButton');
+            const logoutMenu = document.getElementById('logoutMenu');
+            fetch('/check-auth', {
+                    method: 'GET',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.isAuthenticated) {
+                        const profileIcon = document.getElementById('profileIcon');
+                        const profileMenu = document.getElementById('profileMenu');
+                        profileIcon.style.display = 'block';
+                        profileMenu.style.display = 'block'; // Show in drawer
+                        logoutMenu.style.display = 'block';
+                        // Add a click event listener to the logout button
+                        logoutButton.addEventListener('click', function () {
+                            // Display a confirmation dialog
+                            const isConfirmed = window.confirm('Are you sure you want to logout?');
+
+                            // Check if the user confirmed the logout
+                            if (isConfirmed) {
+                                // Send a logout request to the server when confirmed
+                                fetch('/logout', { // Check if this URL is correct
+                                        method: 'GET',
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.message === 'Logout successful') {
+                                            // Redirect to the login page or another page after logout
+                                            window.location.href = '/';
+                                        } else {
+                                            console.error('Logout failed:', data.error);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error during logout:', error);
+                                    });
+                            }
+                        });
+                    } else {
+                        const profileIcon = document.getElementById('profileIcon');
+                        logoutButton.style.display = 'none';
+                        profileIcon.style.display = 'none';
+                        const profileMenu = document.getElementById('profileMenu');
+                        profileMenu.style.display = 'none'; // Show in drawer
+                        logoutMenu.style.display = 'none';
+
+
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking authentication:', error);
+                });
+        });
+
+        // Event listener for real-time search as the user types
+        searchInput.addEventListener('input', () => {
+            searchInputValue = searchInput.value.trim().toLowerCase();
+
+            // Call the filterMenuItems function to filter out items based on the search input and icon filter term
+            filterMenuItemsOnSearch(searchInputValue);
+        });
+
+        function filterMenuItemsOnSearch(searchTerm) {
+            const menuItems = document.querySelectorAll('[data-name]');
+
+            menuItems.forEach(item => {
+                const itemName = item.getAttribute('data-name').toLowerCase();
+                const itemStatus = item.getAttribute('data-status').toLowerCase();
+                const itemDesc = item.getAttribute('data-description').toLowerCase();
+
+                // Display items based on the search term only
+                const display = searchTerm === '' || itemName.includes(searchTerm) || itemStatus.includes(
+                    searchTerm) || itemDesc.includes(searchTerm);
+                item.style.display = display ? 'table-row' : 'none';
+            });
+        }
+
+        function filterMenuItems(searchTerm, iconTerm) {
+            const menuItems = document.querySelectorAll('[data-name]');
+
+            menuItems.forEach(item => {
+                const itemName = item.getAttribute('data-name').toLowerCase();
+                const itemDesc = item.getAttribute('data-description').toLowerCase();
+                const hasIcon = itemName.includes(iconTerm);
+                const hasIcon2 = itemDesc.includes(iconTerm);
+                if (iconTerm) {
+                    // If an icon filter is applied
+                    if (iconTerm === "seafood") {
+                        if (
+                            itemName.includes("bangus") || itemName.includes("tilapia") ||
+                            itemName.includes("galunggong") || itemName.includes("tuna") ||
+                            itemName.includes("lapu-lapu") || itemName.includes("sardine") ||
+                            itemName.includes("hito") || itemName.includes("dilis") ||
+                            itemName.includes("clam") || itemName.includes("tuyo") ||
+                            itemName.includes("oyster") || itemName.includes("crab") ||
+                            itemName.includes("tinapa") || itemName.includes("pompano") ||
+                            itemName.includes("fish") || itemName.includes("calamares")
+                        ) { //list seafood here ^
+                            item.style.display = 'none';
+                        } else {
+                            // Show other non filtered items
+                            item.style.display = 'table-row';
+                        }
+                    } else if (iconTerm === "milk") {
+                        if (
+                            itemName.includes("maja blanca") || itemName.includes("leche flan") ||
+                            itemName.includes("cassava cake") || itemName.includes("bibingka") ||
+                            itemName.includes("espasol") || itemName.includes("ube halaya") ||
+                            itemName.includes("ensaimada") || itemName.includes("butter")
+                        ) { //list milk here ^
+                            item.style.display = 'none';
+                        } else {
+                            // Show other non filtered items
+                            item.style.display = 'table-row';
+                        }
+                    } else if (iconTerm === "soy") {
+                        if (
+                            itemName.includes("tokwat baboy") || itemName.includes("adidas") ||
+                            itemName.includes("tofu sisig") || itemName.includes("taho") ||
+                            itemName.includes("lumpiang shanghai") || itemName.includes("pancit canton")
+                        ) { //list soy here ^
+                            item.style.display = 'none';
+                        } else {
+                            // Show other non filtered items
+                            item.style.display = 'table-row';
+                        }
+                    } else if (iconTerm === "egg") {
+                        if (
+                            itemName.includes("adobo") || itemName.includes("tortang talong") ||
+                            itemName.includes("leche flan") || itemName.includes("hopia") ||
+                            itemName.includes("egg") || itemDesc.includes("egg")
+                        ) { //list egg here ^
+                            item.style.display = 'none';
+                        } else {
+                            // Show other non filtered items
+                            item.style.display = 'table-row';
+                        }
+                    } else if (iconTerm === "peanut") {
+                        if (
+                            itemName.includes("kare-kare") || itemName.includes("kare kare") ||
+                            itemName.includes("satay") || itemName.includes("lumpiang ubod") ||
+                            itemName.includes("ginataang langka") || itemName.includes("pinakbet")
+                        ) { //list peanut here ^
+                            item.style.display = 'none';
+                        } else {
+                            // Show other non filtered items
+                            item.style.display = 'table-row';
+                        }
+                    } else if (iconTerm === "bread") {
+                        if (
+                            itemName.includes("pan de sal") || itemName.includes("torta") ||
+                            itemName.includes("pandesal") || itemName.includes("tinapay") ||
+                            itemName.includes("ensaimada") || itemName.includes("pinakbet") ||
+                            itemName.includes("binatog")
+                        ) { //list peanut here ^
+                            item.style.display = 'none';
+                        } else {
+                            // Show other non filtered items
+                            item.style.display = 'table-row';
+                        }
+                    } else if (iconTerm === "tree nut") {
+                        if (
+                            itemName.includes("pesto sauce") || itemName.includes("marzipan") ||
+                            itemName.includes("peanut") || itemName.includes("almond") ||
+                            itemName.includes("cashew") || itemName.includes("hazelnut") ||
+                            itemName.includes("walnut")
+                        ) { //list tree nut here ^
+                            item.style.display = 'none';
+                        } else {
+                            // Show other non filtered items
+                            item.style.display = 'table-row';
+                        }
+                    } else {
+                        // Handle other icons and search term as before
+                        if (hasIcon || hasIcon2) {
+                            // Hide items with the selected icon
+                            item.style.display = 'none';
+                        } else if (searchTerm === '' || itemName.includes(searchTerm)) {
+                            // Show items that match the search term and don't have the selected icon
+                            item.style.display = 'table-row';
+                        }
+                    }
+                } else {
+                    // No icon filter, only use the search term
+                    const display = searchTerm === '' || itemName.includes(searchTerm) || itemDesc.includes(
+                        searchTerm);
+                    item.style.display = display ? 'table-row' : 'none';
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            // Toggle the category-sidebar on button click
+            $("#toggleSidebarBtn").click(function () {
+                $(".category-sidebar .search-container").slideToggle();
+                $(".category-sidebar .allergen-logo").slideToggle();
+                $("#category-container").slideToggle();
+                $("hr").slideToggle();
+                $("#toggleIcon").toggleClass("fas fa-chevron-ip fas fa-chevron-down");
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
